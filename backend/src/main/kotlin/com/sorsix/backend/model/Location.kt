@@ -10,6 +10,4 @@ class Location(
     val id: Long,
     val street:String,
     val number:String
-) {
-
-}
+)
