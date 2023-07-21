@@ -15,3 +15,4 @@ abstract class User(
     open var phone:String,
     open var password:String,
 ){}
+
