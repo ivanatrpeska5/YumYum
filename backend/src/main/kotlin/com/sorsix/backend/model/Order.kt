@@ -7,12 +7,13 @@ import javax.persistence.*
 
 @Entity
 @Data
+@Table(name="orders")
 class Order(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
 
-    //val dateCreated: LocalDate = LocalDate.now(),
+    val dateCreated: LocalDate = LocalDate.now(),
 
 
     @Enumerated(value = EnumType.STRING)
