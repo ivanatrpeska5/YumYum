@@ -16,7 +16,8 @@ abstract class User(
     open var email:String,
     open var phone:String,
     private var password:String,
-):UserDetails {
+): UserDetails{
+
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         TODO("Not yet implemented")
     }
