@@ -7,7 +7,9 @@ import javax.persistence.*
 @Entity
 @Data
 class Cart(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long,
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    var id: Long,
     var ammount:Double,
     @ManyToOne var customer:Customer
 )
