@@ -12,6 +12,11 @@ class Food(
     var name:String,
     var price:Double,
 
-//    @ManyToOne
-//    var restaurant: Restaurant
+
+
+    @ManyToOne
+    var restaurant: Restaurant,
+
+    @ManyToMany
+    val categories:Set<Category>
 )

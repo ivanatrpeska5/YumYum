@@ -1,5 +1,6 @@
 package com.sorsix.backend.model
 
+import com.sorsix.backend.model.enumeration.OrderStatus
 import lombok.Data
 import java.time.LocalDate
 import javax.persistence.*
@@ -11,10 +12,10 @@ class Order(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long,
 
-    val dateCreated: LocalDate = LocalDate.now(),
+    //val dateCreated: LocalDate = LocalDate.now(),
 
     @Enumerated
-    var status:OrderStatus,
+    var status: OrderStatus,
 
     @ManyToOne
     var location: Location,
