@@ -1,5 +1,6 @@
 package com.sorsix.backend.model
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import javax.persistence.*
 
 
@@ -13,5 +14,14 @@ class Food(
     var price:Double,
 
     @ManyToOne
-    var restaurant: Restaurant
+    var restaurant: Restaurant,
+
+    @ManyToMany
+    @JsonManagedReference
+    @JoinTable(
+        name = "ingredient_in_food",
+        joinColumns = [JoinColumn(name = "foodId")],
+        inverseJoinColumns = [JoinColumn(name = "ingredientId")],
+    )
+    val ingredientsList: MutableList<Ingredient> = arrayListOf()
 )
