@@ -17,5 +17,21 @@ class Order(
     open var status:OrderStatus,
 
     @ManyToOne
-    open var location: Location)
+    open var location: Location,
+
+    @ManyToOne
+    var customer:Customer,
+
+    @ManyToOne
+    var deliveryMan: DeliveryMan,
+
+    @OneToOne
+    var cart: Cart
+
+//    @ManyToOne
+//    var restaurant:Restaurant
+
+//    @OneToOne
+//    var payment:Payment
+    )
 
