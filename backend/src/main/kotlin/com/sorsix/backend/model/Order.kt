@@ -13,7 +13,7 @@ class Order(
 
     val dateCreated: LocalDate = LocalDate.now(),
 
-    @Enumerated
+    @Enumerated(value = EnumType.STRING)
     var status:OrderStatus,
 
     @ManyToOne
@@ -26,12 +26,12 @@ class Order(
     var deliveryMan: DeliveryMan,
 
     @OneToOne
-    var cart: Cart
+    var cart: Cart,
 
-//    @ManyToOne
-//    var restaurant:Restaurant
+    @ManyToOne
+    var restaurant:Restaurant,
 
-//    @OneToOne
-//    var payment:Payment
+    @OneToOne
+    var payment:Payment
     )
 
