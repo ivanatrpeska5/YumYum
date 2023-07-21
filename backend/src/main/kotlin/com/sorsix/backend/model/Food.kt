@@ -10,5 +10,8 @@ class Food(
     var id: Long,
     var photo:String,
     var name:String,
-    var price:Double
+    var price:Double,
+
+//    @ManyToOne
+//    var restaurant: Restaurant
 )
