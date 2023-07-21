@@ -26,6 +26,8 @@ class Food(
         inverseJoinColumns = [JoinColumn(name = "ingredientId")],
     )
     val ingredientsList: MutableList<Ingredient> = arrayListOf(),
-    
+
+
+
 
 )
