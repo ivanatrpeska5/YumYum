@@ -18,5 +18,6 @@ class Food(
     var restaurant: Restaurant,
 
     @ManyToMany
-    val categories:Set<Category>
+    val categories:Set<Category>,
+
 )
