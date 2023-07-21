@@ -13,6 +13,8 @@ class Food(
     var name:String,
     var price:Double,
 
+
+
     @ManyToOne
     var restaurant: Restaurant,
 
@@ -23,5 +25,7 @@ class Food(
         joinColumns = [JoinColumn(name = "foodId")],
         inverseJoinColumns = [JoinColumn(name = "ingredientId")],
     )
-    val ingredientsList: MutableList<Ingredient> = arrayListOf()
+    val ingredientsList: MutableList<Ingredient> = arrayListOf(),
+    
+
 )

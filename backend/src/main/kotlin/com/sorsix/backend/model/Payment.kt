@@ -1,5 +1,6 @@
 package com.sorsix.backend.model
 
+import com.sorsix.backend.model.enumeration.CardType
 import javax.persistence.*
 
 
