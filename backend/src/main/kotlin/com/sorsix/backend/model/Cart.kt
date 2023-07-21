@@ -4,14 +4,15 @@ import javax.persistence.*
 
 
 @Entity
-class Cart(@Id
-           @GeneratedValue(strategy = GenerationType.IDENTITY)
-           @Column(name = "id", nullable = false)
-           private var id: Long? = null,
+class Cart(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    private var id: Long,
 
-           private var ammount:Double? = null,
+    private var ammount:Double,
 
     @ManyToOne
-    var customer:Customer?=null,) {
+    var customer:Customer) {
 
 }

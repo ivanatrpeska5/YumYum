@@ -13,7 +13,10 @@ class Order(
     private val dateCreated: LocalDate,
 
     @Enumerated
-    private var status:OrderStatus) {
+    private var status:OrderStatus,
+
+    @ManyToOne
+    private var location: Location) {
 
 
 
