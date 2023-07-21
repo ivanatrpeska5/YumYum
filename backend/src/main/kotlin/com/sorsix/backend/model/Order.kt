@@ -1,9 +1,11 @@
 package com.sorsix.backend.model
 
+import lombok.Data
 import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
+@Data
 class Order(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,9 +18,5 @@ class Order(
     private var status:OrderStatus,
 
     @ManyToOne
-    private var location: Location) {
+    private var location: Location)
 
-
-
-
-}

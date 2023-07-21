@@ -1,33 +1,18 @@
 package com.sorsix.backend.model
 
+import lombok.Data
 import javax.persistence.*
 
 
 @Entity
-@Table(name = "CustomUser")
 @MappedSuperclass
-open class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private var id: Long? = null
+@Data
+abstract class User(
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) open var userId: Long,
+    open var name:String,
+    open var surname:String,
+    open var email:String,
+    open var phone:String,
+    open var password:String,
+){}
 
-    @Column
-    private var email: String? = null
-
-    @Column
-    private var password: String? = null
-
-    @Column
-    private var name: String? = null
-
-    @Column
-    private var surname: String? = null
-
-
-    @Column
-    private var phone: String? = null
-
-
-
-}

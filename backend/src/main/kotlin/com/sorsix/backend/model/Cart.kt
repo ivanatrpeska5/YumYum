@@ -1,18 +1,13 @@
 package com.sorsix.backend.model
 
+import lombok.Data
 import javax.persistence.*
 
 
 @Entity
+@Data
 class Cart(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
-    private var id: Long,
-
-    private var ammount:Double,
-
-    @ManyToOne
-    var customer:Customer) {
-
-}
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long,
+    var ammount:Double,
+    @ManyToOne var customer:Customer
+)
