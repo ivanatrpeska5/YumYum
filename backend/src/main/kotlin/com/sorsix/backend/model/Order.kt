@@ -4,13 +4,18 @@ import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
-class Order {
+class Order(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    open var id: Long? = null
+    private val id: Long,
 
-    open val dateCreated: LocalDate? = null
+    private val dateCreated: LocalDate,
+
+    @Enumerated
+    private var status:OrderStatus) {
+
+
 
 
 }

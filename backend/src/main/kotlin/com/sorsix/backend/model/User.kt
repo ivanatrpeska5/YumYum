@@ -10,23 +10,23 @@ open class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
-    open var id: Long? = null
+    private var id: Long? = null
 
     @Column
-    open var email: String? = null
+    private var email: String? = null
 
     @Column
-    open var password: String? = null
+    private var password: String? = null
 
     @Column
-    open var name: String? = null
+    private var name: String? = null
 
     @Column
-    open var surname: String? = null
+    private var surname: String? = null
 
 
     @Column
-    open var phone: String? = null
+    private var phone: String? = null
 
 
 
