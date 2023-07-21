@@ -9,13 +9,13 @@ import javax.persistence.*
 class Order(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private val id: Long,
+    open val id: Long,
 
-    private val dateCreated: LocalDate = LocalDate.now(),
+    open val dateCreated: LocalDate = LocalDate.now(),
 
     @Enumerated
-    private var status:OrderStatus,
+    open var status:OrderStatus,
 
     @ManyToOne
-    private var location: Location)
+    open var location: Location)
 
