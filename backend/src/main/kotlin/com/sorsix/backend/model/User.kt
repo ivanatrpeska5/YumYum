@@ -2,6 +2,7 @@ package com.sorsix.backend.model
 
 import lombok.Data
 import org.springframework.security.core.GrantedAuthority
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.UserDetails
 import javax.persistence.*
 
@@ -16,34 +17,35 @@ abstract class User(
     open var email:String,
     open var phone:String,
     private var password:String,
+    private var username:String
 ): UserDetails{
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        TODO("Not yet implemented")
+        return mutableListOf(SimpleGrantedAuthority("user"));
     }
 
     override fun getPassword(): String {
-        TODO("Not yet implemented")
+        return password;
     }
 
     override fun getUsername(): String {
-        TODO("Not yet implemented")
+        return username
     }
 
     override fun isAccountNonExpired(): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 
     override fun isAccountNonLocked(): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 
     override fun isCredentialsNonExpired(): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 
     override fun isEnabled(): Boolean {
-        TODO("Not yet implemented")
+        return true
     }
 }
 
