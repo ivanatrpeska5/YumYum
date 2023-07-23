@@ -8,6 +8,7 @@ import javax.persistence.*
 
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Data
 @Table(name = "users")
 abstract class User(

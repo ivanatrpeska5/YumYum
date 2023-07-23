@@ -35,6 +35,7 @@ dependencies {
     implementation("javax.validation:validation-api:2.0.1.Final")
     implementation("org.postgresql:postgresql:42.6.0")
     implementation("javax.validation:validation-api:2.0.1.Final")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis:3.0.4")
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
