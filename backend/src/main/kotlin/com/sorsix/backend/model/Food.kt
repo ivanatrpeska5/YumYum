@@ -26,6 +26,13 @@ class Food(
         inverseJoinColumns = [JoinColumn(name = "ingredientId")],
     )
     val ingredientsList: MutableList<Ingredient> = arrayListOf(),
-    
 
+    @ManyToMany
+    @JsonManagedReference
+    @JoinTable(
+        name = "category_of_food",
+        joinColumns = [JoinColumn(name = "foodId")],
+        inverseJoinColumns = [JoinColumn(name = "categoryId")],
+    )
+    val categoryList: MutableList<Category> = arrayListOf(),
 )

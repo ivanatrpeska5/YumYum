@@ -9,5 +9,5 @@ class Ingredient(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private var id: Long,
-    private var name:String
+    private var name:String,
 )

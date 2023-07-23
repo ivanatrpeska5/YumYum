@@ -1,5 +1,6 @@
 package com.sorsix.backend.model
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import javax.persistence.*
 
 @Entity
@@ -8,5 +9,8 @@ class Category(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
     var name: String,
-    var photo: String
+    var photo: String,
+    @ManyToMany(mappedBy = "categoryList")
+    @JsonBackReference
+    val foodList: MutableList<Food> = arrayListOf()
 )
