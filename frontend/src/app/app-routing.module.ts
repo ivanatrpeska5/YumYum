@@ -12,6 +12,7 @@ const routes: Routes = [
     {path:'restaurants', component: RestaurantsComponent},
     { path: '**', redirectTo: '' }
   ]},
+
 ];
 
 @NgModule({
