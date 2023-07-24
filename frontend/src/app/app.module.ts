@@ -8,14 +8,14 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './component/home/home.component';
 import { RequestInterceptor } from './request.interceptor';
-import { RestaurantComponent } from './component/restaurant/restaurant.component';
+import { RestaurantsComponent } from './component/restaurants/restaurants.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    RestaurantComponent
+    RestaurantsComponent
   ],
   imports: [
     BrowserModule,
