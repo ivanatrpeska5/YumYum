@@ -9,8 +9,8 @@ const routes: Routes = [
   {path: '', canActivate:[AuthenticationGuard], children: [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'restaurants', component: RestaurantComponent},
     { path: '**', redirectTo: '' },
-    {path:'restaurants', component: RestaurantComponent},
   ]}
 ];
 
