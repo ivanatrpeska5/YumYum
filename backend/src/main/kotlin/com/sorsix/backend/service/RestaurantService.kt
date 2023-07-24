@@ -10,9 +10,12 @@ class RestaurantService(
     private val restaurantRepository: RestaurantRepository
 ) {
 
-
     fun findAll(): MutableList<Restaurant> {
         return restaurantRepository.findAll()
+    }
+
+    fun findById(id:Long): Restaurant{
+        return restaurantRepository.findById(id).get();
     }
 
 }
