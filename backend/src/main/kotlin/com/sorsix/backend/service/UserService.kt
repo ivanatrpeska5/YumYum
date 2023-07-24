@@ -8,9 +8,6 @@ import org.springframework.stereotype.Service
 
 @Service
 class UserService(private val userRepository: UserRepository) :UserDetailsService {
-
-
-
     override fun loadUserByUsername(username: String?): User {
         return userRepository.findUserByUsername(username)
     }
