@@ -6,4 +6,5 @@ import java.util.*
 
 interface RestaurantRepository : JpaRepository<Restaurant, Long> {
     override fun findById(id:Long): Optional<Restaurant>
+
 }
