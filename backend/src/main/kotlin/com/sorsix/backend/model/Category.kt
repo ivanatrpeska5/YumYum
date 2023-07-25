@@ -10,7 +10,7 @@ class Category(
     var id: Long,
     var name: String,
     var photo: String,
-    @ManyToMany(mappedBy = "categoryList")
+    @ManyToMany(mappedBy = "categorySet")
     @JsonBackReference
     val foodList: MutableList<Food> = arrayListOf()
 )
