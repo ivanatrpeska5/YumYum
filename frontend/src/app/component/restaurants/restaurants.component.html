@@ -3,7 +3,7 @@
     <div class="row">
     <div *ngFor="let restaurant of restaurants" class="col-md-3">
             <div class="card mb-3" routerLink="/restaurant/{{restaurant.id}}">
-                    <img src="{{restaurant.photo}}" alt="" class="card-img-top img-fluid" style="object-fit: cover;">
+                    <img src="{{restaurant.logo}}" alt="" class="card-img-top img-fluid" style="object-fit: cover;">
                 <div class="card-body">
                     <h4 class="text-center">{{ restaurant.name }}</h4>
                 </div>
