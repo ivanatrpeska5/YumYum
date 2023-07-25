@@ -20,7 +20,6 @@ class DataInitializer(
 
     @PostConstruct
     fun init(){
-        userRepository.save(Customer(1,"a","a","a","a",passwordEncoder.encode("a"),"a"))
-        restaurantRepository.save(Restaurant(1,"Doma", locationRepository.getReferenceById(1),"photo"))
+
     }
 }
