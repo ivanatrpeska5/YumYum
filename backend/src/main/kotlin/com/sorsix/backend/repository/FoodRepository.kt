@@ -9,7 +9,5 @@ import org.springframework.data.jpa.repository.Query
 interface FoodRepository : JpaRepository<Food, Long> {
 
 
-    fun findFoodsByCategoryAndRestaurant(category: Category,restaurant: Restaurant):MutableList<Food>
-
     fun findFoodsByRestaurantId(restaurantId: Long):List<Food>
 }
