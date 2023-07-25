@@ -9,13 +9,15 @@ import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './component/home/home.component';
 import { RequestInterceptor } from './request.interceptor';
 import { RestaurantsComponent } from './component/restaurants/restaurants.component';
+import { RestaurantComponent } from './component/restaurant/restaurant.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    RestaurantsComponent
+    RestaurantsComponent,
+    RestaurantComponent
   ],
   imports: [
     BrowserModule,

@@ -20,6 +20,5 @@ class DataInitializer(
 
     @PostConstruct
     fun init(){
-
     }
 }
