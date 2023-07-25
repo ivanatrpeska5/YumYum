@@ -5,6 +5,7 @@ import { HomeComponent } from './component/home/home.component';
 import { LoginComponent } from './component/login/login.component';
 import { RestaurantsComponent } from './component/restaurants/restaurants.component';
 import { RestaurantComponent } from './component/restaurant/restaurant.component';
+import { RegisterComponent } from './component/register/register.component';
 
 const routes: Routes = [
   {path: '', canActivate:[AuthenticationGuard], children: [
@@ -12,6 +13,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent },
     {path: 'restaurants', component: RestaurantsComponent},
     {path: 'restaurant/:id', component: RestaurantComponent},
+    {path: 'register', component: RegisterComponent},
     { path: '**', redirectTo: '' }
   ]},
 
