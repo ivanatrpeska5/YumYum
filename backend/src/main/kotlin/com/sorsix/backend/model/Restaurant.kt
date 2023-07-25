@@ -12,7 +12,19 @@ class Restaurant(
     @ManyToOne
     var location: Location,
 
-    var photo:String
+    var logo:String,
+    var photo:String,
+
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "restaurant")
+    val workingHours: List<WorkingHours> = mutableListOf(),
+
+    @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "restaurant")
+    var ratings: List<Rating> = mutableListOf(),
+
+    @Column(nullable = false)
+    var averageRating: Double = 0.0,
+
+    var deliveryTime:String,
 
 ) {
 
