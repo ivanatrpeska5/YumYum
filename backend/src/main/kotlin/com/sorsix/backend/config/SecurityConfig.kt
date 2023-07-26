@@ -47,7 +47,7 @@ class SecurityConfig(
                 )
             }.and()
         http.authorizeRequests()
-            //.antMatchers("/api/login").permitAll()
+            .antMatchers("/api/login").permitAll()
             .anyRequest().permitAll()
         http.addFilterBefore(
             sessionFilter,

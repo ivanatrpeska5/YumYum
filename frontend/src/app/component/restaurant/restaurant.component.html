@@ -1,44 +1,73 @@
 <img src="{{restaurant?.photo}}" class="img-fluid w-100" style="height: 500px;"/>
-<div class="card">
-    <div class="container">
+<div class="">
+    <div class="card restaurant-info">
+    <div class="container pt-2 pb-2">
     <h1>{{restaurant?.name}}</h1>
     <p>Rating: <span>{{restaurant?.averageRating}}</span></p>
-    <div>
-        <div>
+    <div class="row">
+        <div class="col-md-5 restaurant-info">
+            <div class="border border-3 border-warning text-warning rounded-pill w-100 text-center fw-bold p-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
                 <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
              </svg>
              {{restaurant?.location?.street}} {{restaurant?.location?.number}} Kumanovo, Macedonia
-        </div>
-        <div>
+            </div></div>
+        <div class="col-md-2"></div>
+        <div class="col-md-3">
+            <div class="border border-3 border-warning text-warning rounded-pill w-100 text-center fw-bold p-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
                 <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71V3.5z"/>
                 <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0z"/>
               </svg>
               10:00 am - 10:00 pm
+            </div>
         </div>
-        <div>
+        <div class="col-md-2">
+            <div class="border border-3 border-warning text-warning rounded-pill w-100 text-center fw-bold p-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
                 <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"/>
              </svg>
              {{restaurant?.deliveryTime}}
+            </div>
         </div>
     </div>
     </div>
-</div>
+</div></div>
 
-
-
-<div class="container">
-    <div class="row" *ngFor="let c of foodsByCategory">
-        {{c.categoryName}}
-        <div *ngFor="let f of c.food" class="col-md-3">
+<div class="container mt-3">
+    <div class="row" *ngFor="let category of foodsByCategory">
+        <div class="p-3 text-center bg-warning mb-3"><h3>{{category.categoryName}}</h3></div>
+        <div *ngFor="let food of category.food" class="col-md-3">
                 <div class="card mb-3" routerLink="/restaurant/{{restaurant?.id}}">
-                        <img src="{{f.photo}}" alt="" class="card-img-top img-fluid" style="object-fit: cover;">
+                        <img src="{{food.photo}}" alt="" class="card-img-top img-fluid" style="object-fit: cover;">
                     <div class="card-body">
-                        <h4 class="text-center">{{ f.name }}</h4>
+                        <hr/>
+                        <h4 class="text-center">{{ food.name }}</h4>
+                        <hr/>
+                        <div><span class="fw-bold">Ingredients:</span>
+                            <!-- <div *ngFor="let ingredient of foodIngredients">
+
+                            </div> -->
+                        </div>
+                        <hr/>
+                        <p><span class="fw-bold">Price:</span>{{ food.price }} MKD</p>
+                        <hr/>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <input type="number" value="1" min="0" name="quantity" class="w-100 form-control">
+                            </div>        
+                            <div class="col-md-9"> 
+                            <button type="submit" class="btn btn-warning rounded-pill fw-bold w-100 p-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-cart3" viewBox="0 0 16 16">
+                                    <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path>
+                                </svg>
+                                Add to Cart
+                            </button>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+    </div>
 </div>
