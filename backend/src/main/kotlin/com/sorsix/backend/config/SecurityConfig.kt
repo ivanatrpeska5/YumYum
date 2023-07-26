@@ -48,7 +48,7 @@ class SecurityConfig(
             }.and()
         http.authorizeRequests()
             .antMatchers("/api/login").permitAll()
-            .anyRequest().authenticated()
+            .anyRequest().permitAll()
         http.addFilterBefore(
             sessionFilter,
             UsernamePasswordAuthenticationFilter::class.java
