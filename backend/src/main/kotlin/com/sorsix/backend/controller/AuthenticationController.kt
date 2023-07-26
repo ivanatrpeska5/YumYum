@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
+import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
+import javax.servlet.http.HttpServletRequest
 
 @RestController
 @RequestMapping("/api")
@@ -28,4 +30,13 @@ class AuthenticationController {
         println(sessionId)
         return ResponseEntity.ok(response)
     }
+
+
+    @PostMapping("/logout")
+    fun logout(@RequestBody sessionId:String, req: HttpServletRequest): ResponseEntity<String> {
+        req.session.invalidate()
+        sessionRegistry?.sessions?.remove(sessionId);
+        return ResponseEntity.ok().body(sessionId);
+    }
+
 }
