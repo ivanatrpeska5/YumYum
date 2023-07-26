@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { RegisterForm } from 'src/app/model/registerForm';
 import { Restaurant } from 'src/app/model/restaurant';
 import { AuthService } from 'src/app/service/auth.service';
@@ -25,7 +25,9 @@ export class RegisterComponent implements OnInit {
 
   restaurants:Restaurant[]=[]
 
-  constructor(private http: HttpClient, private authService:AuthService, private restaurantsService:RestaurantsService, private router:Router) {}
+  constructor(private http: HttpClient, private authService:AuthService,
+     private restaurantsService:RestaurantsService, private router:Router,
+     private activatedRoute:ActivatedRoute) {}
   ngOnInit(): void {
     this.restaurantsService.getRestaurants().subscribe(restaurants=>{
       this.restaurants=restaurants;
@@ -34,7 +36,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit() {
     this.authService.register(this.formData);
-    this.router.navigate([['/login']])
+    this.router.navigate(['/login'], {relativeTo: this.activatedRoute})
   }
 
 }
