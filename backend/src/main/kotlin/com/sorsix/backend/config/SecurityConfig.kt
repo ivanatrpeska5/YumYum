@@ -47,12 +47,13 @@ class SecurityConfig(
                 )
             }.and()
         http.authorizeRequests()
-           // .antMatchers("/api/login").permitAll()
-            .anyRequest().permitAll()
+            .antMatchers("/api/login").permitAll()
+            .anyRequest().authenticated()
         http.addFilterBefore(
             sessionFilter,
             UsernamePasswordAuthenticationFilter::class.java
         )
+        http.logout().clearAuthentication(true).invalidateHttpSession(true).deleteCookies("JSESSIONID")
     }
 
 
