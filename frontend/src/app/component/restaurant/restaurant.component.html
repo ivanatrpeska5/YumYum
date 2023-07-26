@@ -1,4 +1,4 @@
-<img src="{{restaurant?.photo}}" class="img-fluid w-100" style="height: 500px;"/>
+<img src="{{restaurant?.photo}}" class="img-fluid w-100" style="height: 500px; object-fit: cover;"/>
 <div class="">
     <div class="card restaurant-info">
     <div class="container pt-2 pb-2">
@@ -53,10 +53,10 @@
                         <p><span class="fw-bold">Price:</span>{{ food.price }} MKD</p>
                         <hr/>
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-md-4">
                                 <input type="number" value="1" min="0" name="quantity" class="w-100 form-control">
                             </div>        
-                            <div class="col-md-9"> 
+                            <div class="col-md-8"> 
                             <button type="submit" class="btn btn-warning rounded-pill fw-bold w-100 p-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                      class="bi bi-cart3" viewBox="0 0 16 16">
