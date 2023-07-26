@@ -18,6 +18,7 @@ abstract class User(
     open var email:String,
     open var phone:String,
     private var password:String,
+    @Column(unique = true)
     private var username:String
 ): UserDetails{
 

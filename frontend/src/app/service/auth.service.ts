@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { RegisterForm } from '../model/registerForm';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,21 @@ export class AuthService {
         alert("Cannot logout")
       }
     });
+  }
+
+  register(formData:RegisterForm){
+    let url = '/api/register';
+    this.http
+      .post<any>(url, formData)
+      .subscribe(
+        (response) => {
+          console.log('Post successful!', response);
+          // Handle the response from the server if needed
+        },
+        (error) => {
+          console.error('Error:', error);
+          // Handle any errors that occurred during the post request
+        }
+      );
   }
 }
