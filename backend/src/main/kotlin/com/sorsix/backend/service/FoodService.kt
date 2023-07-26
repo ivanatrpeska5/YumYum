@@ -1,7 +1,6 @@
 package com.sorsix.backend.service
 
-import com.sorsix.backend.model.Food
-import com.sorsix.backend.model.Restaurant
+import com.sorsix.backend.model.dto.CategoryFoodsDTO
 import com.sorsix.backend.repository.CategoryRepository
 import com.sorsix.backend.repository.FoodRepository
 import org.springframework.stereotype.Service
@@ -12,14 +11,18 @@ class FoodService(
 ) {
 
 
-    fun foodsByRestaurant(restaurantId:Long): Map<String, MutableList<Food>> {
-        val foodMap:MutableMap<String,MutableList<Food>> = mutableMapOf();
-        val foods=foodRepository.findFoodsByRestaurantId(restaurantId);
+    fun foodsByRestaurant(restaurantId:Long): MutableCollection<CategoryFoodsDTO> {
+        val foodMap:MutableMap<String,CategoryFoodsDTO> = mutableMapOf();
+        val foods=foodRepository.findFoodsByRestaurantId(restaurantId)
+        println(foods)
         for (food in foods){
             for (c in food.categorySet){
-                foodMap[c.name]?.add(food)
+                println(c)
+                foodMap.putIfAbsent(c.name, CategoryFoodsDTO(c.name, mutableListOf()))
+                foodMap[c.name]?.food?.add(food);
             }
         }
-        return foodMap;
+        println(foodMap)
+        return foodMap.values;
     }
 }

@@ -30,5 +30,15 @@
 
 
 <div class="container">
-    
+    <div class="row" *ngFor="let c of foodsByCategory">
+        {{c.categoryName}}
+        <div *ngFor="let f of c.food" class="col-md-3">
+                <div class="card mb-3" routerLink="/restaurant/{{restaurant?.id}}">
+                        <img src="{{f.photo}}" alt="" class="card-img-top img-fluid" style="object-fit: cover;">
+                    <div class="card-body">
+                        <h4 class="text-center">{{ f.name }}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
