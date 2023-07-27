@@ -1,7 +1,7 @@
 package com.sorsix.backend.controller
 import com.sorsix.backend.model.User
 import com.sorsix.backend.model.dto.RegisterDto
-import com.sorsix.backend.model.dto.ResponseDTO
+import com.sorsix.backend.model.dto.UserSessionDto
 import com.sorsix.backend.model.dto.UserDTO
 import com.sorsix.backend.repository.UserRepository
 import com.sorsix.backend.service.UserService
@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.*
 import java.util.*
 import javax.servlet.http.HttpServletRequest
@@ -25,13 +24,14 @@ class AuthenticationController(private val userRepository: UserRepository,privat
     var sessionRegistry: InMemorySessionRegistry? = null
 
     @PostMapping("/login")
-    fun login(@RequestBody user:UserDTO): ResponseEntity<ResponseDTO> {
+    fun login(@RequestBody user:UserDTO): ResponseEntity<UserSessionDto> {
         println(user.username)
         manager!!.authenticate(
             UsernamePasswordAuthenticationToken(user.username, user.password)
         )
         val sessionId: String? = sessionRegistry?.registerSession(user.username)
-        val response = sessionId?.let { ResponseDTO(it) }
+        val role=userRepository.findUserByUsername(user.username).role;
+        val response = sessionId?.let { UserSessionDto(it,role) }
         println(sessionId)
         return ResponseEntity.ok(response)
     }

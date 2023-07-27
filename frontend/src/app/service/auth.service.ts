@@ -28,6 +28,8 @@ export class AuthService {
           'token',
           this.sessionId
         );
+        sessionStorage.setItem("role",res.role)
+        console.log(sessionStorage.getItem("role"))
         this.router.navigate(['']);
       } else {
         alert("Authentication failed.")

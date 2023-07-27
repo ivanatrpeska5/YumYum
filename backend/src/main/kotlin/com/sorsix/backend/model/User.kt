@@ -19,7 +19,8 @@ abstract class User(
     open var phone:String,
     private var password:String,
     @Column(unique = true)
-    private var username:String
+    private var username:String,
+    open var role:String
 ): UserDetails{
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {

@@ -1,4 +1,4 @@
 package com.sorsix.backend.model.dto
 
-data class ResponseDTO(var sessionId: String) {
+data class UserSessionDto(var sessionId: String, var role:String) {
 }

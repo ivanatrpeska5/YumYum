@@ -11,9 +11,9 @@ import javax.persistence.PrimaryKeyJoinColumn
 class RestaurantEmployee
     (userId: Long, name: String, surname: String, email: String, phone: String, password: String,
      @ManyToOne
-        var restaurant: Restaurant, username: String
+        var restaurant: Restaurant, username: String, role: String
 ) :
-    User(userId, name, surname, email, phone, password, username){
+    User(userId, name, surname, email, phone, password, username, role){
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return mutableListOf(SimpleGrantedAuthority("employee"));
     }
