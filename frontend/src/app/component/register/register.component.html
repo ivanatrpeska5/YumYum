@@ -25,8 +25,8 @@
       <option value="employee">Restaurant Employee</option>
     </select><br><br>
   
-    <select *ngIf="formData.role=='employee'">
-      <option *ngFor="let r of restaurants" [value]="r.id">{{r.name}}</option>
+    <select *ngIf="formData.role=='employee'" [(ngModel)]="formData.restaurantId" [ngModelOptions]="{standalone: true}">
+      <option *ngFor="let r of restaurants" [ngValue]="r.id">{{r.name}}</option>
     </select>
     
     <button type="submit">Submit</button>

@@ -37,7 +37,7 @@ class UserService(private val userRepository: UserRepository, private val custom
                 registerDto.email,
                 registerDto.phone,
                 passwordEncoder.encode(registerDto.password),
-                restaurantRepository.findById(1).get(),registerDto.username))
+                restaurantRepository.findById(registerDto.restaurantId!!).get(),registerDto.username))
         } else if(registerDto.role=="delivery"){
            return deliveryManRepository.save(DeliveryMan(userRepository.count()+1,
                 registerDto.name,

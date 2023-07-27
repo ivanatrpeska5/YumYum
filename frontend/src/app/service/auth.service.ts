@@ -50,6 +50,7 @@ export class AuthService {
 
   register(formData:RegisterForm){
     let url = '/api/register';
+    console.log("restaurant id:",formData.restaurantId)
     this.http
       .post<any>(url, formData)
       .subscribe(
