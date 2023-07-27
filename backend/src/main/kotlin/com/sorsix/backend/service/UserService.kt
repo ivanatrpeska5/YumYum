@@ -31,6 +31,7 @@ class UserService(private val userRepository: UserRepository, private val custom
                 passwordEncoder.encode(registerDto.password),
                 registerDto.username))
         } else if(registerDto.role=="employee"){
+            println(registerDto.restaurantId)
            return restaurantEmployeeRepository.save(RestaurantEmployee(userRepository.count()+1,
                 registerDto.name,
                 registerDto.surname,
