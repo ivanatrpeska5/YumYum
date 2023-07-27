@@ -6,7 +6,6 @@
       <form (ngSubmit)="onSubmit()">
           <label for="name">Name:</label>
           <input type="text" id="name" name="name" class="form-control" [(ngModel)]="formData.name" required />
-
           <label for="surname">Surname:</label>
           <input type="text" id="surname" name="surname" class="form-control" [(ngModel)]="formData.surname" required />
         
@@ -29,7 +28,7 @@
             <option value="employee">Restaurant Employee</option>
           </select>
         
-          <select *ngIf="formData.role=='employee'" class="form-control mt-2 " [(ngModel)]="formData.restaurantId">
+          <select *ngIf="formData.role=='employee'" class="form-control mt-2 " [(ngModel)]="formData.restaurantId" [ngModelOptions]="{standalone: true}">
             <option *ngFor="let r of restaurants" [value]="r.id">{{r.name}}</option>
           </select>
           
