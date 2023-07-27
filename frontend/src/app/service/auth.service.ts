@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { RegisterForm } from '../model/registerForm';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,26 +10,27 @@ import { RegisterForm } from '../model/registerForm';
 export class AuthService {
 
   model: any = {};
-  sessionId: any = "";
-
+ // sessionId: string | null=null;
+  //role: string | null=null;
+  private sessionID= new BehaviorSubject(null);
+  private ROLE=new BehaviorSubject(null);
+  currentSessionId=this.sessionID.asObservable();
+  currentRole=this.ROLE.asObservable();
   constructor(private router: Router,
     private http: HttpClient) { }
 
   login(model:any) {
     let url = '/api/login';
-    this.model=model
+    //this.model=model
     this.http.post<any>(url, {
-      username: this.model.username,
-      password: this.model.password
+      username: model.username,
+      password: model.password
     }).subscribe(res => {
       if (res) {
-        this.sessionId = res.sessionId;
-
-        sessionStorage.setItem(
-          'token',
-          this.sessionId
-        );
-        sessionStorage.setItem("role",res.role)
+        this.sessionID.next(res.sessionId);
+        this.ROLE.next(res.role);
+        sessionStorage.setItem('token',res.sessionId);
+        sessionStorage.setItem("role",res.role);
         console.log(sessionStorage.getItem("role"))
         this.router.navigate(['']);
       } else {
@@ -39,10 +41,13 @@ export class AuthService {
   logout() {
     let url = '/api/logout';
     this.http.post<any>(url, {
-      sessionId: this.sessionId
+      sessionId: sessionStorage.getItem('token')
     }).subscribe(res => {
       if (res) {
         sessionStorage.removeItem('token')
+        sessionStorage.removeItem('role');
+        this.sessionID.next(null);
+        this.ROLE.next(null);
         this.router.navigate(['login']);
       } else {
         alert("Cannot logout")
