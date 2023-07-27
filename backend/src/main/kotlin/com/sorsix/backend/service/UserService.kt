@@ -31,13 +31,14 @@ class UserService(private val userRepository: UserRepository, private val custom
                 passwordEncoder.encode(registerDto.password),
                 registerDto.username))
         } else if(registerDto.role=="employee"){
+            println(registerDto.restaurantId)
            return restaurantEmployeeRepository.save(RestaurantEmployee(userRepository.count()+1,
                 registerDto.name,
                 registerDto.surname,
                 registerDto.email,
                 registerDto.phone,
                 passwordEncoder.encode(registerDto.password),
-                restaurantRepository.findById(1).get(),registerDto.username))
+                restaurantRepository.findById(registerDto.restaurantId!!).get(),registerDto.username))
         } else if(registerDto.role=="delivery"){
            return deliveryManRepository.save(DeliveryMan(userRepository.count()+1,
                 registerDto.name,
