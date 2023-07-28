@@ -22,18 +22,18 @@
           <li class="nav-item">
             <a class="nav-link text-white" routerLink="/restaurants">Restaurants</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="role=='customer'">
             <a class="nav-link text-white" href="#">My orders</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link text-white" href="#">Restaurant Orders</a>
+          <li class="nav-item" *ngIf="role=='employee'">
+            <a class="nav-link text-white" href="#" >Restaurant Orders</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="role=='employee'">
             <a class="nav-link text-white" href="#">Add Product</a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">
-          <a class="nav-link text-white me-3" style="text-decoration: underline" href="#">
+          <a class="nav-link text-white me-3" style="text-decoration: underline" href="#" *ngIf="role=='customer'">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-fill"
               viewBox="0 0 16 16">
               <path
@@ -41,7 +41,7 @@
             </svg>
             Shopping Cart
           </a>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="role=='employee'">
             <a class="nav-link border bg-light text-dark rounded-pill pt-0 pb-0 pl-1 pr-1 me-3 mt-2" href="#">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                 class="bi bi-person-fill" viewBox="0 0 16 16">
@@ -51,7 +51,7 @@
             </a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="role=='customer'">
             <a class="nav-link border bg-light text-dark rounded-pill pt-0 pb-0 pl-1 pr-1 me-3 mt-2" href="#">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                 class="bi bi-person-fill" viewBox="0 0 16 16">
@@ -61,12 +61,12 @@
             </a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="isAuthorized()">
             <a class="nav-link text-white border bg-warning text-white rounded-pill pt-0 pb-0 pl-1 pr-1 mt-2"
               (click)="logout()" routerLink="/logout">Logout</a>
           </li>
 
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="!isAuthorized()">
             <a class="nav-link text-white" style="text-decoration: underline" routerLink="/login">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                 class="bi bi-person-fill" viewBox="0 0 16 16">
@@ -75,7 +75,7 @@
               Login
             </a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="!isAuthorized()">
             <a class="nav-link border bg-warning text-white rounded-pill pt-0 pb-0 pl-1 pr-1 mt-2" routerLink="register">Register</a>
           </li>
         </ul>
