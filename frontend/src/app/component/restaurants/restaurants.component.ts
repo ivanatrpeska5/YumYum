@@ -25,5 +25,6 @@ export class RestaurantsComponent implements OnInit {
       this.restaurants=restaurants
     })
   }
+  
 
 }
