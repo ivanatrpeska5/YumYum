@@ -17,4 +17,9 @@ export class CartService {
         
     })
   }
+
+  getCarts(){
+    const sessionId=localStorage.getItem('token')
+    return this.http.get<any>(`${this.url}/${sessionId}`)
+  }
 }

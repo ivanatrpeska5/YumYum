@@ -12,6 +12,7 @@ import { RequestInterceptor } from './request.interceptor';
 import { RestaurantsComponent } from './component/restaurants/restaurants.component';
 import { RestaurantComponent } from './component/restaurant/restaurant.component';
 import { RegisterComponent } from './component/register/register.component';
+import { CartComponent } from './component/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RegisterComponent } from './component/register/register.component';
     HomeComponent,
     RestaurantsComponent,
     RestaurantComponent,
-    RegisterComponent
+    RegisterComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

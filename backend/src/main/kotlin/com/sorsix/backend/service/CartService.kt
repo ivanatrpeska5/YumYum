@@ -29,5 +29,13 @@ class CartService(
             cartConsistsOfFoodRepository.count()+1,cart,food,dto.quantity)
         )
     }
-}
+
+    fun getCarts(sessionId:String): Set<Cart> {
+        val username=sessionRegistry.getUsernameForSession(sessionId);
+        val customer=customerRepository.findCustomerByUsername(username!!);
+        val carts=cartRepository.findAllByCustomer(customer);
+        return carts;
+    }
+
+
 }

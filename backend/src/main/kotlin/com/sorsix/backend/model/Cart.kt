@@ -1,5 +1,6 @@
 package com.sorsix.backend.model
 
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.sorsix.backend.model.manytomany.CartConsistsOfFood
 import lombok.Data
 import javax.persistence.*
@@ -17,6 +18,7 @@ class Cart(
 
     @OneToMany
     @JoinColumn(name="cart_id")
+    @JsonManagedReference
     val cartConsistsOfFoodList: MutableList<CartConsistsOfFood> = mutableListOf<CartConsistsOfFood>()
 ){
     fun getAmmountPrice(): Double {

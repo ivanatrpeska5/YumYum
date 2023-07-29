@@ -1,5 +1,6 @@
 package com.sorsix.backend.model.manytomany
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import com.sorsix.backend.model.Cart
 import com.sorsix.backend.model.Food
 import javax.persistence.*
@@ -14,6 +15,7 @@ class CartConsistsOfFood(
 
     @ManyToOne
     @JoinColumn(name="cart_id")
+    @JsonBackReference
     var cart: Cart,
 
     @ManyToOne
