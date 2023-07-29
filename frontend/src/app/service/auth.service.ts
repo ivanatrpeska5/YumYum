@@ -29,9 +29,9 @@ export class AuthService {
       if (res) {
         this.sessionID.next(res.sessionId);
         this.ROLE.next(res.role);
-        sessionStorage.setItem('token',res.sessionId);
-        sessionStorage.setItem("role",res.role);
-        console.log(sessionStorage.getItem("role"))
+        localStorage.setItem('token',res.sessionId);
+        localStorage.setItem("role",res.role);
+        console.log(localStorage.getItem("role"))
         this.router.navigate(['']);
       } else {
         alert("Authentication failed.")
@@ -41,11 +41,11 @@ export class AuthService {
   logout() {
     let url = '/api/logout';
     this.http.post<any>(url, {
-      sessionId: sessionStorage.getItem('token')
+      sessionId: localStorage.getItem('token')
     }).subscribe(res => {
       if (res) {
-        sessionStorage.removeItem('token')
-        sessionStorage.removeItem('role');
+        localStorage.removeItem('token')
+        localStorage.removeItem('role');
         this.sessionID.next(null);
         this.ROLE.next(null);
         this.router.navigate(['login']);

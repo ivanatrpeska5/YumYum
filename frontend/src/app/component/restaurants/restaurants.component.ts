@@ -13,6 +13,7 @@ export class RestaurantsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getRestaurants()
+    console.log(sessionStorage.getItem('token'))
   }
 
   constructor(private restaurantsService:RestaurantsService){

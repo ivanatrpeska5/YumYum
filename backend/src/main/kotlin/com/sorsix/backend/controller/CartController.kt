@@ -1,17 +1,19 @@
 package com.sorsix.backend.controller
 
+import com.sorsix.backend.model.dto.AddFoodToCartDto
+import com.sorsix.backend.model.dto.UserSessionDto
 import com.sorsix.backend.service.CartService
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.http.ResponseEntity
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api")
 class CartController (private val cartService: CartService) {
 
-    @GetMapping("/addToCart/{foodId}/{quantity}/{userId}")
-    fun addToCart(@PathVariable foodId: Long,@PathVariable quantity: Int, @PathVariable userId:Long) {
+    @PostMapping("/cart")
+    fun addToCart(@RequestBody dto:AddFoodToCartDto): ResponseEntity<UserSessionDto> {
 
+        cartService.addFoodToCart(dto)
+        return ResponseEntity.ok().body(UserSessionDto(dto.sessionId,"customer"))
     }
 }

@@ -19,7 +19,8 @@ export class AppComponent implements OnInit {
     //this.sessionId=sessionStorage.getItem("token")
     this.authService.currentRole.subscribe(role=>this.role=role)
     this.authService.currentSessionId.subscribe(sessionId=>{this.sessionId=sessionId;})
-    console.log(this.role)
+    this.sessionId=localStorage.getItem('token');
+    this.role=localStorage.getItem('role')
   }
   logout(){
     console.log(this.role)

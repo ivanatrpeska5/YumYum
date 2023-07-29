@@ -31,8 +31,8 @@ class Order(
     @OneToOne
     var cart: Cart,
 
-    @ManyToOne
-    var restaurant:Restaurant,
+   /* @ManyToOne
+    var restaurant:Restaurant,*/
 
     @OneToOne
     var payment:Payment
