@@ -1,5 +1,6 @@
 package com.sorsix.backend.model
 
+import com.fasterxml.jackson.annotation.JsonIgnore
 import lombok.Data
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
@@ -17,6 +18,7 @@ abstract class User(
     open var surname:String,
     open var email:String,
     open var phone:String,
+    @JsonIgnore
     private var password:String,
     @Column(unique = true)
     private var username:String,

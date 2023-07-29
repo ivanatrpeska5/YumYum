@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FoodsByCategory } from 'src/app/model/foodsByCategory';
 import { Restaurant } from 'src/app/model/restaurant';
+import { CartService } from 'src/app/service/cart.service';
 import { RestaurantsService } from 'src/app/service/restaurants.service';
 
 @Component({
@@ -14,22 +15,17 @@ export class RestaurantComponent implements OnInit {
 
   restaurant:Restaurant | undefined;
   foodsByCategory:FoodsByCategory[]=[];
-  restaurantForm!: FormGroup;
-
+  quantity:{[id:number]:number}={}
   ngOnInit(): void {
     this.getRestaurant()
     this.getFoodsbyCategory()
+    this.quantity={}
   }
 
-  constructor(private restaurantsService:RestaurantsService, private route: ActivatedRoute, private formBuilder: FormBuilder){
+  constructor(private restaurantsService:RestaurantsService, 
+              private route: ActivatedRoute,
+              private cartService:CartService){
 
-  }
-
-  createFoodForm(foodId: number): FormGroup {
-    return this.formBuilder.group({
-      foodId: [foodId],
-      quantity: ['1', Validators.required],
-    });
   }
 
   getRestaurant(){
@@ -46,17 +42,10 @@ export class RestaurantComponent implements OnInit {
     })
   }
 
-  private getFoodFormArray(): FormArray {
-    return this.restaurantForm.get('foodForms') as FormArray;
+  addToCart(foodId:number){
+    console.log(foodId)
+    this.cartService.addToCart(foodId,this.quantity[foodId])
   }
-  
-  addToCart(foodId:Number){
-      const formArray = this.getFoodFormArray();
-      const foodForm = formArray.controls.find((control) => control.get('foodId')!!.value === foodId);
-      const formData = this.restaurantForm.value;
-      const quantity = formData.quantity;
-      console.log(foodId)
-      console.log(quantity)
-  }
+
 
 }
