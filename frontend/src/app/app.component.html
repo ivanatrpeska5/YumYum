@@ -31,6 +31,15 @@
           <li class="nav-item" *ngIf="role=='employee'">
             <a class="nav-link text-white" href="#">Add Product</a>
           </li>
+          <li class="nav-item" *ngIf="role=='delivery'">
+            <a class="nav-link text-white" href="#">Accept Order</a>
+          </li>
+          <li class="nav-item" *ngIf="role=='delivery'">
+            <a class="nav-link text-white" href="#">Current Deliveries</a>
+          </li>
+          <li class="nav-item" *ngIf="role=='delivery'">
+            <a class="nav-link text-white" href="#">Finished Deliveries</a>
+          </li>
         </ul>
         <ul class="navbar-nav ms-auto">
           <a class="nav-link text-white me-3" style="text-decoration: underline" href="#" *ngIf="role=='customer'">
