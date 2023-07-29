@@ -16,10 +16,13 @@ export class RestaurantComponent implements OnInit {
   restaurant:Restaurant | undefined;
   foodsByCategory:FoodsByCategory[]=[];
   quantity:{[id:number]:number}={}
+  sessionId: string | null = null;
+  
   ngOnInit(): void {
     this.getRestaurant()
     this.getFoodsbyCategory()
     this.quantity={}
+    this.sessionId=localStorage.getItem('token');
   }
 
   constructor(private restaurantsService:RestaurantsService, 
@@ -47,5 +50,7 @@ export class RestaurantComponent implements OnInit {
     this.cartService.addToCart(foodId,this.quantity[foodId])
   }
 
-
+  isAuthenticated():boolean{
+    return this.sessionId!=null;
+  }
 }
