@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FoodsByCategory } from 'src/app/model/foodsByCategory';
 import { Restaurant } from 'src/app/model/restaurant';
@@ -13,13 +14,17 @@ export class RestaurantComponent implements OnInit {
 
   restaurant:Restaurant | undefined;
   foodsByCategory:FoodsByCategory[]=[];
+  restaurantForm!: FormGroup;
 
   ngOnInit(): void {
     this.getRestaurant()
     this.getFoodsbyCategory()
+    this.restaurantForm = this.formBuilder.group({
+      quantity: ['1', Validators.required]
+    });
   }
 
-  constructor(private restaurantsService:RestaurantsService, private route: ActivatedRoute){
+  constructor(private restaurantsService:RestaurantsService, private route: ActivatedRoute, private formBuilder: FormBuilder){
 
   }
 
@@ -37,5 +42,12 @@ export class RestaurantComponent implements OnInit {
     })
   }
 
+  addToCart(foodId:Number){
+      const formData = this.restaurantForm.value;
+      const quantity = formData.quantity;
+      console.log(foodId)
+      console.log(quantity)
+
+  }
 
 }

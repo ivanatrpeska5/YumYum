@@ -13,8 +13,6 @@ class Food(
     var name:String,
     var price:Double,
 
-
-
     @ManyToOne
     var restaurant: Restaurant,
 

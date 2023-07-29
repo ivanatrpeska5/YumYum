@@ -11,9 +11,9 @@ class CartService(
     private val cartRepository: CartRepository,
     private val foodRepository: FoodRepository
 ) {
-    fun addFoodToCart(foodId:Long){
-        var food: Food = foodRepository.findFoodById(foodId).get()
-        if(food!=null){
+    fun addFoodToCart(foodId:Long, quantity: Int, userId: Long){
+        val food: Food = foodRepository.findFoodById(foodId)
+        if(food!=null) {
 
         }
 
