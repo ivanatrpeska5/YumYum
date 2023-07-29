@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Restaurant } from '../model/restaurant';
 import { Observable } from 'rxjs';
 import { FoodsByCategory } from '../model/foodsByCategory';
+import { FoodInCart } from '../model/foodInCart';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,11 @@ export class RestaurantsService {
 
   getFoodsByCategory(id:number): Observable<FoodsByCategory[]>{
     return this.http.get<FoodsByCategory[]>(`${this.url}/foods/${id}`)
+  }
+
+  addFoodToCart(foodId: number, quantity: number){
+    const userId=localStorage.getItem('token')
+    return this.http.get<FoodInCart[]>(`${this.url}/addFoodInCart/${userId}/${foodId}/${quantity}`)
   }
 
 }

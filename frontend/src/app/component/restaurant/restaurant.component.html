@@ -52,10 +52,10 @@
                         <hr/>
                         <p><span class="fw-bold">Price:</span>{{ food.price }} MKD</p>
                         <hr/>
-                            <form [formGroup]="restaurantForm" (ngSubmit)="addToCart(food.id)">
+                            <form [formGroup]="createFoodForm(food.id)" (ngSubmit)="addToCart(food.id)">
                                 <div class="row">
                                  <div class="col-md-4">
-                                        <input type="number"  name="quantity" class="w-100 form-control" formControlName="quantity" value="1" required>
+                                        <input type="number"  name="quantity" class="w-100 form-control" formControlName="quantity" required>
                                     </div>        
                                     <div class="col-md-8"> 
                                     <button type="submit" class="btn btn-warning rounded-pill fw-bold w-100 p-2">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { FoodsByCategory } from 'src/app/model/foodsByCategory';
 import { Restaurant } from 'src/app/model/restaurant';
@@ -19,13 +19,17 @@ export class RestaurantComponent implements OnInit {
   ngOnInit(): void {
     this.getRestaurant()
     this.getFoodsbyCategory()
-    this.restaurantForm = this.formBuilder.group({
-      quantity: ['1', Validators.required]
-    });
   }
 
   constructor(private restaurantsService:RestaurantsService, private route: ActivatedRoute, private formBuilder: FormBuilder){
 
+  }
+
+  createFoodForm(foodId: number): FormGroup {
+    return this.formBuilder.group({
+      foodId: [foodId],
+      quantity: ['1', Validators.required],
+    });
   }
 
   getRestaurant(){
@@ -42,12 +46,17 @@ export class RestaurantComponent implements OnInit {
     })
   }
 
+  private getFoodFormArray(): FormArray {
+    return this.restaurantForm.get('foodForms') as FormArray;
+  }
+  
   addToCart(foodId:Number){
+      const formArray = this.getFoodFormArray();
+      const foodForm = formArray.controls.find((control) => control.get('foodId')!!.value === foodId);
       const formData = this.restaurantForm.value;
       const quantity = formData.quantity;
       console.log(foodId)
       console.log(quantity)
-
   }
 
 }
