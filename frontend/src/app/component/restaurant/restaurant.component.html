@@ -54,7 +54,7 @@
                         <hr/>
                         <div class="row">
                             <div class="col-md-4">
-                                <input type="number" [value]="quantity[food.id] || 1" min="1" name="quantity" class="w-100 form-control" [(ngModel)]="quantity[food.id]">
+                                <input type="number" min="1" value="1" name="quantity" class="w-100 form-control" [ngModel]="quantity[food.id] || 1" (ngModelChange)="onQuantityChange(food.id, $event)">
                             </div>        
                             <div class="col-md-8"> 
                             <button type="submit" class="btn btn-warning rounded-pill fw-bold w-100 p-2" (click)="addToCart(food.id)" [disabled]="!isAuthenticated()">
@@ -65,6 +65,12 @@
                                 Add to Cart
                             </button>
                         </div>
+                        <div *ngIf="!isAuthenticated()">
+                            *Login to order
+                          </div>
+                          <div *ngIf="quantity[food.id] <= 0">
+                            *Quantity must be more than 0!
+                          </div>
                         </div>
                     </div>
                 </div>
