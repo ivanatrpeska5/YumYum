@@ -8,4 +8,6 @@ interface CartRepository : JpaRepository<Cart, Long> {
     fun findCartByRestaurantIdAndCustomerUserId(restaurantId:Long,customerUserId:Long):Cart?
 
     fun findAllByCustomer(customer: Customer):Set<Cart>
+
+    fun findAllByCustomerUserId(customerUserId: Long):List<Cart>
 }
