@@ -35,7 +35,4 @@ class Food(
     )
     val categorySet: Set<Category>,
 
-    @OneToMany
-    @JoinColumn(name="cart_id")
-    val cartConsistsOfFoodList: MutableList<CartConsistsOfFood> = mutableListOf<CartConsistsOfFood>()
 )
