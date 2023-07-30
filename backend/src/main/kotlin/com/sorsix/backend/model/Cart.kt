@@ -1,6 +1,7 @@
 package com.sorsix.backend.model
 
 import com.fasterxml.jackson.annotation.JsonManagedReference
+import com.sorsix.backend.model.enumeration.ShoppingCartStatus
 import com.sorsix.backend.model.manytomany.CartConsistsOfFood
 import lombok.Data
 import javax.persistence.*
@@ -12,9 +13,10 @@ class Cart(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
-    /*var ammount:Double,*/
     @ManyToOne var customer:Customer,
     @ManyToOne var restaurant: Restaurant,
+    @Enumerated(EnumType.STRING)
+    var status: ShoppingCartStatus,
 
     @OneToMany
     @JoinColumn(name="cart_id")

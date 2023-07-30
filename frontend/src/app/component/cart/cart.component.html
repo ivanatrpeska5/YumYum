@@ -8,13 +8,14 @@
                 <div class="card-body">
                     <h5 class="fw-bold">{{ cartInfo.name }}</h5>
                     <p>
-                        <span class="fw-bold">Quantity:</span>  {{ cartInfo.quantity }} <br />
-                        <span class="fw-bold">Price for one:</span> 
-                        {{ cartInfo.price }}
+                        <span class="fw-bold">Quantity:</span> {{ cartInfo.quantity }} <br />
+                        <span class="fw-bold">Price for one:</span>
+                        {{ cartInfo.price }} MKD
                     </p>
-                    <p class="fw-bold">Subtotal: {{ cartInfo.quantity * cartInfo.price }}</p>
+                    <p class="fw-bold">Subtotal: {{ cartInfo.quantity * cartInfo.price }} MKD</p>
                 </div>
-                <a class="btn btn-danger" (click)="removeFromCart(cartInfo.cartConsistsOfFoodId)" style="position: absolute; right: 3%; top: 3%">
+                <a class="btn btn-danger" (click)="removeFromCart(cartInfo.cartConsistsOfFoodId)"
+                    style="position: absolute; right: 3%; top: 3%">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                         class="bi bi-x-circle" viewBox="0 0 16 16">
                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
@@ -26,14 +27,14 @@
             </div>
         </div>
     </div>
-    <div *ngIf="cartsInfo">
+    <div *ngIf="cartsInfo && cartsInfo.length>0">
         <div class="text-center">
-            <h6>Total Amount : {{ totalAmount }}</h6>
+            <h4>Total Amount : {{ totalAmount }} MKD</h4>
             <a href="#" class="btn btn-warning rounded-pill"
                 style="padding: 1rem 10rem 1rem 10rem; font-size: 1.6rem">Buy All Products</a>
         </div>
     </div>
-    <div *ngIf="!cartsInfo" class="d-flex justify-content-center align-items-center" style="height: 500px;">
+    <div *ngIf="!cartsInfo || cartsInfo.length==0" class="d-flex justify-content-center align-items-center" style="height: 500px;">
         <div>
             <h3>Empty cart, full appetite? Order now and feast!</h3>
             <a routerLink="/restaurants" class="btn btn-warning rounded-pill mt-2"
