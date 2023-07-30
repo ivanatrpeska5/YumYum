@@ -1,7 +1,6 @@
 package com.sorsix.backend.model
 
 import com.fasterxml.jackson.annotation.JsonManagedReference
-import com.sorsix.backend.model.manytomany.CartConsistsOfFood
 import javax.persistence.*
 
 
@@ -24,7 +23,7 @@ class Food(
         joinColumns = [JoinColumn(name = "foodId")],
         inverseJoinColumns = [JoinColumn(name = "ingredientId")],
     )
-    val ingredientsList: MutableList<Ingredient> = arrayListOf(),
+    val ingredientsSet: Set<Ingredient>,
 
     @ManyToMany
     @JsonManagedReference
@@ -35,4 +34,4 @@ class Food(
     )
     val categorySet: Set<Category>,
 
-)
+    )

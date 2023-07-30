@@ -16,6 +16,7 @@ class FoodService(
         val foods=foodRepository.findFoodsByRestaurantId(restaurantId)
         println(foods)
         for (food in foods){
+            println(food.ingredientsSet)
             for (c in food.categorySet){
                 println(c)
                 foodMap.putIfAbsent(c.name, CategoryFoodsDTO(c.name, mutableListOf()))
