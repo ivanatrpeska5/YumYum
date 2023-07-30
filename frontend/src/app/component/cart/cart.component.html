@@ -1,1 +1,41 @@
-<p>cart works!</p>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-3" *ngFor="let cartInfo of cartsInfo">
+            <div class="card mb-3">
+                <img src="{{ cartInfo.photo }}" alt="" class="card-img-top img-fluid"
+                    style="height: 300px; object-fit: cover" />
+                <div class="card-body">
+                    <h6>{{ cartInfo.name }}</h6>
+                    <p>
+                        Quantity : {{ cartInfo.quantity }} Price for one :
+                        {{ cartInfo.price }}
+                    </p>
+                    <p>Subtotal: {{ cartInfo.quantity * cartInfo.price }}</p>
+                </div>
+                <a class="btn btn-danger" href="#" style="position: absolute; right: 3%; top: 3%">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-x-circle" viewBox="0 0 16 16">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"></path>
+                        <path
+                            d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z">
+                        </path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="cartsInfo">
+        <div class="text-center">
+            <h6>Total Amount : {{ totalAmount }}</h6>
+            <a href="#" class="btn btn-warning rounded-pill"
+                style="padding: 1rem 10rem 1rem 10rem; font-size: 1.6rem">Buy All Products</a>
+        </div>
+    </div>
+    <div *ngIf="!cartsInfo" class="d-flex justify-content-center align-items-center" style="height: 500px;">
+        <div>
+            <h3>Empty cart, full appetite? Order now and feast!</h3>
+            <a routerLink="/restaurants" class="btn btn-warning rounded-pill mt-2"
+                style="padding: 1rem 10rem 1rem 10rem; font-size: 1.6rem">Explore Restaurants</a>
+        </div>
+    </div>
+</div>

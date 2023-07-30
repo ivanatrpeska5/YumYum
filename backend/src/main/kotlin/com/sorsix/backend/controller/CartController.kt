@@ -24,8 +24,8 @@ class CartController (private val cartService: CartService) {
         return ResponseEntity.ok().body(cartService.getCarts(sessionId))
     }
 
-    @GetMapping("/get-carts-info/{userId}")
-    fun getCartsInfoForUser(@PathVariable userId: Long): ResponseEntity<List<CartInfoDTO>>{
-        return ResponseEntity.ok().body(cartService.getCartsInfoForUser(userId))
+    @GetMapping("/info/{sessionId}")
+    fun getCartsInfoForUser(@PathVariable sessionId: String): ResponseEntity<List<CartInfoDTO>>{
+        return ResponseEntity.ok().body(cartService.getCartsInfoForUser(sessionId))
     }
 }

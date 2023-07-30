@@ -42,8 +42,10 @@ class CartService(
         return carts;
     }
 
-    fun getCartsInfoForUser(userId: Long): List<CartInfoDTO>? {
-        val carts = cartRepository.findAllByCustomerUserId(userId);
+    fun getCartsInfoForUser(sessionId: String): List<CartInfoDTO>? {
+        val username = sessionRegistry.getUsernameForSession(sessionId);
+        val customer = customerRepository.findCustomerByUsername(username!!);
+        val carts = cartRepository.findAllByCustomerUserId(customer.userId);
         val foodsInCart: MutableList<CartConsistsOfFood> = mutableListOf()
         for (cart in carts) {
             foodsInCart.addAll(cartConsistsOfFoodRepository.findAllByCart(cart))
