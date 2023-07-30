@@ -52,4 +52,6 @@ export class CartComponent implements OnInit {
       .removeFromCart(cartConsistsOfFoodId)
       .subscribe(() => this.getCartsInfoForUser());
   }
+
+  
 }

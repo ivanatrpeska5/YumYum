@@ -2,8 +2,10 @@ package com.sorsix.backend.service
 
 import com.sorsix.backend.model.Cart
 import com.sorsix.backend.model.Food
+import com.sorsix.backend.model.Order
 import com.sorsix.backend.model.dto.AddFoodToCartDto
 import com.sorsix.backend.model.dto.CartInfoDTO
+import com.sorsix.backend.model.enumeration.OrderStatus
 import com.sorsix.backend.model.enumeration.ShoppingCartStatus
 import com.sorsix.backend.model.manytomany.CartConsistsOfFood
 import com.sorsix.backend.repository.*
@@ -19,6 +21,7 @@ class CartService(
     private val customerRepository: CustomerRepository,
     private val cartConsistsOfFoodRepository: CartConsistsOfFoodRepository,
     private val restaurantRepository: RestaurantRepository,
+    private val orderRepository: OrderRepository
 ) {
 
     fun addFoodToCart(dto: AddFoodToCartDto) {
@@ -70,6 +73,5 @@ class CartService(
     fun removeFromCart(cartConsistsOfFoodId: Long) {
         cartConsistsOfFoodRepository.deleteById(cartConsistsOfFoodId)
     }
-
 
 }

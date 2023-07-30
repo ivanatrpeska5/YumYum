@@ -1,0 +1,4 @@
+enum PaymentMethod {
+    OnDelivery,
+    Card
+  }

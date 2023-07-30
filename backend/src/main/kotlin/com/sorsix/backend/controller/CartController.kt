@@ -34,4 +34,5 @@ class CartController (private val cartService: CartService) {
         cartService.removeFromCart(cartConsistsOfFoodId)
         return ResponseEntity.ok().build()
     }
+
 }

@@ -30,8 +30,8 @@
     <div *ngIf="cartsInfo && cartsInfo.length>0">
         <div class="text-center">
             <h4>Total Amount : {{ totalAmount }} MKD</h4>
-            <a href="#" class="btn btn-warning rounded-pill"
-                style="padding: 1rem 10rem 1rem 10rem; font-size: 1.6rem">Buy All Products</a>
+            <a routerLink="/order" class="btn btn-warning rounded-pill"
+                style="padding: 1rem 10rem 1rem 10rem; font-size: 1.6rem">Order All Products</a>
         </div>
     </div>
     <div *ngIf="!cartsInfo || cartsInfo.length==0" class="d-flex justify-content-center align-items-center" style="height: 500px;">

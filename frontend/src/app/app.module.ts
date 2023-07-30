@@ -13,6 +13,7 @@ import { RestaurantsComponent } from './component/restaurants/restaurants.compon
 import { RestaurantComponent } from './component/restaurant/restaurant.component';
 import { RegisterComponent } from './component/register/register.component';
 import { CartComponent } from './component/cart/cart.component';
+import { OrderComponent } from './component/order/order.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CartComponent } from './component/cart/cart.component';
     RestaurantsComponent,
     RestaurantComponent,
     RegisterComponent,
-    CartComponent
+    CartComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

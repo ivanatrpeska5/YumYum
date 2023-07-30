@@ -1,6 +1,7 @@
 package com.sorsix.backend.model
 
 import com.sorsix.backend.model.enumeration.OrderStatus
+import com.sorsix.backend.model.enumeration.PaymentMethod
 import lombok.Data
 import java.time.LocalDate
 import javax.persistence.*
@@ -22,6 +23,9 @@ class Order(
     @ManyToOne
     var location: Location,
 
+    @Enumerated(value = EnumType.STRING)
+    var paymentMethod: PaymentMethod,
+
     @ManyToOne
     var customer:Customer,
 
@@ -30,9 +34,6 @@ class Order(
 
     @OneToOne
     var cart: Cart,
-
-   /* @ManyToOne
-    var restaurant:Restaurant,*/
 
     @OneToOne
     var payment:Payment

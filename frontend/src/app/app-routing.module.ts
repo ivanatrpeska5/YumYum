@@ -7,22 +7,27 @@ import { RestaurantsComponent } from './component/restaurants/restaurants.compon
 import { RestaurantComponent } from './component/restaurant/restaurant.component';
 import { RegisterComponent } from './component/register/register.component';
 import { CartComponent } from './component/cart/cart.component';
+import { OrderComponent } from './component/order/order.component';
 
 const routes: Routes = [
-  {path: '', canActivate:[AuthenticationGuard], children: [
-    { path: '', component: HomeComponent },
-    { path: 'login', component: LoginComponent },
-    {path: 'restaurants', component: RestaurantsComponent},
-    {path: 'restaurant/:id', component: RestaurantComponent},
-    {path: 'register', component: RegisterComponent},
-    {path: 'cart', component: CartComponent},
-    { path: '**', redirectTo: '' }
-  ]},
-
+  {
+    path: '',
+    canActivate: [AuthenticationGuard],
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'login', component: LoginComponent },
+      { path: 'restaurants', component: RestaurantsComponent },
+      { path: 'restaurant/:id', component: RestaurantComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'cart', component: CartComponent },
+      { path: 'order', component: OrderComponent },
+      { path: '**', redirectTo: '' },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
