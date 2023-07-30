@@ -29,4 +29,8 @@ export class CartService implements OnInit {
     const sessionId=localStorage.getItem('token')
     return this.http.get<any>(`${this.url}/info/${sessionId}`)
   }
+
+  removeFromCart(cartConsistsOfFoodId: number) {
+    return this.http.delete<any>(`${this.url}/remove-from-cart/${cartConsistsOfFoodId}`);
+  }
 }

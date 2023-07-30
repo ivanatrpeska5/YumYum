@@ -66,5 +66,9 @@ class CartService(
 
     }
 
+    fun removeFromCart(cartConsistsOfFoodId: Long) {
+        cartConsistsOfFoodRepository.deleteById(cartConsistsOfFoodId)
+    }
+
 
 }

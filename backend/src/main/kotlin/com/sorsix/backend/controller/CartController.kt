@@ -28,4 +28,10 @@ class CartController (private val cartService: CartService) {
     fun getCartsInfoForUser(@PathVariable sessionId: String): ResponseEntity<List<CartInfoDTO>>{
         return ResponseEntity.ok().body(cartService.getCartsInfoForUser(sessionId))
     }
+
+    @DeleteMapping("/remove-from-cart/{cartConsistsOfFoodId}")
+    fun removeFromCart(@PathVariable cartConsistsOfFoodId:Long):ResponseEntity<Any>{
+        cartService.removeFromCart(cartConsistsOfFoodId)
+        return ResponseEntity.ok().build()
+    }
 }
