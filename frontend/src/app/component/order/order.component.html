@@ -1,11 +1,22 @@
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center d-flex align-content-center" style="height: 500px;">
         <div class="col-md-4 border p-3">
             <h4 class="text-warning">Delivery Info:</h4>
-            <form action="" method="post">
-                
-                <button type="submit" class="btn btn-warning">Proceed</button>
-            </form>
+            <form (ngSubmit)="order()">
+                <label for="street">Street:</label>
+                <input type="text" id="street" name="street" class="form-control" [(ngModel)]="formData.street" required />
+
+                <label for="number">Number:</label>
+                <input type="text" id="number" name="number" class="form-control" [(ngModel)]="formData.number" required />
+      
+                <label for="paymentMethod">Payment Method:</label>
+                <select name="paymentMethod" id="paymentMethod" class="form-control mt-2" [(ngModel)]="formData.paymentMethod" required="">
+                    <option value="Card">Card</option>
+                    <option value="OnDelivery" selected>On Delivery</option>
+                </select>
+
+                <button type="submit" class="btn btn-warning w-100 mt-3">Proceed</button>
+              </form>
         </div>
         </div>
 </div>      

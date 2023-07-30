@@ -1,4 +1,4 @@
-enum PaymentMethod {
+export enum PaymentMethod {
     OnDelivery,
     Card
   }
