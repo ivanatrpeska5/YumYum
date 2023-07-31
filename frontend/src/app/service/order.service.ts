@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { OrderForm } from '../model/orderForm';
 import { HttpClient } from '@angular/common/http';
+import { Payment } from '../model/payment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,10 +14,13 @@ export class OrderService {
     private http: HttpClient
   ) { }
 
-  order(formData: OrderForm) {
+  order(orderFormData: OrderForm, paymentFormData?: Payment) {
     const sessionId = localStorage.getItem('token');
-    formData.sessionId = sessionId!!;    
-    return this.http.post<any>(`${this.url}`, formData);
+    orderFormData.sessionId = sessionId!!;  
+    const requestBody = paymentFormData
+    ? { orderFormData, paymentFormData }
+    : { orderFormData };
+    return this.http.post<any>(`${this.url}`, requestBody);
   }
 
 }

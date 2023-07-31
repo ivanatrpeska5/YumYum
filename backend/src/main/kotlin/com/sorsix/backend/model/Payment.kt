@@ -8,7 +8,7 @@ import javax.persistence.*
 class Payment(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long? = null,
     val cardHolderName:String,
     val securityCode:String,
     val expYY:Long,

@@ -3,13 +3,11 @@ package com.sorsix.backend.service
 import com.sorsix.backend.model.Cart
 import com.sorsix.backend.model.Location
 import com.sorsix.backend.model.Order
+import com.sorsix.backend.model.Payment
 import com.sorsix.backend.model.dto.OrderDTO
 import com.sorsix.backend.model.enumeration.OrderStatus
 import com.sorsix.backend.model.enumeration.ShoppingCartStatus
-import com.sorsix.backend.repository.CartRepository
-import com.sorsix.backend.repository.CustomerRepository
-import com.sorsix.backend.repository.LocationRepository
-import com.sorsix.backend.repository.OrderRepository
+import com.sorsix.backend.repository.*
 import com.sorsix.backend.session.InMemorySessionRegistry
 import org.springframework.stereotype.Service
 
@@ -19,10 +17,11 @@ class OrderService(
     private val sessionRegistry: InMemorySessionRegistry,
     private val customerRepository: CustomerRepository,
     private val cartRepository: CartRepository,
-    private val locationRepository: LocationRepository
+    private val locationRepository: LocationRepository,
+    private val paymentRepository: PaymentRepository,
 ) {
 
-    fun createOrder(orderDTO: OrderDTO) {
+    fun createOrder(orderDTO: OrderDTO, payment: Payment?) {
         val username: String = sessionRegistry.getUsernameForSession(orderDTO.sessionId)!!
         val customer = customerRepository.findCustomerByUsername(username)
         val carts = cartRepository.findAllByCustomerUserIdAndStatus(customer.userId, ShoppingCartStatus.ACTIVE);
@@ -44,15 +43,39 @@ class OrderService(
                     status = ShoppingCartStatus.ACTIVE
                 )
             )
-            orderRepository.save(
-                Order(
-                    status = OrderStatus.Created,
-                    location = location,
-                    paymentMethod = orderDTO.paymentMethod,
-                    customer = customer,
-                    cart = cart,
+            if(payment != null) {
+                val payment1 = Payment(
+                    id = null,
+                    cardHolderName = payment.cardHolderName,
+                    securityCode = payment.securityCode,
+                    expYY = payment.expYY,
+                    expMM = payment.expMM,
+                    cardNumber = payment.cardNumber,
+                    cardType = payment.cardType,
                 )
-            )
+                paymentRepository.save(payment1)
+                orderRepository.save(
+                    Order(
+                        status = OrderStatus.Created,
+                        location = location,
+                        paymentMethod = orderDTO.paymentMethod,
+                        customer = customer,
+                        cart = cart,
+                        payment = payment1
+                    )
+                )
+            }
+            else{
+                orderRepository.save(
+                    Order(
+                        status = OrderStatus.Created,
+                        location = location,
+                        paymentMethod = orderDTO.paymentMethod,
+                        customer = customer,
+                        cart = cart,
+                    )
+                )
+            }
         }
     }
 }

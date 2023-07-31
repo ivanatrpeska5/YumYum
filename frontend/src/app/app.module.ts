@@ -14,6 +14,9 @@ import { RestaurantComponent } from './component/restaurant/restaurant.component
 import { RegisterComponent } from './component/register/register.component';
 import { CartComponent } from './component/cart/cart.component';
 import { OrderComponent } from './component/order/order.component';
+import { PaymentComponent } from './component/payment/payment.component';
+import { SuccessfulOrderComponent } from './component/successful-order/successful-order.component';
+import { MyOrdersComponent } from './component/my-orders/my-orders.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +27,10 @@ import { OrderComponent } from './component/order/order.component';
     RestaurantComponent,
     RegisterComponent,
     CartComponent,
-    OrderComponent
+    OrderComponent,
+    PaymentComponent,
+    SuccessfulOrderComponent,
+    MyOrdersComponent
   ],
   imports: [
     BrowserModule,

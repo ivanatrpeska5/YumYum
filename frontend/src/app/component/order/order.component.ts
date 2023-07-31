@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PaymentMethod } from 'src/app/model/paymentMethod';
 import { OrderForm } from 'src/app/model/orderForm';
 import { OrderService } from 'src/app/service/order.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order',
@@ -10,7 +11,7 @@ import { OrderService } from 'src/app/service/order.service';
 })
 export class OrderComponent implements OnInit{
 
-  formData: OrderForm = {
+  orderFormData: OrderForm = {
     sessionId: '',
     street: '',
     number: '',
@@ -19,14 +20,24 @@ export class OrderComponent implements OnInit{
   
   constructor(
     private orderService:OrderService,
-  ) {  
+    private router: Router
+  ) { }
 
-  }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   order(){
-    this.orderService.order(this.formData).subscribe();
+    if(this.orderFormData.paymentMethod  === PaymentMethod.OnDelivery){
+      this.orderService.order(this.orderFormData).subscribe(
+        (response)=>{
+          this.router.navigate(['/successfulOrder'])
+        }
+      );
+    }
+    else{
+      this.router.navigate(['/payment'], { queryParams: { orderFormData: JSON.stringify(this.orderFormData) } });
+    }
   }
-}
+}  
+
+
