@@ -10,5 +10,5 @@ class Ingredient(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
     var name:String,
-    
+
 )
