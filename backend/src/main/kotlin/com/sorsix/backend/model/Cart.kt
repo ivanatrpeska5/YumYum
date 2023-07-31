@@ -12,7 +12,7 @@ import javax.persistence.*
 class Cart(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long,
+    var id: Long?=null,
     @ManyToOne var customer:Customer,
     @ManyToOne var restaurant: Restaurant,
     @Enumerated(EnumType.STRING)
@@ -24,6 +24,6 @@ class Cart(
     val cartConsistsOfFoodList: MutableList<CartConsistsOfFood> = mutableListOf<CartConsistsOfFood>()
 ){
     fun getAmmountPrice(): Double {
-        return cartConsistsOfFoodList.map { it.food.price }.sum();
+        return cartConsistsOfFoodList.map { it.food.price*it.quantity }.sum();
     }
 }

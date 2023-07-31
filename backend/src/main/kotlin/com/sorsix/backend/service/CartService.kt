@@ -30,11 +30,11 @@ class CartService(
         val customer = customerRepository.findCustomerByUsername(username!!);
         var cart = cartRepository.findCartByRestaurantIdAndCustomerUserIdAndStatus(food.restaurant.id, customer.userId, ShoppingCartStatus.ACTIVE);
         if (cart == null) {
-            cart = cartRepository.save(Cart(cartRepository.count() + 1, customer, restaurant = food.restaurant, status = ShoppingCartStatus.ACTIVE))
+            cart = cartRepository.save(Cart( customer=customer, restaurant = food.restaurant, status = ShoppingCartStatus.ACTIVE))
         }
         cartConsistsOfFoodRepository.save(
             CartConsistsOfFood(
-                cartConsistsOfFoodRepository.count() + 1, cart, food, dto.quantity
+                cartConsistsOfFoodRepository.maxId() + 1, cart, food, dto.quantity
             )
         )
     }
@@ -56,8 +56,8 @@ class CartService(
         }
         return foodsInCart.map {
             CartInfoDTO(
-                it.id,
-                it.cart.id,
+                it.id!!,
+                it.cart.id!!,
                 it.food.id,
                 it.food.photo,
                 it.food.name,

@@ -1,4 +1,5 @@
 import { Category } from "./category"
+import { Ingredient } from "./ingredient"
 import { Restaurant } from "./restaurant"
 
 export interface Food {
@@ -8,4 +9,5 @@ export interface Food {
     price: number
     restaurant: Restaurant
     categories: Category[]
+    ingredientsSet:Ingredient[]
   }

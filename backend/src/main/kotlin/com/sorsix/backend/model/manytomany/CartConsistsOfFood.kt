@@ -11,7 +11,7 @@ import javax.persistence.*
 class CartConsistsOfFood(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long,
+    var id: Long?=null,
 
     @ManyToOne
     @JoinColumn(name="cart_id")

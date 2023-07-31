@@ -23,7 +23,7 @@ class UserService(private val userRepository: UserRepository, private val custom
 
     fun register(registerDto: RegisterDto): User? {
         if (registerDto.role == "customer"){
-           return customerRepository.save(Customer(userRepository.count()+1,
+           return customerRepository.save(Customer(userRepository.maxId()+1,
                 registerDto.name,
                 registerDto.surname,
                 registerDto.email,
@@ -32,7 +32,7 @@ class UserService(private val userRepository: UserRepository, private val custom
                 registerDto.username,registerDto.role))
         } else if(registerDto.role=="employee"){
             println(registerDto.restaurantId)
-           return restaurantEmployeeRepository.save(RestaurantEmployee(userRepository.count()+1,
+           return restaurantEmployeeRepository.save(RestaurantEmployee(userRepository.maxId()+1,
                 registerDto.name,
                 registerDto.surname,
                 registerDto.email,
@@ -40,7 +40,7 @@ class UserService(private val userRepository: UserRepository, private val custom
                 passwordEncoder.encode(registerDto.password),
                 restaurantRepository.findById(registerDto.restaurantId!!).get(),registerDto.username,registerDto.role))
         } else if(registerDto.role=="delivery"){
-           return deliveryManRepository.save(DeliveryMan(userRepository.count()+1,
+           return deliveryManRepository.save(DeliveryMan(userRepository.maxId()+1,
                 registerDto.name,
                 registerDto.surname,
                 registerDto.email,
