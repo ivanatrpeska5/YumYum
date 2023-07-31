@@ -44,10 +44,10 @@
                         <hr/>
                         <h4 class="text-center">{{ food.name }}</h4>
                         <hr/>
-                        <div><span class="fw-bold">Ingredients:</span>
-                            <div *ngFor="let ingredient of food.ingredientsSet">
-                                <span>{{ingredient.name}} </span>
-                            </div>
+                        <div style="height: 35px;"><span class="fw-bold">Ingredients:</span>
+                            <span *ngFor="let ingredient of food.ingredientsSet">
+                                {{ingredient.name}},
+                            </span>
                         </div>
                         <hr/>
                         <p><span class="fw-bold">Price:</span>{{ food.price }} MKD</p>
