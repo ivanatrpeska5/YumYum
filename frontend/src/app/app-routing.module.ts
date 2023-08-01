@@ -9,6 +9,9 @@ import { RegisterComponent } from './component/register/register.component';
 import { CartComponent } from './component/cart/cart.component';
 import { OrderComponent } from './component/order/order.component';
 import { AddFoodComponent } from './component/add-food/add-food.component';
+import { PaymentComponent } from './component/payment/payment.component';
+import { SuccessfulOrderComponent } from './component/successful-order/successful-order.component';
+import { MyOrdersComponent } from './component/my-orders/my-orders.component';
 
 const routes: Routes = [
   {
@@ -23,6 +26,9 @@ const routes: Routes = [
       { path: 'cart', component: CartComponent },
       { path: 'order', component: OrderComponent },
       { path: 'add-product', component: AddFoodComponent },
+      { path: 'payment', component: PaymentComponent },
+      { path: 'successfulOrder', component: SuccessfulOrderComponent },
+      { path: 'myOrders', component: MyOrdersComponent },
       { path: '**', redirectTo: '' },
     ],
   },

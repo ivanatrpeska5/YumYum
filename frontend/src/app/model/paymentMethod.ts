@@ -1,4 +1,4 @@
 export enum PaymentMethod {
-    OnDelivery,
-    Card
+  OnDelivery = 'OnDelivery',
+  Card = 'Card',
   }

@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row justify-content-center d-flex align-content-center" style="height: 500px;">
+        <div class="col-md-4 border p-3">
+            <h4 class="text-warning">Payment:</h4>
+            <form (ngSubmit)="order()">
+                <label for="cardHolderName">Card Holder Name:</label>
+                <input type="text" id="cardHolderName" name="cardHolderName" class="form-control" [(ngModel)]="paymentFormData.cardHolderName" required />
+
+                <label for="securityCode">Security Code:</label>
+                <input type="text" id="securityCode" name="securityCode" class="form-control" [(ngModel)]="paymentFormData.securityCode" required />
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="expYY">Exp YY:</label>
+                        <input type="text" id="expYY" name="expYY" class="form-control" [(ngModel)]="paymentFormData.expYY" required />
+                    </div>
+                    <div class="col-md-6">
+                        <label for="expMM">Exp MM:</label>
+                        <input type="text" id="expMM" name="expMM" class="form-control" [(ngModel)]="paymentFormData.expMM" required />
+                    </div>
+                </div>
+
+                <label for="cardNumber">Card Number:</label>
+                <input type="text" id="cardNumber" name="cardNumber" class="form-control" [(ngModel)]="paymentFormData.cardNumber" required />
+      
+                <label for="cardType">Card Type:</label>
+                <select name="cardType" id="cardType" class="form-control mt-2" [(ngModel)]="paymentFormData.cardType" required>
+                    <option value="MasterCard">MasterCard</option>
+                    <option value="VISA" selected>VISA</option>
+                </select>
+
+                <button type="submit" class="btn btn-warning w-100 mt-3" routerLink="/successfulOrder">Pay</button>
+              </form>
+        </div>
+        </div>
+</div>   
