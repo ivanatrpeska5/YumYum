@@ -4,4 +4,6 @@ import com.sorsix.backend.model.RestaurantEmployee
 import org.springframework.data.jpa.repository.JpaRepository
 
 interface RestaurantEmployeeRepository : JpaRepository<RestaurantEmployee, Long> {
+
+    fun findByUsername(username:String):RestaurantEmployee?;
 }

@@ -8,6 +8,7 @@ import { RestaurantComponent } from './component/restaurant/restaurant.component
 import { RegisterComponent } from './component/register/register.component';
 import { CartComponent } from './component/cart/cart.component';
 import { OrderComponent } from './component/order/order.component';
+import { AddFoodComponent } from './component/add-food/add-food.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'register', component: RegisterComponent },
       { path: 'cart', component: CartComponent },
       { path: 'order', component: OrderComponent },
+      { path: 'add-product', component: AddFoodComponent },
       { path: '**', redirectTo: '' },
     ],
   },

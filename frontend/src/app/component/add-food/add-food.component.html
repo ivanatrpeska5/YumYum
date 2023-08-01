@@ -1,0 +1,27 @@
+<div>
+    <h2>Post Food to Server</h2>
+    <form (submit)="onSubmit()">
+      <label for="photo">Photo:</label>
+      <!-- Use the 'onFileChange' function to handle the file input change -->
+      <input type="file" name="photo" (change)="onFileChange($event)" required>
+  
+      <label for="name">Name:</label>
+      <input type="text" name="name" [(ngModel)]="newFood!!.name" required>
+  
+      <label for="price">Price:</label>
+      <input type="number" name="price" [(ngModel)]="newFood!!.price" required>
+  
+      <label for="categories">Categories:</label>
+      <select name="categories" [(ngModel)]="selectedCategories" multiple required>
+        <option *ngFor="let category of categories" [value]="category">{{ category.name }}</option>
+      </select>
+  
+      <label for="ingredients">Ingredients:</label>
+      <select name="ingredients" [(ngModel)]="selectedIngredients" multiple required>
+        <option *ngFor="let ingredient of ingredients" [value]="ingredient">{{ ingredient.name }}</option>
+      </select>
+  
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  

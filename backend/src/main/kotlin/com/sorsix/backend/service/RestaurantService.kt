@@ -4,6 +4,7 @@ import com.sorsix.backend.model.Rating
 import com.sorsix.backend.model.Restaurant
 import com.sorsix.backend.repository.RestaurantRepository
 import org.springframework.stereotype.Service
+import org.springframework.web.bind.annotation.GetMapping
 
 
 @Service
@@ -32,5 +33,6 @@ class RestaurantService(
 
         restaurantRepository.save(restaurant)
     }
+
 
 }
