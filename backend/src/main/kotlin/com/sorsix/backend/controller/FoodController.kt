@@ -30,8 +30,9 @@ class FoodController(private val categoryRepository: CategoryRepository,
     }
 
     @PostMapping("food/add")
-    fun postFood(@RequestBody food: Food){
+    fun postFood(@RequestBody food: Food):ResponseEntity<Any>{
         foodRepository.save(food)
+        return ResponseEntity.ok().build()
     }
 
     @PostMapping("food/photo")

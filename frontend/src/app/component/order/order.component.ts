@@ -38,6 +38,8 @@ export class OrderComponent implements OnInit{
       this.router.navigate(['/payment'], { queryParams: { orderFormData: JSON.stringify(this.orderFormData) } });
     }
   }
+
+  
 }  
 
 

@@ -1,6 +1,5 @@
 package com.sorsix.backend.service
 
-import com.sorsix.backend.model.Cart
 import com.sorsix.backend.model.Location
 import com.sorsix.backend.model.Order
 import com.sorsix.backend.model.Payment
@@ -35,14 +34,15 @@ class OrderService(
         for (cart in carts) {
             cart.status = ShoppingCartStatus.ORDERED
             cartRepository.save(cart)
-            cartRepository.save(
+            /*cartRepository.save(
                 Cart(
                     cartRepository.count() + 1,
                     customer,
                     restaurant = cart.restaurant,
                     status = ShoppingCartStatus.ACTIVE
                 )
-            )
+            )*/
+            println(orderDTO.paymentMethod)
             if(payment != null) {
                 val payment1 = Payment(
                     id = null,
@@ -77,5 +77,11 @@ class OrderService(
                 )
             }
         }
+    }
+
+    fun getCustomerOrder(sessionId: String): MutableList<Order> {
+        val username: String = sessionRegistry.getUsernameForSession(sessionId)!!
+        val customer = customerRepository.findCustomerByUsername(username)
+        return orderRepository.getOrdersByCustomer(customer);
     }
 }
