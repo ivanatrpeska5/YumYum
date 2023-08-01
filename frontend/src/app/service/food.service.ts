@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Food } from '../model/food';
@@ -37,10 +37,17 @@ export class FoodService {
   }
 
   // Method to upload image to the server
+  
+
   uploadImage(image: File): Observable<any> {
     const formData = new FormData();
     formData.append('image', image, image.name);
-    const url = `${this.baseUrl}/upload`; // Replace with the actual endpoint for image upload
-    return this.http.post(url, formData);
+    
+    // Set the headers properly for file upload
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'application/json');
+
+    const url = `${this.baseUrl}/photo`; // Replace with the actual endpoint for image upload
+    return this.http.post(url, formData, { headers });
   }
 }

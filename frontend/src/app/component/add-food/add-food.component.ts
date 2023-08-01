@@ -54,9 +54,9 @@ export class AddFoodComponent implements OnInit {
     // First, upload the image to the server (backend)
     if (this.selectedImage) {
       this.foodService.uploadImage(this.selectedImage).subscribe(
-        (response: string) => {
+        (response) => {
           // The backend should return the path of the uploaded image
-          this.newFood!!.photo = response;
+          this.newFood!!.photo = response.imageUrl;
 
           // Now, post the newFood object with the image path to the server
           this.foodService.postFood(this.newFood!!).subscribe(
