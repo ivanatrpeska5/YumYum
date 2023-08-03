@@ -1,10 +1,10 @@
 package com.sorsix.backend.service
 
-import com.sorsix.backend.model.Cart
-import com.sorsix.backend.model.Location
-import com.sorsix.backend.model.Order
-import com.sorsix.backend.model.Payment
+import com.sorsix.backend.model.*
+import com.sorsix.backend.model.dto.CartInfoDTO
+import com.sorsix.backend.model.dto.FoodNameQuantityDTO
 import com.sorsix.backend.model.dto.OrderDTO
+import com.sorsix.backend.model.dto.RestaurantOrderDTO
 import com.sorsix.backend.model.enumeration.OrderStatus
 import com.sorsix.backend.model.enumeration.ShoppingCartStatus
 import com.sorsix.backend.repository.*
@@ -19,6 +19,7 @@ class OrderService(
     private val cartRepository: CartRepository,
     private val locationRepository: LocationRepository,
     private val paymentRepository: PaymentRepository,
+    private val restaurantEmployeeRepository: RestaurantEmployeeRepository,
 ) {
 
     fun createOrder(orderDTO: OrderDTO, payment: Payment?) {
@@ -77,5 +78,36 @@ class OrderService(
                 )
             }
         }
+    }
+
+    fun getNewOrdersForRestaurant(sessionId: String): MutableList<RestaurantOrderDTO> {
+        val username: String = sessionRegistry.getUsernameForSession(sessionId)!!
+        val employee: RestaurantEmployee = restaurantEmployeeRepository.findRestaurantEmployeeByUsername(username)
+        val restaurantId = employee.restaurant.id
+        val orders : List<Order>  =  orderRepository.findAllByStatusAndCartRestaurantId(OrderStatus.Created, restaurantId)
+        val restaurantOrders: MutableList<RestaurantOrderDTO> = mutableListOf()
+        for(order in orders){
+            val foodNameQuantityDTO: List<FoodNameQuantityDTO> = order.cart.cartConsistsOfFoodList.map {
+                FoodNameQuantityDTO(
+                    it.food.name,
+                    it.quantity
+                )
+            }
+            val restaurantOrderDTO = RestaurantOrderDTO(
+                order.id,
+                order.dateCreated,
+                order.status,
+                order.location,
+                order.customer.userId,
+                order.customer.name,
+                order.customer.surname,
+                order.customer.username,
+                order.paymentMethod,
+                order.cart.id,
+                foodNameQuantityDTO
+            )
+            restaurantOrders.add(restaurantOrderDTO)
+        }
+        return restaurantOrders
     }
 }

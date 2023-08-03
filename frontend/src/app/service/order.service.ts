@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { OrderForm } from '../model/orderForm';
 import { HttpClient } from '@angular/common/http';
 import { Payment } from '../model/payment';
+import { RestaurantOrderDTO } from '../model/restaurantOrderDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,11 @@ export class OrderService {
     ? { orderFormData, paymentFormData }
     : { orderFormData };
     return this.http.post<any>(`${this.url}`, requestBody);
+  }
+
+  getNewOrdersForRestaurant(){
+    const sessionId = localStorage.getItem('token');
+    return this.http.get<RestaurantOrderDTO[]>(`${this.url}/restaurant/${sessionId}`);
   }
 
 }

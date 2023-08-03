@@ -17,6 +17,7 @@ import { OrderComponent } from './component/order/order.component';
 import { PaymentComponent } from './component/payment/payment.component';
 import { SuccessfulOrderComponent } from './component/successful-order/successful-order.component';
 import { MyOrdersComponent } from './component/my-orders/my-orders.component';
+import { RestaurantOrdersComponent } from './component/restaurant-orders/restaurant-orders.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { MyOrdersComponent } from './component/my-orders/my-orders.component';
     OrderComponent,
     PaymentComponent,
     SuccessfulOrderComponent,
-    MyOrdersComponent
+    MyOrdersComponent,
+    RestaurantOrdersComponent
   ],
   imports: [
     BrowserModule,

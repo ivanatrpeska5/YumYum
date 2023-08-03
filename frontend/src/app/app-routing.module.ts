@@ -11,6 +11,7 @@ import { OrderComponent } from './component/order/order.component';
 import { PaymentComponent } from './component/payment/payment.component';
 import { SuccessfulOrderComponent } from './component/successful-order/successful-order.component';
 import { MyOrdersComponent } from './component/my-orders/my-orders.component';
+import { RestaurantOrdersComponent } from './component/restaurant-orders/restaurant-orders.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
       { path: 'payment', component: PaymentComponent },
       { path: 'successfulOrder', component: SuccessfulOrderComponent },
       { path: 'myOrders', component: MyOrdersComponent },
+      { path: 'restaurantOrders', component: RestaurantOrdersComponent },
       { path: '**', redirectTo: '' },
     ],
   },

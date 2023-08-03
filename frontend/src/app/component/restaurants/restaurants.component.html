@@ -1,10 +1,13 @@
 <div class="container">
-        <h2 class="mt-2">Restaurants</h2>
+    <div class="w-100 text-warning text-center p-2 mb-3 mt-3" style="background-color: beige;">
+        <h2 class="mt-2">Choose Your Culinary Heaven</h2>
+    </div>
+        
     <div class="row">
     <div *ngFor="let restaurant of restaurants" class="col-md-3">
             <div class="card mb-3" routerLink="/restaurant/{{restaurant.id}}">
                     <img src="{{restaurant.logo}}" alt="" class="card-img-top img-fluid" style="object-fit: cover;">
-                <div class="card-body">
+                <div class="card-body " style="background-color: beige;">
                     <h4 class="text-center">{{ restaurant.name }}</h4>
                 </div>
             </div>
