@@ -23,10 +23,10 @@
             <a class="nav-link text-white" routerLink="/restaurants">Restaurants</a>
           </li>
           <li class="nav-item" *ngIf="role=='customer'">
-            <a class="nav-link text-white" href="myOrders">My orders</a>
+            <a class="nav-link text-white" routerLink="/myOrders">My orders</a>
           </li>
           <li class="nav-item" *ngIf="role=='employee'">
-            <a class="nav-link text-white" href="#" >Restaurant Orders</a>
+            <a class="nav-link text-white" routerLink="restaurantOrders" >Restaurant Orders</a>
           </li>
           <li class="nav-item" *ngIf="role=='employee'">
             <a class="nav-link text-white" routerLink="add-product">Add Product</a>
