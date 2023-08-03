@@ -89,9 +89,9 @@ class OrderService(
         val username: String = sessionRegistry.getUsernameForSession(sessionId)!!
         val employee: RestaurantEmployee = restaurantEmployeeRepository.findRestaurantEmployeeByUsername(username)
         val restaurantId = employee.restaurant.id
-        val orders : List<Order>  =  orderRepository.findAllByStatusAndCartRestaurantId(OrderStatus.Created, restaurantId)
+        val orders: List<Order> = orderRepository.findAllByStatusAndCartRestaurantId(OrderStatus.Created, restaurantId)
         val restaurantOrders: MutableList<RestaurantOrderDTO> = mutableListOf()
-        for(order in orders){
+        for (order in orders) {
             val foodNameQuantityDTO: List<FoodNameQuantityDTO> = order.cart.cartConsistsOfFoodList.map {
                 FoodNameQuantityDTO(
                     it.food.name,
@@ -114,10 +114,13 @@ class OrderService(
             restaurantOrders.add(restaurantOrderDTO)
         }
         return restaurantOrders
-    fun getCustomerOrder(sessionId: String): MutableList<Order> {
-        val username: String = sessionRegistry.getUsernameForSession(sessionId)!!
-        val customer = customerRepository.findCustomerByUsername(username)
-        return orderRepository.getOrdersByCustomer(customer);
-
     }
-}}
+        fun getCustomerOrder(sessionId: String): MutableList<Order> {
+            val username: String = sessionRegistry.getUsernameForSession(sessionId)!!
+            val customer = customerRepository.findCustomerByUsername(username)
+            return orderRepository.getOrdersByCustomer(customer);
+
+        }
+
+
+}

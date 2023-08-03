@@ -3,6 +3,7 @@ import { OrderForm } from '../model/orderForm';
 import { HttpClient } from '@angular/common/http';
 import { Payment } from '../model/payment';
 import { RestaurantOrderDTO } from '../model/restaurantOrderDTO';
+import { Order } from '../model/order';
 
 @Injectable({
   providedIn: 'root'

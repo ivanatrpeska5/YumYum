@@ -7,6 +7,7 @@ import com.sorsix.backend.model.dto.OrderDTO
 
 import com.sorsix.backend.model.dto.OrderRequestDTO
 import com.sorsix.backend.service.OrderService
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -28,5 +29,10 @@ class OrderController(private val orderService: OrderService) {
     @GetMapping("/restaurant/{sessionId}")
     fun getNewOrdersForRestaurant(@PathVariable sessionId: String) = orderService.getNewOrdersForRestaurant(sessionId)
 
+
+    @GetMapping("/customer-orders/{sessionId}")
+    fun getCustomerOrders(@PathVariable sessionId: String): ResponseEntity<MutableList<Order>> {
+        return ResponseEntity.ok().body(orderService.getCustomerOrder(sessionId))
+    }
 
 }
