@@ -1,1 +1,13 @@
 <p>my-orders works!</p>
+<div *ngFor="let order of customerOrders">
+
+    <p>Date created: {{order.dateCreated}}</p>
+    <p>Status: {{order.status}}</p>
+    <p>Restaurant: {{order.cart.restaurant.name}}</p>
+    <table *ngFor="let food of order.cart.cartConsistsOfFoodList">
+        <tr>
+            <td>{{food.food.name}}</td>
+        </tr>
+    </table>
+    <br><br>
+</div>

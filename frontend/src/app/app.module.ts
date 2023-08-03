@@ -14,6 +14,7 @@ import { RestaurantComponent } from './component/restaurant/restaurant.component
 import { RegisterComponent } from './component/register/register.component';
 import { CartComponent } from './component/cart/cart.component';
 import { OrderComponent } from './component/order/order.component';
+import { AddFoodComponent } from './component/add-food/add-food.component';
 import { PaymentComponent } from './component/payment/payment.component';
 import { SuccessfulOrderComponent } from './component/successful-order/successful-order.component';
 import { MyOrdersComponent } from './component/my-orders/my-orders.component';
@@ -29,6 +30,7 @@ import { RestaurantOrdersComponent } from './component/restaurant-orders/restaur
     RegisterComponent,
     CartComponent,
     OrderComponent,
+    AddFoodComponent,
     PaymentComponent,
     SuccessfulOrderComponent,
     MyOrdersComponent,

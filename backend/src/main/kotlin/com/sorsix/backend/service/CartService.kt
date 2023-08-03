@@ -58,7 +58,7 @@ class CartService(
             CartInfoDTO(
                 it.id!!,
                 it.cart.id!!,
-                it.food.id,
+                it.food.id!!,
                 it.food.photo,
                 it.food.name,
                 it.food.price,

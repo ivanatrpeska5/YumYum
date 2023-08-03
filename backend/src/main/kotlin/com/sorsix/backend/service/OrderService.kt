@@ -1,8 +1,11 @@
 package com.sorsix.backend.service
 
+
 import com.sorsix.backend.model.*
-import com.sorsix.backend.model.dto.CartInfoDTO
 import com.sorsix.backend.model.dto.FoodNameQuantityDTO
+import com.sorsix.backend.model.Location
+import com.sorsix.backend.model.Order
+import com.sorsix.backend.model.Payment
 import com.sorsix.backend.model.dto.OrderDTO
 import com.sorsix.backend.model.dto.RestaurantOrderDTO
 import com.sorsix.backend.model.enumeration.OrderStatus
@@ -36,14 +39,15 @@ class OrderService(
         for (cart in carts) {
             cart.status = ShoppingCartStatus.ORDERED
             cartRepository.save(cart)
-            cartRepository.save(
+            /*cartRepository.save(
                 Cart(
                     cartRepository.count() + 1,
                     customer,
                     restaurant = cart.restaurant,
                     status = ShoppingCartStatus.ACTIVE
                 )
-            )
+            )*/
+            println(orderDTO.paymentMethod)
             if(payment != null) {
                 val payment1 = Payment(
                     id = null,
@@ -80,6 +84,7 @@ class OrderService(
         }
     }
 
+
     fun getNewOrdersForRestaurant(sessionId: String): MutableList<RestaurantOrderDTO> {
         val username: String = sessionRegistry.getUsernameForSession(sessionId)!!
         val employee: RestaurantEmployee = restaurantEmployeeRepository.findRestaurantEmployeeByUsername(username)
@@ -109,5 +114,10 @@ class OrderService(
             restaurantOrders.add(restaurantOrderDTO)
         }
         return restaurantOrders
+    fun getCustomerOrder(sessionId: String): MutableList<Order> {
+        val username: String = sessionRegistry.getUsernameForSession(sessionId)!!
+        val customer = customerRepository.findCustomerByUsername(username)
+        return orderRepository.getOrdersByCustomer(customer);
+
     }
-}
+}}

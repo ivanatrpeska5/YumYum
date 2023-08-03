@@ -29,4 +29,8 @@ export class OrderService {
     return this.http.get<RestaurantOrderDTO[]>(`${this.url}/restaurant/${sessionId}`);
   }
 
+  getCustomerOrders(){
+    const sessionId = localStorage.getItem('token');
+    return this.http.get<Order[]>(`${this.url}/customer-orders/${sessionId}`)
+  }
 }

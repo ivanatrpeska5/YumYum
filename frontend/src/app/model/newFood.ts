@@ -2,12 +2,12 @@ import { Category } from "./category"
 import { Ingredient } from "./ingredient"
 import { Restaurant } from "./restaurant"
 
-export interface Food {
-    id: number
+export interface NewFood {
+    id: null
     photo: string
     name: string
     price: number
-    restaurant: Restaurant
+    restaurant: Restaurant | undefined
     categorySet: Category[]
     ingredientsSet:Ingredient[]
   }
