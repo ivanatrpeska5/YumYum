@@ -17,7 +17,7 @@ import { OrderComponent } from './component/order/order.component';
 import { AddFoodComponent } from './component/add-food/add-food.component';
 import { PaymentComponent } from './component/payment/payment.component';
 import { SuccessfulOrderComponent } from './component/successful-order/successful-order.component';
-import { MyOrdersComponent } from './component/my-orders/my-orders.component';
+import { CustomerOrdersComponent } from './component/customer-orders/customer-orders.component';
 import { RestaurantOrdersComponent } from './component/restaurant-orders/restaurant-orders.component';
 
 @NgModule({
@@ -33,7 +33,7 @@ import { RestaurantOrdersComponent } from './component/restaurant-orders/restaur
     AddFoodComponent,
     PaymentComponent,
     SuccessfulOrderComponent,
-    MyOrdersComponent,
+    CustomerOrdersComponent,
     RestaurantOrdersComponent
   ],
   imports: [

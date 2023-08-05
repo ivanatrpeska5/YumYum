@@ -122,5 +122,19 @@ class OrderService(
 
         }
 
+    fun cancelOrder(orderId:Long): Order {
+        val order=orderRepository.findById(orderId).get();
+        order.status=OrderStatus.Cancelled;
+        orderRepository.save(order);
+        return order;
+    }
+
+    fun preparedOrder(orderId:Long): Order {
+        val order=orderRepository.findById(orderId).get();
+        order.status=OrderStatus.Prepared;
+        orderRepository.save(order);
+        return order;
+    }
+
 
 }

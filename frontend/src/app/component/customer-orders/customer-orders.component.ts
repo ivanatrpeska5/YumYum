@@ -3,11 +3,11 @@ import { Order } from 'src/app/model/order';
 import { OrderService } from 'src/app/service/order.service';
 
 @Component({
-  selector: 'app-my-orders',
-  templateUrl: './my-orders.component.html',
-  styleUrls: ['./my-orders.component.css']
+  selector: 'app-customer-orders',
+  templateUrl: './customer-orders.component.html',
+  styleUrls: ['./customer-orders.component.css']
 })
-export class MyOrdersComponent implements OnInit {
+export class CustomerOrdersComponent implements OnInit {
 
   customerOrders:Order[]=[]
 

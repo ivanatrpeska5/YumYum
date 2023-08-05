@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { RestaurantOrderDTO } from 'src/app/model/restaurantOrderDTO';
 import { OrderService } from 'src/app/service/order.service';
+import { Observable, debounceTime, map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-restaurant-orders',
@@ -8,16 +10,27 @@ import { OrderService } from 'src/app/service/order.service';
   styleUrls: ['./restaurant-orders.component.css'],
 })
 export class RestaurantOrdersComponent implements OnInit {
-  restaurantOrders!: RestaurantOrderDTO[];
+  restaurantOrders$?: Observable<RestaurantOrderDTO[]>;
 
   constructor(private orderService: OrderService) {}
+
   ngOnInit(): void {
-    this.getNewOrdersForRestaurant();
+    this.restaurantOrders$ = this.orderService.getNewOrdersForRestaurant();
   }
 
-  getNewOrdersForRestaurant() {
-    this.orderService.getNewOrdersForRestaurant().subscribe((orders) => {
-      this.restaurantOrders = orders;
+  cancelOrder(orderId: number) {
+    this.orderService.cancelOrder(orderId).subscribe(() => {
+      this.restaurantOrders$ = this.restaurantOrders$!.pipe(
+        map(orders => orders.filter(order => order.id !== orderId))
+      );
+    });
+  }
+
+  preparedOrder(orderId: number) {
+    this.orderService.preparedOrder(orderId).subscribe(() => {
+      this.restaurantOrders$ = this.restaurantOrders$!.pipe(
+        map(orders => orders.filter(order => order.id !== orderId))
+      );
     });
   }
 }

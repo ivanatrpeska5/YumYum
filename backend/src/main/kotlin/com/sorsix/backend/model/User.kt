@@ -14,9 +14,13 @@ import javax.persistence.*
 @Table(name = "users")
 abstract class User(
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) open var userId: Long,
+    @JsonIgnore
     open var name:String,
+    @JsonIgnore
     open var surname:String,
+    @JsonIgnore
     open var email:String,
+    @JsonIgnore
     open var phone:String,
     @JsonIgnore
     private var password:String,
@@ -25,18 +29,22 @@ abstract class User(
     open var role:String
 ): UserDetails{
 
+    @JsonIgnore
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return mutableListOf(SimpleGrantedAuthority("user"));
     }
 
+    @JsonIgnore
     override fun getPassword(): String {
         return password;
     }
 
+    @JsonIgnore
     override fun getUsername(): String {
         return username
     }
 
+    @JsonIgnore
     override fun isAccountNonExpired(): Boolean {
         return true
     }
@@ -45,10 +53,12 @@ abstract class User(
         return true
     }
 
+    @JsonIgnore
     override fun isCredentialsNonExpired(): Boolean {
         return true
     }
 
+    @JsonIgnore
     override fun isEnabled(): Boolean {
         return true
     }

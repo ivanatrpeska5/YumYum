@@ -34,4 +34,12 @@ export class OrderService {
     const sessionId = localStorage.getItem('token');
     return this.http.get<Order[]>(`${this.url}/customer-orders/${sessionId}`)
   }
+
+  cancelOrder(orderId:number){
+    return this.http.put<any>(`${this.url}/cancel/${orderId}`,{})
+  }
+
+  preparedOrder(orderId:number){
+    return this.http.put<any>(`${this.url}/prepared/${orderId}`,{})
+  }
 }
