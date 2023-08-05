@@ -1,4 +1,5 @@
 import { Cart } from "./cart";
+import { Location } from "./location";
 
 export interface Order{
     cart:Cart,

@@ -1,6 +1,6 @@
 import { Food } from "./food";
 
 export interface CartConsistsOfFood{
-    id:number,
+    quantity:number,
     food:Food
 }
