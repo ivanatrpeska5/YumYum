@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="w-100 text-warning text-center p-2 mb-3 mt-3" style="background-color: beige;">
+        <h2 class="mt-2">Current Orders:</h2>
+    </div>
+    <div *ngFor="let order of (acceptedOrders$ | async)" class="card mb-3">
+        <div class="w-100 bg-warning card-header d-flex align-items-center">
+            <h5 class="card-title flex-grow-1">Order Id: {{order.id}}</h5>
+            <button class="btn btn-outline-dark" (click)="deliverOrder(order.id)">Deliver Order</button>
+        </div>
+        <div class="row">
+            <div class="col-6 card-body p-5">
+                <p>
+                    <span class="fw-bold">Address: </span> St: {{ order.location.street }} No.{{ order.location.number }}
+                </p>
+                <p>
+                    <span class="fw-bold">Payment: </span> {{ order.paymentMethod }}
+                </p>
+                <p>
+                    <span class="fw-bold">Status: </span> {{ order.status }}
+                </p>
+                <p class="card-text"><small class="text-muted">Date created: {{order.dateCreated}}</small></p>
+            </div>
+            <div class="col-6  p-5">
+                
+                <p><span class="fw-bold">Products: </span> </p>
+                <div *ngFor="let food of order.cart.cartConsistsOfFoodList">
+                    <p>{{food.food.name}} X {{food.quantity}}</p>
+                </div>
+            </div>
+            </div>
+    </div>
+</div>    

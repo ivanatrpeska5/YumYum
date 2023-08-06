@@ -19,6 +19,9 @@ import { PaymentComponent } from './component/payment/payment.component';
 import { SuccessfulOrderComponent } from './component/successful-order/successful-order.component';
 import { CustomerOrdersComponent } from './component/customer-orders/customer-orders.component';
 import { RestaurantOrdersComponent } from './component/restaurant-orders/restaurant-orders.component';
+import { AcceptOrderDeliveryComponent } from './component/accept-order-delivery/accept-order-delivery.component';
+import { CurrentOrderDeliveryComponent } from './component/current-order-delivery/current-order-delivery.component';
+import { FinishedOrderDeliveryComponent } from './component/finished-order-delivery/finished-order-delivery.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +37,10 @@ import { RestaurantOrdersComponent } from './component/restaurant-orders/restaur
     PaymentComponent,
     SuccessfulOrderComponent,
     CustomerOrdersComponent,
-    RestaurantOrdersComponent
+    RestaurantOrdersComponent,
+    AcceptOrderDeliveryComponent,
+    CurrentOrderDeliveryComponent,
+    FinishedOrderDeliveryComponent
   ],
   imports: [
     BrowserModule,

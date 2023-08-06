@@ -23,6 +23,7 @@ class OrderService(
     private val locationRepository: LocationRepository,
     private val paymentRepository: PaymentRepository,
     private val restaurantEmployeeRepository: RestaurantEmployeeRepository,
+    private val deliveryManRepository: DeliveryManRepository,
 ) {
 
     fun createOrder(orderDTO: OrderDTO, payment: Payment?) {
@@ -122,18 +123,42 @@ class OrderService(
 
         }
 
-    fun cancelOrder(orderId:Long): Order {
+
+
+    fun changeOrderStatus(orderId:Long,status:OrderStatus): Order {
         val order=orderRepository.findById(orderId).get();
-        order.status=OrderStatus.Cancelled;
+        order.status=status;
         orderRepository.save(order);
         return order;
     }
 
-    fun preparedOrder(orderId:Long): Order {
+    fun getPreparedOrders(): List<Order> {
+        val orders=orderRepository.findAllByStatus(OrderStatus.Prepared)
+        return orders;
+    }
+
+    fun acceptOrder(sessionId: String, orderId: Long): Order {
+        val username=sessionRegistry.getUsernameForSession(sessionId);
+        val deliveryMan=deliveryManRepository.findByUsername(username!!);
         val order=orderRepository.findById(orderId).get();
-        order.status=OrderStatus.Prepared;
+        order.deliveryMan=deliveryMan;
+        order.status=OrderStatus.InDelivery;
         orderRepository.save(order);
         return order;
+    }
+
+    fun getInDeliveryOrders(sessionId:String): List<Order> {
+        val username=sessionRegistry.getUsernameForSession(sessionId);
+        val deliveryMan=deliveryManRepository.findByUsername(username!!);
+        val orders=orderRepository.getOrdersByDeliveryManAndStatus(deliveryMan,OrderStatus.InDelivery);
+        return orders;
+    }
+
+    fun getDeliveredOrders(sessionId:String): List<Order> {
+        val username=sessionRegistry.getUsernameForSession(sessionId);
+        val deliveryMan=deliveryManRepository.findByUsername(username!!);
+        val orders=orderRepository.getOrdersByDeliveryManAndStatus(deliveryMan,OrderStatus.Delivered);
+        return orders;
     }
 
 

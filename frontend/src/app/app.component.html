@@ -32,13 +32,13 @@
             <a class="nav-link text-white" routerLink="add-product">Add Product</a>
           </li>
           <li class="nav-item" *ngIf="role=='delivery'">
-            <a class="nav-link text-white" href="#">Accept Order</a>
+            <a class="nav-link text-white" routerLink="preparedOrders">Accept Order</a>
           </li>
           <li class="nav-item" *ngIf="role=='delivery'">
-            <a class="nav-link text-white" href="#">Current Deliveries</a>
+            <a class="nav-link text-white" routerLink="currentOrders">Current Deliveries</a>
           </li>
           <li class="nav-item" *ngIf="role=='delivery'">
-            <a class="nav-link text-white" href="#">Finished Deliveries</a>
+            <a class="nav-link text-white" routerLink="deliveredOrders">Finished Deliveries</a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">

@@ -6,6 +6,7 @@ import com.sorsix.backend.model.Payment
 import com.sorsix.backend.model.dto.OrderDTO
 
 import com.sorsix.backend.model.dto.OrderRequestDTO
+import com.sorsix.backend.model.enumeration.OrderStatus
 import com.sorsix.backend.service.OrderService
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -39,16 +40,45 @@ class OrderController(private val orderService: OrderService) {
 
     @PutMapping("/cancel/{orderId}")
     fun cancelOrder(@PathVariable orderId:Long): ResponseEntity<Any> {
-        val order=orderService.cancelOrder(orderId)
+        val order=orderService.changeOrderStatus(orderId,OrderStatus.Cancelled)
         println(order.status)
         return ResponseEntity.ok().body(mapOf("id" to orderId));
     }
 
     @PutMapping("/prepared/{orderId}")
     fun preparedOrder(@PathVariable orderId:Long): ResponseEntity<Any> {
-        val order=orderService.preparedOrder(orderId)
+        val order=orderService.changeOrderStatus(orderId,OrderStatus.Prepared)
         println(order.status)
         return ResponseEntity.ok().body(mapOf("id" to orderId));
+    }
+
+    @GetMapping("/prepared")
+    fun getPreparedOrders(): ResponseEntity<List<Order>> {
+        return ResponseEntity.ok().body(orderService.getPreparedOrders())
+    }
+
+    @PutMapping("/accept/{sessionId}/{orderId}")
+    fun acceptOrder(@PathVariable sessionId: String,@PathVariable orderId: Long): ResponseEntity<Map<String, Long>> {
+        orderService.acceptOrder(sessionId,orderId);
+        return ResponseEntity.ok().body(mapOf("id" to orderId));
+    }
+
+    @GetMapping("/accepted/{sessionId}")
+    fun getAcceptedOrders(@PathVariable sessionId: String): ResponseEntity<List<Order>> {
+        return ResponseEntity.ok().body(orderService.getInDeliveryOrders(sessionId))
+    }
+
+    @PutMapping("/deliver/{orderId}")
+    fun deliverOrder(@PathVariable orderId:Long): ResponseEntity<Any> {
+        val order=orderService.changeOrderStatus(orderId,OrderStatus.Delivered)
+        println(order.status)
+        return ResponseEntity.ok().body(mapOf("id" to orderId));
+    }
+
+
+    @GetMapping("/delivered/{sessionId}")
+    fun getDeliveredOrders(@PathVariable sessionId: String): ResponseEntity<List<Order>> {
+        return ResponseEntity.ok().body(orderService.getDeliveredOrders(sessionId))
     }
 
 }

@@ -13,6 +13,9 @@ import { PaymentComponent } from './component/payment/payment.component';
 import { SuccessfulOrderComponent } from './component/successful-order/successful-order.component';
 import { CustomerOrdersComponent } from './component/customer-orders/customer-orders.component';
 import { RestaurantOrdersComponent } from './component/restaurant-orders/restaurant-orders.component';
+import { AcceptOrderDeliveryComponent } from './component/accept-order-delivery/accept-order-delivery.component';
+import { CurrentOrderDeliveryComponent } from './component/current-order-delivery/current-order-delivery.component';
+import { FinishedOrderDeliveryComponent } from './component/finished-order-delivery/finished-order-delivery.component';
 
 const routes: Routes = [
   {
@@ -31,6 +34,9 @@ const routes: Routes = [
       { path: 'successfulOrder', component: SuccessfulOrderComponent },
       { path: 'myOrders', component: CustomerOrdersComponent },
       { path: 'restaurantOrders', component: RestaurantOrdersComponent },
+      { path: 'preparedOrders', component: AcceptOrderDeliveryComponent },
+      { path: 'currentOrders', component: CurrentOrderDeliveryComponent },
+      { path: 'deliveredOrders', component: FinishedOrderDeliveryComponent },
       { path: '**', redirectTo: '' },
     ],
   },
