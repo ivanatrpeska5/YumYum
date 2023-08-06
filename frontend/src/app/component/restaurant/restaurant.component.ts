@@ -18,12 +18,14 @@ export class RestaurantComponent implements OnInit {
   foodsByCategory:FoodsByCategory[]=[];
   quantity:{[id:number]:number}={}
   sessionId: string | null = null;
+  role:string | null=null;
 
   ngOnInit(): void {
     this.getRestaurant()
     this.getFoodsbyCategory()
     this.quantity={}
     this.sessionId=localStorage.getItem('token');
+    this.role=localStorage.getItem('role')
     this.initForms();
   }
 
