@@ -28,13 +28,13 @@ class CartService(
         val food: Food = foodRepository.findFoodById(dto.foodId)
         val username = sessionRegistry.getUsernameForSession(dto.sessionId);
         val customer = customerRepository.findCustomerByUsername(username!!);
-        var cart = cartRepository.findCartByRestaurantIdAndCustomerUserIdAndStatus(food.restaurant.id, customer.userId, ShoppingCartStatus.ACTIVE);
+        var cart = cartRepository.findCartByRestaurantIdAndCustomerUserIdAndStatus(food.restaurant.id, customer.userId!!, ShoppingCartStatus.ACTIVE);
         if (cart == null) {
             cart = cartRepository.save(Cart( customer=customer, restaurant = food.restaurant, status = ShoppingCartStatus.ACTIVE))
         }
         cartConsistsOfFoodRepository.save(
             CartConsistsOfFood(
-                cartConsistsOfFoodRepository.maxId() + 1, cart, food, dto.quantity
+                cart= cart, food = food, quantity = dto.quantity
             )
         )
     }
@@ -49,7 +49,7 @@ class CartService(
     fun getCartsInfoForUser(sessionId: String): List<CartInfoDTO>? {
         val username = sessionRegistry.getUsernameForSession(sessionId);
         val customer = customerRepository.findCustomerByUsername(username!!);
-        val carts = cartRepository.findAllByCustomerUserIdAndStatus(customer.userId, ShoppingCartStatus.ACTIVE);
+        val carts = cartRepository.findAllByCustomerUserIdAndStatus(customer.userId!!, ShoppingCartStatus.ACTIVE);
         val foodsInCart: MutableList<CartConsistsOfFood> = mutableListOf()
         for (cart in carts) {
             foodsInCart.addAll(cartConsistsOfFoodRepository.findAllByCart(cart))

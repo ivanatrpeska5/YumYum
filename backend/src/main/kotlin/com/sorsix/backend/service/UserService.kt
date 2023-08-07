@@ -23,30 +23,36 @@ class UserService(private val userRepository: UserRepository, private val custom
 
     fun register(registerDto: RegisterDto): User? {
         if (registerDto.role == "customer"){
-           return customerRepository.save(Customer(userRepository.maxId()+1,
-                registerDto.name,
-                registerDto.surname,
-                registerDto.email,
-                registerDto.phone,
-                passwordEncoder.encode(registerDto.password),
-                registerDto.username,registerDto.role))
+           return customerRepository.save(Customer(
+                name=registerDto.name,
+                surname = registerDto.surname,
+               email = registerDto.email,
+               phone = registerDto.phone,
+               password = passwordEncoder.encode(registerDto.password),
+               username = registerDto.username, role = registerDto.role
+           ))
         } else if(registerDto.role=="employee"){
             println(registerDto.restaurantId)
-           return restaurantEmployeeRepository.save(RestaurantEmployee(userRepository.maxId()+1,
-                registerDto.name,
-                registerDto.surname,
-                registerDto.email,
-                registerDto.phone,
-                passwordEncoder.encode(registerDto.password),
-                restaurantRepository.findById(registerDto.restaurantId!!).get(),registerDto.username,registerDto.role))
+           return restaurantEmployeeRepository.save(RestaurantEmployee(
+                name=registerDto.name,
+               surname = registerDto.surname,
+               email = registerDto.email,
+               phone = registerDto.phone,
+               password = passwordEncoder.encode(registerDto.password),
+               restaurant = restaurantRepository.findById(registerDto.restaurantId!!).get(),
+               username = registerDto.username, role = registerDto.role
+           ))
         } else if(registerDto.role=="delivery"){
-           return deliveryManRepository.save(DeliveryMan(userRepository.maxId()+1,
-                registerDto.name,
-                registerDto.surname,
-                registerDto.email,
-                registerDto.phone,
-                passwordEncoder.encode(registerDto.password),
-                registerDto.username,registerDto.role))
+            return deliveryManRepository.save(
+                DeliveryMan(
+                    name = registerDto.name,
+                    surname = registerDto.surname,
+                    email = registerDto.email,
+                    phone = registerDto.phone,
+                    password = passwordEncoder.encode(registerDto.password),
+                    username = registerDto.username, role = registerDto.role
+                )
+            )
         }
         return null;
     }

@@ -9,7 +9,7 @@ import javax.persistence.PrimaryKeyJoinColumn
 @Entity
 @PrimaryKeyJoinColumn(name = "userId")
 class RestaurantEmployee
-    (userId: Long, name: String, surname: String, email: String, phone: String, password: String,
+    (userId: Long?=null, name: String, surname: String, email: String, phone: String, password: String,
      @ManyToOne
         var restaurant: Restaurant, username: String, role: String
 ) :

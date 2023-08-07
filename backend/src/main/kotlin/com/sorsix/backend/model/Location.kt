@@ -7,7 +7,7 @@ import javax.persistence.*
 class Location(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long?=null,
     val street:String,
     val number:String
 )
