@@ -22,6 +22,7 @@ import { RestaurantOrdersComponent } from './component/restaurant-orders/restaur
 import { AcceptOrderDeliveryComponent } from './component/accept-order-delivery/accept-order-delivery.component';
 import { CurrentOrderDeliveryComponent } from './component/current-order-delivery/current-order-delivery.component';
 import { FinishedOrderDeliveryComponent } from './component/finished-order-delivery/finished-order-delivery.component';
+import { AboutUsComponent } from './component/about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { FinishedOrderDeliveryComponent } from './component/finished-order-deliv
     RestaurantOrdersComponent,
     AcceptOrderDeliveryComponent,
     CurrentOrderDeliveryComponent,
-    FinishedOrderDeliveryComponent
+    FinishedOrderDeliveryComponent,
+    AboutUsComponent
   ],
   imports: [
     BrowserModule,

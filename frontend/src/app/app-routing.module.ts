@@ -16,6 +16,7 @@ import { RestaurantOrdersComponent } from './component/restaurant-orders/restaur
 import { AcceptOrderDeliveryComponent } from './component/accept-order-delivery/accept-order-delivery.component';
 import { CurrentOrderDeliveryComponent } from './component/current-order-delivery/current-order-delivery.component';
 import { FinishedOrderDeliveryComponent } from './component/finished-order-delivery/finished-order-delivery.component';
+import { AboutUsComponent } from './component/about-us/about-us.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,7 @@ const routes: Routes = [
       { path: 'preparedOrders', component: AcceptOrderDeliveryComponent },
       { path: 'currentOrders', component: CurrentOrderDeliveryComponent },
       { path: 'deliveredOrders', component: FinishedOrderDeliveryComponent },
+      { path: 'aboutUs', component: AboutUsComponent },
       { path: '**', redirectTo: '' },
     ],
   },
