@@ -13,7 +13,7 @@ import javax.persistence.*
 @Data
 @Table(name = "users")
 abstract class User(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) open var userId: Long,
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) open var userId: Long?=null,
     @JsonIgnore
     open var name:String,
     @JsonIgnore

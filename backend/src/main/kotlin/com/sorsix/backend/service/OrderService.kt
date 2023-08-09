@@ -29,10 +29,9 @@ class OrderService(
     fun createOrder(orderDTO: OrderDTO, payment: Payment?) {
         val username: String = sessionRegistry.getUsernameForSession(orderDTO.sessionId)!!
         val customer = customerRepository.findCustomerByUsername(username)
-        val carts = cartRepository.findAllByCustomerUserIdAndStatus(customer.userId, ShoppingCartStatus.ACTIVE);
+        val carts = cartRepository.findAllByCustomerUserIdAndStatus(customer.userId!!, ShoppingCartStatus.ACTIVE);
         val location = locationRepository.save(
             Location(
-                locationRepository.count() + 1,
                 street = orderDTO.street,
                 number = orderDTO.number
             )
@@ -51,7 +50,6 @@ class OrderService(
             println(orderDTO.paymentMethod)
             if(payment != null) {
                 val payment1 = Payment(
-                    id = null,
                     cardHolderName = payment.cardHolderName,
                     securityCode = payment.securityCode,
                     expYY = payment.expYY,
@@ -104,7 +102,7 @@ class OrderService(
                 order.dateCreated,
                 order.status,
                 order.location,
-                order.customer.userId,
+                order.customer.userId!!,
                 order.customer.name,
                 order.customer.surname,
                 order.customer.username,
