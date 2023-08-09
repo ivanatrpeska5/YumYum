@@ -17,7 +17,7 @@ import java.nio.file.Paths
 class FoodController(private val categoryRepository: CategoryRepository,
                      private val ingredientRepository: IngredientRepository, private val foodRepository: FoodRepository
 ) {
-    private val uploadDir: Path = Paths.get("D:\\Faks\\Sorsix\\YumYum\\frontend\\src\\assets\\images")
+    private val uploadDir: Path = Paths.get("E:\\IdeaProjects\\Sorsix\\YumYum\\YumYum\\frontend\\src\\assets\\images")
     @GetMapping("/categories")
     fun getCategories(): ResponseEntity<MutableList<Category>> {
         return ResponseEntity.ok().body(categoryRepository.findAll());
