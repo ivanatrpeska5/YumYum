@@ -1,13 +1,36 @@
 <div class="container">
-    <div class="w-100 text-warning text-center p-2 mb-3 mt-3" style="background-color: beige;">
-        <h2 class="mt-2">Choose Your Culinary Heaven</h2>
+    <div class="row p-2 mb-3 mt-3">
+    <div class="col-md-6">
+        <div class="">
+            <h2 class="mt-2">Choose Your Culinary Heaven</h2>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="input-group">
+            <button class="btn btn-warning">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+              </svg>
+          </button>
+        <div class="form-outline">
+          <input type="search" id="form1" class="form-control" placeholder="Search..." />
+        </div>
+        <button class="btn btn-warning">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search-heart-fill" viewBox="0 0 16 16">
+                <path d="M6.5 13a6.474 6.474 0 0 0 3.845-1.258h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.008 1.008 0 0 0-.115-.1A6.471 6.471 0 0 0 13 6.5 6.502 6.502 0 0 0 6.5 0a6.5 6.5 0 1 0 0 13Zm0-8.518c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z"/>
+              </svg>
+          </button>
+        </div>
+    </div>
+    
     </div>
         
     <div class="row">
     <div *ngFor="let restaurant of restaurants" class="col-md-3">
-            <div class="card mb-3" routerLink="/restaurant/{{restaurant.id}}">
-                    <img src="{{restaurant.logo}}" alt="" class="card-img-top img-fluid" style="object-fit: cover;">
-                <div class="card-body " style="background-color: beige;">
+            <div class="card mb-3" routerLink="/restaurant/{{restaurant.id}}" style="min-height: 320px">
+                    <img src="{{restaurant.logo}}" alt="" class="card-img-top img-fluid" style="object-fit: cover; min-height: 214.4px;">
+                <div class="card-body">
                     <h4 class="text-center">{{ restaurant.name }}</h4>
                 </div>
             </div>
