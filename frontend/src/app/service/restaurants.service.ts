@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Restaurant } from '../model/restaurant';
-import { Observable } from 'rxjs';
+import { Observable, catchError, tap } from 'rxjs';
 import { FoodsByCategory } from '../model/foodsByCategory';
 import { FoodInCart } from '../model/foodInCart';
 
@@ -9,6 +9,9 @@ import { FoodInCart } from '../model/foodInCart';
   providedIn: 'root'
 })
 export class RestaurantsService {
+
+
+ 
   private url=`api/restaurants`
 
   constructor(private http:HttpClient) { }
@@ -30,4 +33,13 @@ export class RestaurantsService {
     return this.http.get<FoodInCart[]>(`${this.url}/addFoodInCart/${userId}/${foodId}/${quantity}`)
   }
 
+  searchRestaurants(term: string) {
+    if (!term.trim()) {
+      return this.getRestaurants();
+    }
+    return this.http.get<Restaurant[]>(`${this.url}/search/?q=${term}`);
+  }
+
+
 }
+
