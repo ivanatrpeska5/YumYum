@@ -1,6 +1,5 @@
 package com.sorsix.backend.controller
 
-import com.sorsix.backend.model.Food
 import com.sorsix.backend.model.Restaurant
 import com.sorsix.backend.model.dto.CategoryFoodsDTO
 import com.sorsix.backend.repository.RestaurantEmployeeRepository
@@ -9,10 +8,8 @@ import com.sorsix.backend.service.FoodService
 import com.sorsix.backend.service.RestaurantService
 import com.sorsix.backend.session.InMemorySessionRegistry
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PathVariable
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+
 
 @RestController
 @RequestMapping("/api")
@@ -47,5 +44,10 @@ class RestaurantController(private val restaurantService: RestaurantService,
             return ResponseEntity.ok().body(employee.restaurant)
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/restaurants/search")
+    fun searchRestaurants(@RequestParam(name = "q") query: String?): List<Restaurant?>? {
+        return query?.let { restaurantRepository.findByNameContainingIgnoreCase(it) }
     }
 }
