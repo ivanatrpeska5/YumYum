@@ -5,6 +5,7 @@ import { Food } from 'src/app/model/food';
 import { FoodsByCategory } from 'src/app/model/foodsByCategory';
 import { Restaurant } from 'src/app/model/restaurant';
 import { CartService } from 'src/app/service/cart.service';
+import { FoodService } from 'src/app/service/food.service';
 import { RestaurantsService } from 'src/app/service/restaurants.service';
 
 @Component({
@@ -30,6 +31,7 @@ export class RestaurantComponent implements OnInit {
   }
 
   constructor(private restaurantsService:RestaurantsService, 
+              private foodService:FoodService,
               private route: ActivatedRoute,
               private formBuilder: FormBuilder,
               private cartService:CartService){
@@ -84,5 +86,18 @@ export class RestaurantComponent implements OnInit {
 
   isAuthenticated():boolean{
     return this.sessionId!=null;
+  }
+
+  deleteFoodFromRestaurant(foodId:number){
+    this.foodService.deleteFoodFromRestaurant(foodId).subscribe(
+      () => {
+        this.getFoodsbyCategory();
+      }
+    )
+  }
+
+  editFood(food:Food){
+    
+
   }
 }

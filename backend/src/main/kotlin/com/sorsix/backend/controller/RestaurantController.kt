@@ -48,4 +48,5 @@ class RestaurantController(private val restaurantService: RestaurantService,
         }
         return ResponseEntity.notFound().build();
     }
+
 }

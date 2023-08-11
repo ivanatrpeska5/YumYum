@@ -6,6 +6,7 @@ import { Restaurant } from '../model/restaurant';
 import { Ingredient } from '../model/ingredient';
 import { Category } from '../model/category';
 import { NewFood } from '../model/newFood';
+import { RestaurantsService } from './restaurants.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,10 @@ export class FoodService {
     return this.http.get<Restaurant>(`api/restaurant/${sessionId}`)
   }
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private restaurantService: RestaurantsService
+    ) {}
 
   // Method to post food to the server
   postFood(food: NewFood): Observable<any> {
@@ -49,5 +53,9 @@ export class FoodService {
 
     const url = `${this.baseUrl}/photo`; // Replace with the actual endpoint for image upload
     return this.http.post(url, formData, { headers });
+  }
+
+  deleteFoodFromRestaurant(foodId:number){
+    return this.http.delete<Food>(`api/food/delete/${foodId}`)
   }
 }
