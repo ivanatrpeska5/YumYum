@@ -15,7 +15,8 @@ import java.nio.file.Paths
 @RestController
 @RequestMapping("/api")
 class FoodController(private val categoryRepository: CategoryRepository,
-                     private val ingredientRepository: IngredientRepository, private val foodRepository: FoodRepository
+                     private val ingredientRepository: IngredientRepository,
+                     private val foodRepository: FoodRepository
 ) {
     private val uploadDir: Path = Paths.get("E:\\IdeaProjects\\Sorsix\\YumYum\\YumYum\\frontend\\src\\assets\\images")
     @GetMapping("/categories")
@@ -45,5 +46,11 @@ class FoodController(private val categoryRepository: CategoryRepository,
         // Return the URL/path of the uploaded image
 
         return ResponseEntity.ok().body(mapOf("imageUrl" to "assets/images/$fileName"));
+    }
+
+    @DeleteMapping("food/delete/{id}")
+    fun deleteFoodFromRestaurant(@PathVariable id:Long):ResponseEntity<Any>{
+        foodRepository.deleteById(id)
+        return ResponseEntity.ok().build()
     }
 }

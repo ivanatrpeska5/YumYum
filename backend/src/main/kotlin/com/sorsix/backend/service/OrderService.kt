@@ -117,7 +117,7 @@ class OrderService(
         fun getCustomerOrder(sessionId: String): MutableList<Order> {
             val username: String = sessionRegistry.getUsernameForSession(sessionId)!!
             val customer = customerRepository.findCustomerByUsername(username)
-            return orderRepository.getOrdersByCustomer(customer);
+            return orderRepository.findOrdersByCustomerOrderByIdDesc(customer)
 
         }
 

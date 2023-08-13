@@ -50,4 +50,5 @@ class RestaurantController(private val restaurantService: RestaurantService,
     fun searchRestaurants(@RequestParam(name = "q") query: String?): List<Restaurant?>? {
         return query?.let { restaurantRepository.findByNameContainingIgnoreCase(it) }
     }
+
 }

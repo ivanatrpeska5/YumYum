@@ -1,7 +1,7 @@
 <div class="container">
-    <div class="w-100 text-warning text-center p-2 mb-3 mt-3" style="background-color: beige;">
-        <h2 class="mt-2">New Orders:</h2>
-    </div>
+    
+        <h2 class="mt-4 mb-4">New Orders:</h2>
+    
     <div *ngFor="let order of (restaurantOrders$ | async)" class="card mb-3">
         <div class="w-100 bg-warning card-header d-flex align-items-center">
             <h5 class="card-title flex-grow-1">Order Id: {{order.id}}</h5>

@@ -23,9 +23,8 @@ import { AcceptOrderDeliveryComponent } from './component/accept-order-delivery/
 import { CurrentOrderDeliveryComponent } from './component/current-order-delivery/current-order-delivery.component';
 import { FinishedOrderDeliveryComponent } from './component/finished-order-delivery/finished-order-delivery.component';
 import { AboutUsComponent } from './component/about-us/about-us.component';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { EditFoodComponent } from './component/edit-food/edit-food.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -46,6 +45,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     CurrentOrderDeliveryComponent,
     FinishedOrderDeliveryComponent,
     AboutUsComponent,
+    EditFoodComponent
   ],
   imports: [
     BrowserModule,
@@ -53,9 +53,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSnackBarModule,
-    BrowserAnimationsModule,
-    MatDialogModule
+    BrowserAnimationsModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
   bootstrap: [AppComponent]
