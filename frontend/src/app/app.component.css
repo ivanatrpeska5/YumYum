@@ -5,3 +5,7 @@
 body{
     background-color: #f7f8f3;
 }
+.mat-snack-bar-container {
+    top: 0;
+    transform: translateY(0%);
+  }
