@@ -19,8 +19,8 @@ export class HomeComponent implements OnInit {
   }
 
   getNewFood(){
-    // this.foodService.getNewFood().subscribe(newFood => this.newFood = newFood);
-    // return this.newFood;
+    this.foodService.getNewFood().subscribe(newFood => this.newFood = newFood);
+    return this.newFood;
   }
 
 

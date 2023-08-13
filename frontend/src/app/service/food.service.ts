@@ -64,6 +64,6 @@ export class FoodService {
   }
 
   getNewFood(){
-    return this.http.get<NewFood[]>(`api/newestFood`)
+    return this.http.get<Food[]>(`api/newestFood`)
   }
 }
