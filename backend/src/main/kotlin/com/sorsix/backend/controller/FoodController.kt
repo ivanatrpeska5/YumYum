@@ -6,6 +6,7 @@ import com.sorsix.backend.model.Ingredient
 import com.sorsix.backend.repository.CategoryRepository
 import com.sorsix.backend.repository.FoodRepository
 import com.sorsix.backend.repository.IngredientRepository
+import com.sorsix.backend.service.FoodService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 import org.springframework.web.multipart.MultipartFile
@@ -16,7 +17,8 @@ import java.nio.file.Paths
 @RequestMapping("/api")
 class FoodController(private val categoryRepository: CategoryRepository,
                      private val ingredientRepository: IngredientRepository,
-                     private val foodRepository: FoodRepository
+                     private val foodRepository: FoodRepository,
+                     private val foodService: FoodService
 ) {
     private val uploadDir: Path = Paths.get("E:\\IdeaProjects\\Sorsix\\YumYum\\YumYum\\frontend\\src\\assets\\images")
     @GetMapping("/categories")
@@ -52,5 +54,10 @@ class FoodController(private val categoryRepository: CategoryRepository,
     fun deleteFoodFromRestaurant(@PathVariable id:Long):ResponseEntity<Any>{
         foodRepository.deleteById(id)
         return ResponseEntity.ok().build()
+    }
+
+    @GetMapping("newestFood")
+    fun newestFood():ResponseEntity<List<Food>>{
+        return ResponseEntity.ok().body(foodService.newestFood())
     }
 }

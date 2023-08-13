@@ -1,5 +1,6 @@
 package com.sorsix.backend.service
 
+import com.sorsix.backend.model.Food
 import com.sorsix.backend.model.dto.CategoryFoodsDTO
 import com.sorsix.backend.repository.CategoryRepository
 import com.sorsix.backend.repository.FoodRepository
@@ -25,5 +26,9 @@ class FoodService(
         }
         println(foodMap)
         return foodMap.values;
+    }
+
+    fun newestFood():List<Food>{
+        return foodRepository.findTop5ByOrderByIdDesc()
     }
 }

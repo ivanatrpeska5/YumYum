@@ -62,4 +62,8 @@ export class FoodService {
   updateFoodFromRestaurant(food: Food){
     return this.http.put<Food>(`api/food/update`, food)
   }
+
+  getNewFood(){
+    return this.http.get<NewFood[]>(`api/newestFood`)
+  }
 }
