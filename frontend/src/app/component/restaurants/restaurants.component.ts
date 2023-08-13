@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { Observable, Subject, debounceTime, distinctUntilChanged, startWith, switchMap } from 'rxjs';
 import { Restaurant } from 'src/app/model/restaurant';
 import { RestaurantsService } from 'src/app/service/restaurants.service';
 
@@ -14,8 +14,7 @@ export class RestaurantsComponent implements OnInit {
   private searchTerms = new Subject<string>();
 
   ngOnInit(): void {
-    this.getRestaurants()
-    console.log(sessionStorage.getItem('token'))
+    this.getRestaurants();
   }
 
   constructor(private restaurantsService:RestaurantsService){
@@ -28,6 +27,7 @@ export class RestaurantsComponent implements OnInit {
 
   getRestaurants(){
     this.restaurants$ = this.searchTerms.pipe(
+      startWith(''),
       // wait 300ms after each keystroke before considering the term
       debounceTime(300),
 

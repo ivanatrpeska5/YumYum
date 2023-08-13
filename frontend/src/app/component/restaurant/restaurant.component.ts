@@ -17,9 +17,9 @@ import { RestaurantsService } from 'src/app/service/restaurants.service';
 })
 export class RestaurantComponent implements OnInit {
 
-  restaurant:Restaurant | undefined;
-  foodsByCategory:FoodsByCategory[]=[];
-  quantity:{[id:number]:number}={}
+  restaurant: Restaurant | undefined;
+  foodsByCategory: FoodsByCategory[] = [];
+  quantity: { [id: number]: number } = {}
   sessionId: string | null = null;
   role:string | null=null;
   foodToUpdate: Food | undefined;
@@ -30,9 +30,10 @@ export class RestaurantComponent implements OnInit {
   ngOnInit(): void {
     this.getRestaurant()
     this.getFoodsbyCategory()
-    this.quantity={}
-    this.sessionId=localStorage.getItem('token');
-    this.role=localStorage.getItem('role')
+    console.log(this.foodsByCategory)
+    this.quantity = {}
+    this.sessionId = localStorage.getItem('token');
+    this.role = localStorage.getItem('role')
     this.initForms();
     this.foodToUpdate = {
       id: 0,
@@ -56,17 +57,17 @@ export class RestaurantComponent implements OnInit {
 
   }
 
-  getRestaurant(){
+  getRestaurant() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.restaurantsService.getRestaurant(id).subscribe(restaurant=>{
-      this.restaurant=restaurant
+    this.restaurantsService.getRestaurant(id).subscribe(restaurant => {
+      this.restaurant = restaurant
     })
   }
 
-  getFoodsbyCategory(){
+  getFoodsbyCategory() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.restaurantsService.getFoodsByCategory(id).subscribe(foodsByCategory=>{
-      this.foodsByCategory=foodsByCategory
+    this.restaurantsService.getFoodsByCategory(id).subscribe(foodsByCategory => {
+      this.foodsByCategory = foodsByCategory
     })
   }
 
@@ -89,21 +90,21 @@ export class RestaurantComponent implements OnInit {
     this.quantity[foodId] = quantity;
   }
 
-  addToCart(foodId:number){
-    console.log(foodId)
-    var food_quantity=this.quantity[foodId]
+  addToCart(food:Food,notification:boolean) {
+    console.log(food.id)
+    var food_quantity = this.quantity[food.id]
     console.log(food_quantity)
-    if(food_quantity==undefined){
-      food_quantity=1
+    if (food_quantity == undefined) {
+      food_quantity = 1
     }
-    if(food_quantity>0){
-      this.cartService.addToCart(foodId,food_quantity)
+    if (food_quantity > 0) {
+      this.cartService.addToCart(food.id, food_quantity)
     }
   }
 
 
-  isAuthenticated():boolean{
-    return this.sessionId!=null;
+  isAuthenticated(): boolean {
+    return this.sessionId != null;
   }
 
   deleteFoodFromRestaurant(foodId:number){
