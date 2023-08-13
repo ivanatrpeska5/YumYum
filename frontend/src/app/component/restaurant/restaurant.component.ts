@@ -133,5 +133,9 @@ export class RestaurantComponent implements OnInit {
     return this.foodToUpdate!!.categorySet.some((c) => c.id === category.id);
   }
 
+  updateFood(){
+    
+  }
+
   
 }
