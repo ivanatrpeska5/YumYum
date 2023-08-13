@@ -45,7 +45,7 @@ class RestaurantController(private val restaurantService: RestaurantService,
         }
         return ResponseEntity.notFound().build();
     }
-    
+
     @GetMapping("/restaurants/search")
     fun searchRestaurants(@RequestParam(name = "q") query: String?): List<Restaurant?>? {
         return query?.let { restaurantRepository.findByNameContainingIgnoreCase(it) }

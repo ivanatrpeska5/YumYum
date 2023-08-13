@@ -23,6 +23,8 @@ import { AcceptOrderDeliveryComponent } from './component/accept-order-delivery/
 import { CurrentOrderDeliveryComponent } from './component/current-order-delivery/current-order-delivery.component';
 import { FinishedOrderDeliveryComponent } from './component/finished-order-delivery/finished-order-delivery.component';
 import { AboutUsComponent } from './component/about-us/about-us.component';
+import { EditFoodComponent } from './component/edit-food/edit-food.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -42,14 +44,16 @@ import { AboutUsComponent } from './component/about-us/about-us.component';
     AcceptOrderDeliveryComponent,
     CurrentOrderDeliveryComponent,
     FinishedOrderDeliveryComponent,
-    AboutUsComponent
+    AboutUsComponent,
+    EditFoodComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
   bootstrap: [AppComponent]

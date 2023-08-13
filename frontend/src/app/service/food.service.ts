@@ -58,4 +58,8 @@ export class FoodService {
   deleteFoodFromRestaurant(foodId:number){
     return this.http.delete<Food>(`api/food/delete/${foodId}`)
   }
+
+  updateFoodFromRestaurant(food: Food){
+    return this.http.put<Food>(`api/food/update`, food)
+  }
 }

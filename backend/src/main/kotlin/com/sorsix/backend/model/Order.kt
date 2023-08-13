@@ -16,7 +16,6 @@ class Order(
 
     val dateCreated: LocalDate = LocalDate.now(),
 
-
     @Enumerated(value = EnumType.STRING)
     var status: OrderStatus,
 
