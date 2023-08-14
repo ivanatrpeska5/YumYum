@@ -44,7 +44,9 @@ export class AuthService {
       }
       return of(res);
     })).subscribe(res => {
-      this.router.navigate(['']);
+      this.router.navigate(['']).then(()=>{
+        window.location.reload();
+      });
 
     });
   }

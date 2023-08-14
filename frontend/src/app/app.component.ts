@@ -17,20 +17,17 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    //this.role=sessionStorage.getItem("role")
-    //this.sessionId=sessionStorage.getItem("token")
-    this.authService.currentRole.subscribe(role=>this.role=role)
-    this.authService.currentSessionId.subscribe(sessionId=>{this.sessionId=sessionId;})
-    this.authService.currentUsername.subscribe(username=>this.username=username)
-    this.authService.currentRestaurantId.subscribe(restaurantId=>this.restaurantId=restaurantId)
+    this.role=localStorage.getItem('role');
+    this.sessionId=localStorage.getItem("token")
+    this.username=localStorage.getItem('username')
+    this.restaurantId=Number(localStorage.getItem('restaurantId'))
   }
   logout(){
-    console.log(this.role)
     this.authService.logout()
-   // this.authService.currentRole.subscribe(role=>this.role=role)
-    //this.authService.currentSessionId.subscribe(sessionId=>this.sessionId=sessionId)
-    console.log(this.role)
-    //this.sessionId=null;
+    this.role=null;
+    this.sessionId=null;
+    this.username=null;
+    this.restaurantId=null;
   }
 
   isAuthorized():boolean{
