@@ -17,8 +17,11 @@
           <li class="nav-item">
             <a class="nav-link text-white" routerLink="/aboutUs">About Us</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="role=='customer' || !isAuthorized()">
             <a class="nav-link text-white" routerLink="/restaurants">Restaurants</a>
+          </li>
+          <li class="nav-item" *ngIf="role=='employee' && restaurantId!=0">
+            <a class="nav-link text-white" routerLink="/restaurant/{{restaurantId}}">My Restaurant</a>
           </li>
           <li class="nav-item" *ngIf="role=='customer'">
             <a class="nav-link text-white" routerLink="/myOrders">My orders</a>
