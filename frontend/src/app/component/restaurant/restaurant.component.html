@@ -74,9 +74,8 @@
                                 (ngModelChange)="onQuantityChange(food.id, $event)" />
                         </div>
                         <div class="col-md-8">
-                            <button mat-button type="submit" class="btn btn-warning rounded-pill fw-bold w-100 p-2"
-                                (click)="addToCart(food, true)"
-                                [disabled]="!isAuthenticated() || quantity[food.id] <= 0">
+                            <button #addCart mat-button type="submit" class="btn btn-warning rounded-pill fw-bold w-100 p-2"
+                                (click)="addToCart(food)" [disabled]="!isAuthenticated() || quantity[food.id] <= 0">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                     class="bi bi-cart3" viewBox="0 0 16 16">
                                     <path
@@ -90,6 +89,9 @@
                         <div *ngIf="quantity[food.id] <= 0">
                             *Quantity must be more than 0!
                         </div>
+                    </div>
+                    <div *ngIf="isAddedToCart[food.id]">
+                        Added to Cart
                     </div>
                 </div>
                 <button class="btn btn-danger" *ngIf="role == 'employee'" style="position: absolute; right: 3%; top: 3%"

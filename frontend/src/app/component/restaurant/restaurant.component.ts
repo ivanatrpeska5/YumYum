@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/model/category';
@@ -20,6 +20,7 @@ export class RestaurantComponent implements OnInit {
   restaurant: Restaurant | undefined;
   foodsByCategory: FoodsByCategory[] = [];
   quantity: { [id: number]: number } = {}
+  isAddedToCart: { [id: number]: boolean } = {}
   sessionId: string | null = null;
   role:string | null=null;
   foodToUpdate: Food | undefined;
@@ -28,6 +29,7 @@ export class RestaurantComponent implements OnInit {
   newCategories:Category[]=[]
   ingredients:Ingredient[]=[]
   newIngredients:Ingredient[]=[]
+  @ViewChild('addCart') button!:ElementRef;
 
   ngOnInit(): void {
     this.getRestaurant()
@@ -83,7 +85,8 @@ export class RestaurantComponent implements OnInit {
   initForms() {
     this.foodsByCategory.forEach((category) => {
       category.food.forEach((food) => {
-        this.quantity[food.id] = 1; // Set default quantity to 1 for each food item
+        this.quantity[food.id] = 1;
+        this.isAddedToCart[food.id]=false;
       });
     });
   }
@@ -92,8 +95,7 @@ export class RestaurantComponent implements OnInit {
     this.quantity[foodId] = quantity;
   }
 
-  addToCart(food:Food,notification:boolean) {
-    console.log(food.id)
+  addToCart(food:Food) {
     var food_quantity = this.quantity[food.id]
     console.log(food_quantity)
     if (food_quantity == undefined) {
@@ -102,6 +104,8 @@ export class RestaurantComponent implements OnInit {
     if (food_quantity > 0) {
       this.cartService.addToCart(food.id, food_quantity)
     }
+    this.isAddedToCart[food.id]=true;
+    this.button.nativeElement.disabled=true;
   }
 
 

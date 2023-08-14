@@ -4,4 +4,6 @@
 }
 
 
-
+option:checked{
+    background-color: aqua;
+}

@@ -55,7 +55,7 @@ export class AddFoodComponent implements OnInit {
     this.newFood.categorySet=this.selectedCategories;
     this.newFood.ingredientsSet=this.selectedIngredients;
     this.newFood.restaurant=this.restaurant
-    console.log(this.newFood)
+    console.log(this.newFood.id)
     // First, upload the image to the server (backend)
     if (this.selectedImage) {
       this.foodService.uploadImage(this.selectedImage).subscribe(
@@ -69,6 +69,7 @@ export class AddFoodComponent implements OnInit {
               // Handle the success response if needed.
               this.router.navigate([`/restaurant/${this.newFood!!.restaurant!!.id}`], {relativeTo: this.activatedRoute})
               console.log('Food posted successfully:', response);
+              this.router.navigate([`restaurant/${this.restaurant?.id}`]);
             },
             (error) => {
               // Handle the error if needed.
@@ -88,6 +89,7 @@ export class AddFoodComponent implements OnInit {
           // Handle the success response if needed.
           this.router.navigate([`/restaurant/${this.newFood!!.restaurant!!.id}`], {relativeTo: this.activatedRoute})
           console.log('Food posted successfully:', response);
+          this.router.navigate([`restaurant/${this.restaurant?.id}`]);
         },
         (error) => {
           // Handle the error if needed.
