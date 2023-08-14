@@ -31,6 +31,7 @@ export class AuthService {
         this.ROLE.next(res.role);
         localStorage.setItem('token',res.sessionId);
         localStorage.setItem("role",res.role);
+        localStorage.setItem("username",model.username);
         console.log(localStorage.getItem("role"))
         this.router.navigate(['']);
       } else {

@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
   title = 'Yum Yum';
   role:string | null=null;
   sessionId: string | null = null;
+  username:string | null=null;
   
   constructor(private authService:AuthService){
 
@@ -20,7 +21,8 @@ export class AppComponent implements OnInit {
     this.authService.currentRole.subscribe(role=>this.role=role)
     this.authService.currentSessionId.subscribe(sessionId=>{this.sessionId=sessionId;})
     this.sessionId=localStorage.getItem('token');
-    this.role=localStorage.getItem('role')
+    this.role=localStorage.getItem('role');
+    this.username=localStorage.getItem('username');
   }
   logout(){
     console.log(this.role)
@@ -34,4 +36,6 @@ export class AppComponent implements OnInit {
   isAuthorized():boolean{
     return this.sessionId!=null;
   }
+
+
 }

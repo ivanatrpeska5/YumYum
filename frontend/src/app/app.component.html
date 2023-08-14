@@ -48,23 +48,14 @@
             </svg>
             Shopping Cart
           </a>
-          <li class="nav-item" *ngIf="role=='employee'">
-            <a class="nav-link border bg-light text-dark rounded-pill pt-0 pb-0 pl-1 pr-1 me-3 mt-2" href="#">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                class="bi bi-person-fill" viewBox="0 0 16 16">
-                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
-              </svg>
-              Seller
-            </a>
-          </li>
 
-          <li class="nav-item" *ngIf="role=='customer'">
-            <a class="nav-link border bg-light text-dark rounded-pill pt-0 pb-0 pl-1 pr-1 me-3 mt-2" href="#">
+          <li class="nav-item" *ngIf="isAuthorized()">
+            <a class="nav-link border bg-light text-dark rounded-pill pt-0 pb-0 pl-1 pr-1 me-3 mt-2" *ngIf="username">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                 class="bi bi-person-fill" viewBox="0 0 16 16">
                 <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
               </svg>
-              Profile
+              {{username}}
             </a>
           </li>
 
