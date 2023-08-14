@@ -107,7 +107,10 @@ export class RestaurantComponent implements OnInit {
     return this.sessionId != null;
   }
 
-  deleteFoodFromRestaurant(foodId:number){
+  deleteFood(foodId:number){
+    console.log('here');
+    
+    debugger
     this.foodService.deleteFoodFromRestaurant(foodId).subscribe(
       () => {
         this.getFoodsbyCategory();

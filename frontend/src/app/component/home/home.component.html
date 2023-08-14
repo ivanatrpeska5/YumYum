@@ -8,8 +8,13 @@
 <div class="container">
     <div>
         <h3>New Fresh Bites Discovery Hub</h3>
-        <div *ngFor="let food of newFood">
-                <h1>{{food.name}}</h1>
+        <div class="row justify-content-between">
+            <div *ngFor="let food of newFood" class="col-md-2 card p-3">
+                <img src="{{food.photo}}" alt="" class="card-img-top img-fluid" style="object-fit: cover; height: 150px;">
+                <div class="card-body">
+                    <h6 class="text-center">{{ food.name }}</h6>
+                </div>
+            </div>
         </div>
     </div>
     <div>
