@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AuthService } from './service/auth.service';
 
 @Component({
@@ -16,24 +16,18 @@ export class AppComponent implements OnInit {
   constructor(private authService:AuthService){
 
   }
-  ngOnInit(): void {
-    //this.role=sessionStorage.getItem("role")
-    //this.sessionId=sessionStorage.getItem("token")
-    this.authService.currentRole.subscribe(role=>this.role=role)
-    this.authService.currentSessionId.subscribe(sessionId=>{this.sessionId=sessionId;})
-    this.authService.currentUsername.subscribe(username=>this.username=username)
-    this.authService.currentRestaurantId.subscribe(restaurantId=>this.restaurantId=restaurantId)
+
+  ngOnInit(): void {    
+    this.role = localStorage.getItem('role');
+    this.sessionId = localStorage.getItem('token');
+    this.username=localStorage.getItem('username');
+    this.restaurantId=Number(localStorage.getItem('restaurantId'));
   }
   logout(){
-    console.log(this.role)
     this.authService.logout()
-   // this.authService.currentRole.subscribe(role=>this.role=role)
-    //this.authService.currentSessionId.subscribe(sessionId=>this.sessionId=sessionId)
-    console.log(this.role)
-    //this.sessionId=null;
   }
 
-  isAuthorized():boolean{
+  isAuthorized():boolean{    
     return this.sessionId!=null;
   }
 

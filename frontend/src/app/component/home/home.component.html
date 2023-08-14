@@ -19,6 +19,14 @@
     </div>
     <div>
         <h3>Our Top 5 Restaurants:</h3>
+        <div class="row justify-content-between">
+            <div *ngFor="let restaurant of topRestaurants" class="col-md-2 card p-3">
+                <img src="{{restaurant.photo}}" alt="" class="card-img-top img-fluid" style="object-fit: cover; height: 150px;">
+                <div class="card-body">
+                    <h6 class="text-center">{{ restaurant.name }}</h6>
+                </div>
+            </div>
+        </div>
         
     </div>
 </div>

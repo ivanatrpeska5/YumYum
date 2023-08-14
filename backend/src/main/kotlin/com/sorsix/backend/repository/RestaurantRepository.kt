@@ -9,4 +9,6 @@ interface RestaurantRepository : JpaRepository<Restaurant, Long> {
 
     fun findByNameContainingIgnoreCase(query:String):List<Restaurant>
 
+    fun findTop5ByOrderByAverageRatingDesc():List<Restaurant>
+
 }
