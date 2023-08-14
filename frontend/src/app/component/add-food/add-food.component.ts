@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Category } from 'src/app/model/category';
 import { Food } from 'src/app/model/food';
 import { Ingredient } from 'src/app/model/ingredient';
@@ -35,7 +36,7 @@ export class AddFoodComponent implements OnInit {
 
   ingredients:Ingredient[]=[]
 
-  constructor(private foodService: FoodService) {}
+  constructor(private foodService: FoodService, private router:Router) {}
   ngOnInit(): void {
     this.foodService.getRestaurantByEmployee().subscribe(restaurant=>{
       console.log("Restaurant: ",restaurant.name)
@@ -50,7 +51,7 @@ export class AddFoodComponent implements OnInit {
     this.newFood.categorySet=this.selectedCategories;
     this.newFood.ingredientsSet=this.selectedIngredients;
     this.newFood.restaurant=this.restaurant
-    console.log(this.newFood)
+    console.log(this.newFood.id)
     // First, upload the image to the server (backend)
     if (this.selectedImage) {
       this.foodService.uploadImage(this.selectedImage).subscribe(
@@ -63,6 +64,7 @@ export class AddFoodComponent implements OnInit {
             (response) => {
               // Handle the success response if needed.
               console.log('Food posted successfully:', response);
+              this.router.navigate([`restaurant/${this.restaurant?.id}`]);
             },
             (error) => {
               // Handle the error if needed.
@@ -81,6 +83,7 @@ export class AddFoodComponent implements OnInit {
         (response) => {
           // Handle the success response if needed.
           console.log('Food posted successfully:', response);
+          this.router.navigate([`restaurant/${this.restaurant?.id}`]);
         },
         (error) => {
           // Handle the error if needed.

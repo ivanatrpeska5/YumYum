@@ -90,7 +90,7 @@ export class RestaurantComponent implements OnInit {
     this.quantity[foodId] = quantity;
   }
 
-  addToCart(food:Food,notification:boolean) {
+  addToCart(food:Food) {
     console.log(food.id)
     var food_quantity = this.quantity[food.id]
     console.log(food_quantity)
@@ -108,6 +108,7 @@ export class RestaurantComponent implements OnInit {
   }
 
   deleteFoodFromRestaurant(foodId:number){
+    console.log(foodId)
     this.foodService.deleteFoodFromRestaurant(foodId).subscribe(
       () => {
         this.getFoodsbyCategory();
@@ -131,7 +132,16 @@ export class RestaurantComponent implements OnInit {
     // console.log(this.foodToUpdate!!.categorySet);
     // console.log(this.foodToUpdate!!.categorySet.some((c) => c.id === category.id))
     // console.log(category.id);
-    return this.foodToUpdate!!.categorySet.some((c) => c.id === category.id);
+    return this.foodToUpdate!!.categorySet.filter(c=>c.id===category.id).length>0;
+  }
+
+  isSelectedIngredient(ingredient:Ingredient): boolean {
+    // console.log("Kategorii:");
+    // console.log(this.foodToUpdate!!.categorySet);
+    // console.log(this.foodToUpdate!!.categorySet.some((c) => c.id === category.id))
+    // console.log(category.id);
+    const a=this.foodToUpdate!!.ingredientsSet.filter(c=>c.id===ingredient.id).length>0
+    return a;
   }
 
   updateFood(){
