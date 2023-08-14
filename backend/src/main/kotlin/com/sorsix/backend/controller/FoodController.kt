@@ -60,4 +60,10 @@ class FoodController(private val categoryRepository: CategoryRepository,
     fun newestFood():ResponseEntity<List<Food>>{
         return ResponseEntity.ok().body(foodService.newestFood())
     }
+
+    @PutMapping("food/update")
+    fun updateFood(@RequestBody food: Food):ResponseEntity<Any>{
+        foodRepository.save(food)
+        return ResponseEntity.ok().build()
+    }
 }

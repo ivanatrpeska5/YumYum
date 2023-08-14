@@ -59,11 +59,12 @@ export class FoodService {
     return this.http.delete<Food>(`api/food/delete/${foodId}`)
   }
 
-  updateFoodFromRestaurant(food: Food){
+  updateFood(food: Food){
     return this.http.put<Food>(`api/food/update`, food)
   }
 
   getNewFood(){
     return this.http.get<Food[]>(`api/newestFood`)
   }
+
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Category } from 'src/app/model/category';
 import { Food } from 'src/app/model/food';
 import { Ingredient } from 'src/app/model/ingredient';
@@ -35,7 +36,11 @@ export class AddFoodComponent implements OnInit {
 
   ingredients:Ingredient[]=[]
 
-  constructor(private foodService: FoodService) {}
+  constructor(
+    private foodService: FoodService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+    ) {}
   ngOnInit(): void {
     this.foodService.getRestaurantByEmployee().subscribe(restaurant=>{
       console.log("Restaurant: ",restaurant.name)
@@ -62,6 +67,7 @@ export class AddFoodComponent implements OnInit {
           this.foodService.postFood(this.newFood!!).subscribe(
             (response) => {
               // Handle the success response if needed.
+              this.router.navigate([`/restaurant/${this.newFood!!.restaurant!!.id}`], {relativeTo: this.activatedRoute})
               console.log('Food posted successfully:', response);
             },
             (error) => {
@@ -80,6 +86,7 @@ export class AddFoodComponent implements OnInit {
       this.foodService.postFood(this.newFood!!).subscribe(
         (response) => {
           // Handle the success response if needed.
+          this.router.navigate([`/restaurant/${this.newFood!!.restaurant!!.id}`], {relativeTo: this.activatedRoute})
           console.log('Food posted successfully:', response);
         },
         (error) => {

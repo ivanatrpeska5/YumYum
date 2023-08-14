@@ -123,10 +123,10 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form>
+                <form (submit)="updateFood()">
                     <label for="photo">Photo:</label>
                     <!-- Use the 'onFileChange' function to handle the file input change -->
-                    <input type="file" name="photo" class="form-control" required />
+                    <input type="file" name="photo" class="form-control" required (change)="onFileChange($event)" />
 
                     <label for="name">Name:</label>
                     <input type="text" name="name" class="form-control" [(ngModel)]="foodToUpdate!!.name" required />
@@ -136,23 +136,28 @@
                         required />
 
                     <label for="categories">Categories:</label>
-                    <select name="categories" class="form-control" [(ngModel)]="foodToUpdate!!.categorySet" multiple
-                        required>
-                        <option *ngFor="let category of categories" [value]="category"
-                            [selected]="isSelectedCategory(category)">
-                            {{ category.name }}
-                        </option>
-                    </select>
-
+                    <div *ngIf="newCategories.length > 0">
+                        <div *ngFor="let category of categories">
+                            <label>
+                                <input type="checkbox" name="categories" class="form-check-input"
+                                    [checked]="checkCategorySelection(category)"
+                                    (change)="toggleCategorySelection(category)" />
+                                {{ category.name }}
+                            </label>
+                        </div>
+                    </div>
                     <label for="ingredients">Ingredients:</label>
-                    <select name="ingredients" class="form-control" [(ngModel)]="foodToUpdate!!.ingredientsSet" multiple
-                        required>
-                        <option *ngFor="let ingredient of ingredients" [value]="ingredient">
-                            {{ ingredient.name }}
-                        </option>
-                    </select>
-
-                    <button type="submit" class="btn btn-warning w-100 mt-3">
+                    <div *ngIf="newIngredients.length > 0">
+                        <div *ngFor="let ingredient of ingredients">
+                            <label>
+                                <input type="checkbox" name="ingredients" class="form-check-input"
+                                    [checked]="checkIngredientSelection(ingredient)"
+                                    (change)="toggleIngredientSelection(ingredient)" />
+                                {{ ingredient.name }}
+                            </label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-warning w-100 mt-3" data-bs-dismiss="modal" aria-label="Close">
                         Save Changes
                     </button>
                 </form>

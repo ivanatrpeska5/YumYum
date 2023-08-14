@@ -25,7 +25,9 @@ export class RestaurantComponent implements OnInit {
   foodToUpdate: Food | undefined;
   selectedImage: File | undefined;
   categories:Category[]=[]
+  newCategories:Category[]=[]
   ingredients:Ingredient[]=[]
+  newIngredients:Ingredient[]=[]
 
   ngOnInit(): void {
     this.getRestaurant()
@@ -108,9 +110,6 @@ export class RestaurantComponent implements OnInit {
   }
 
   deleteFood(foodId:number){
-    console.log('here');
-    
-    debugger
     this.foodService.deleteFoodFromRestaurant(foodId).subscribe(
       () => {
         this.getFoodsbyCategory();
@@ -119,7 +118,15 @@ export class RestaurantComponent implements OnInit {
   }
 
   edit(food:Food){
-    this.foodToUpdate=food
+    this.foodToUpdate={...food}
+    this.newCategories=[]
+    this.newIngredients=[]
+    for(let category of food.categorySet){
+      this.toggleCategorySelection(category)
+    }
+    for(let ingredient of food.ingredientsSet){
+      this.toggleIngredientSelection(ingredient)
+    }
   }
 
   onFileChange(event: Event) {
@@ -129,15 +136,88 @@ export class RestaurantComponent implements OnInit {
     }
   }
 
-  isSelectedCategory(category: Category): boolean {
-    // console.log("Kategorii:");
-    // console.log(this.foodToUpdate!!.categorySet);
-    // console.log(this.foodToUpdate!!.categorySet.some((c) => c.id === category.id))
-    // console.log(category.id);
-    return this.foodToUpdate!!.categorySet.some((c) => c.id === category.id);
+  toggleCategorySelection(category: Category): void {
+    const index = this.newCategories.map(it=>it.id).indexOf(category.id);  
+    
+    if (index === -1) {
+      this.newCategories.push(category);
+    } else {
+      this.newCategories.splice(index, 1);
+    }    
+  }
+  checkCategorySelection(cat: Category): boolean {
+    for(let category of this.newCategories){
+      if(category.name==cat.name){
+        return true
+      }
+    }
+    return false;
+  }
+
+  toggleIngredientSelection(ingredient: Ingredient): void {
+    const index = this.newIngredients.map(it=>it.id).indexOf(ingredient.id);  
+    
+    if (index === -1) {
+      this.newIngredients.push(ingredient);
+    } else {
+      this.newIngredients.splice(index, 1);
+    }    
+  }
+
+  checkIngredientSelection(ing: Ingredient): boolean {
+    for(let ingredient of this.newIngredients){
+      if(ingredient.name==ing.name){
+        return true
+      }
+    }
+    return false;
   }
 
   updateFood(){
+    console.log(this.foodToUpdate);
+    console.log(this.newCategories);
+    console.log(this.newIngredients);
+    this.foodToUpdate!!.categorySet=this.newCategories
+    this.foodToUpdate!!.ingredientsSet=this.newIngredients
+    if (this.selectedImage) {
+      this.foodService.uploadImage(this.selectedImage).subscribe(
+        (response) => {
+          // The backend should return the path of the uploaded image
+          this.foodToUpdate!!.photo = response.imageUrl;
+          // Now, post the foodToUpdate object with the image path to the server
+          this.foodService.updateFood(this.foodToUpdate!!).subscribe(
+            (response) => {
+              // Handle the success response if needed.
+              this.router.navigate(['/restaurant', this.restaurant!!.id]);
+              console.log('Food posted successfully:', response);
+            },
+            (error) => {
+              // Handle the error if needed.
+              console.error('Error while posting food:', error);
+            }
+          );
+        },
+        (error) => {
+          // Handle the error if image upload fails
+          console.error('Error while uploading image:', error);
+        }
+      );
+    } else {
+      // If no image is selected, directly post the foodToUpdate object to the server
+      this.foodService.updateFood(this.foodToUpdate!!).subscribe(
+        (response) => {
+          // Handle the success response if needed.
+          this.getFoodsbyCategory();
+          console.log('Food posted successfully:', response);
+        },
+        (error) => {
+          // Handle the error if needed.
+          console.error('Error while posting food:', error);
+        }
+      );
+    }
+    
+    
     
   }
 
