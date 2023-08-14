@@ -1,9 +1,11 @@
-<img src="{{restaurant?.photo}}" class="img-fluid w-100" style="height: 500px; object-fit: cover;" />
+<img src="{{ restaurant?.photo }}" class="img-fluid w-100" style="height: 500px; object-fit: cover" />
 <div class="">
     <div class="card restaurant-info">
         <div class="container pt-2 pb-2">
-            <h1>{{restaurant?.name}}</h1>
-            <p>Rating: <span>{{restaurant?.averageRating}}</span></p>
+            <h1>{{ restaurant?.name }}</h1>
+            <p>
+                Rating: <span>{{ restaurant?.averageRating }}</span>
+            </p>
             <div class="row">
                 <div class="col-md-5 restaurant-info">
                     <div class="border border-3 border-warning text-warning rounded-pill w-100 text-center fw-bold p-2">
@@ -12,7 +14,8 @@
                             <path
                                 d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10zm0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6z" />
                         </svg>
-                        {{restaurant?.location?.street}} {{restaurant?.location?.number}} Kumanovo, Macedonia
+                        {{ restaurant?.location?.street }}
+                        {{ restaurant?.location?.number }} Kumanovo, Macedonia
                     </div>
                 </div>
                 <div class="col-md-2"></div>
@@ -34,7 +37,7 @@
                             <path
                                 d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5v-7zm1.294 7.456A1.999 1.999 0 0 1 4.732 11h5.536a2.01 2.01 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456zM12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12v4zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
                         </svg>
-                        {{restaurant?.deliveryTime}}
+                        {{ restaurant?.deliveryTime }}
                     </div>
                 </div>
             </div>
@@ -45,28 +48,30 @@
 <div class="container mt-3">
     <div class="row" *ngFor="let category of foodsByCategory">
         <div class="p-3 text-center bg-warning mb-3">
-            <h3>{{category.categoryName}}</h3>
+            <h3>{{ category.categoryName }}</h3>
         </div>
         <div *ngFor="let food of category.food" class="col-md-3">
-            <div class="card mb-3" routerLink="/restaurant/{{restaurant?.id}}">
-                <img src="{{food.photo}}" alt="" class="card-img-top img-fluid" style="object-fit: cover;">
+            <div class="card mb-3">
+                <img src="{{ food.photo }}" alt="" class="card-img-top img-fluid" style="object-fit: cover" />
                 <div class="card-body">
                     <hr />
                     <h4 class="text-center">{{ food.name }}</h4>
                     <hr />
-                    <div style="height: 35px;"><span class="fw-bold">Ingredients:</span>
+                    <div style="height: 35px">
+                        <span class="fw-bold">Ingredients:</span>
                         <ng-container *ngFor="let ingredient of food.ingredientsSet; let last = last">
-                            {{ingredient.name}}
+                            {{ ingredient.name }}
                             <span *ngIf="!last">, </span>
                         </ng-container>
                     </div>
                     <hr />
                     <p><span class="fw-bold">Price:</span>{{ food.price }} MKD</p>
                     <hr />
-                    <div class="row" *ngIf="role=='customer'">
+                    <div class="row" *ngIf="role == 'customer'">
                         <div class="col-md-4">
                             <input type="number" min="1" value="1" name="quantity" class="w-100 form-control"
-                                [ngModel]="quantity[food.id] || 1" (ngModelChange)="onQuantityChange(food.id, $event)">
+                                [ngModel]="quantity[food.id] || 1"
+                                (ngModelChange)="onQuantityChange(food.id, $event)" />
                         </div>
                         <div class="col-md-8">
                             <button mat-button type="submit" class="btn btn-warning rounded-pill fw-bold w-100 p-2"
@@ -81,29 +86,22 @@
                                 Add to Cart
                             </button>
                         </div>
-                        <div *ngIf="!isAuthenticated()">
-                            *Login to order
-                        </div>
+                        <div *ngIf="!isAuthenticated()">*Login to order</div>
                         <div *ngIf="quantity[food.id] <= 0">
                             *Quantity must be more than 0!
                         </div>
                     </div>
-                    <button class="btn btn-danger " *ngIf="role=='employee'" (click)="deleteFoodFromRestaurant(food.id)"
-                           style="position:absolute; right: 3%; top: 3%;">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                            <path d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
-                          </svg>
-                    </button>
-                    <button class="btn btn-outline-danger" *ngIf="role=='employee'" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(food)"
-                           style="position:absolute; right: 18%; top: 3%;">
-                           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                          </svg>
-                    </button>
                 </div>
-                <button class="btn btn-outline-danger" *ngIf="role=='employee'" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(food)"
-                    style="position:absolute; right: 18%; top: 3%;">
+                <button class="btn btn-danger" *ngIf="role == 'employee'" style="position: absolute; right: 3%; top: 3%"
+                    (click)="deleteFood(food.id)">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-trash3-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+                    </svg>
+                </button>
+                <button class="btn btn-outline-danger" *ngIf="role == 'employee'" data-bs-toggle="modal"
+                    data-bs-target="#exampleModal" (click)="edit(food)" style="position: absolute; right: 18%; top: 3%">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                         class="bi bi-pencil-square" viewBox="0 0 16 16">
                         <path
@@ -117,39 +115,48 @@
     </div>
 </div>
 
-
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Update Food</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Food</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <label for="photo">Photo:</label>
+                    <!-- Use the 'onFileChange' function to handle the file input change -->
+                    <input type="file" name="photo" class="form-control" required />
+
+                    <label for="name">Name:</label>
+                    <input type="text" name="name" class="form-control" [(ngModel)]="foodToUpdate!!.name" required />
+
+                    <label for="price">Price:</label>
+                    <input type="number" name="price" class="form-control" [(ngModel)]="foodToUpdate!!.price"
+                        required />
+
+                    <label for="categories">Categories:</label>
+                    <select name="categories" class="form-control" [(ngModel)]="foodToUpdate!!.categorySet" multiple
+                        required>
+                        <option *ngFor="let category of categories" [value]="category"
+                            [selected]="isSelectedCategory(category)">
+                            {{ category.name }}
+                        </option>
+                    </select>
+
+                    <label for="ingredients">Ingredients:</label>
+                    <select name="ingredients" class="form-control" [(ngModel)]="foodToUpdate!!.ingredientsSet" multiple
+                        required>
+                        <option *ngFor="let ingredient of ingredients" [value]="ingredient">
+                            {{ ingredient.name }}
+                        </option>
+                    </select>
+
+                    <button type="submit" class="btn btn-warning w-100 mt-3">
+                        Save Changes
+                    </button>
+                </form>
+            </div>
         </div>
-        <div class="modal-body">
-            <form>
-                <label for="photo">Photo:</label>
-                <!-- Use the 'onFileChange' function to handle the file input change -->
-                <input type="file" name="photo" class="form-control"  required>
-            
-                <label for="name">Name:</label>
-                <input type="text" name="name" class="form-control" [(ngModel)]="foodToUpdate!!.name" required>
-            
-                <label for="price">Price:</label>
-                <input type="number" name="price" class="form-control" [(ngModel)]="foodToUpdate!!.price" required>
-            
-                <label for="categories">Categories:</label>
-                <select name="categories" class="form-control" [(ngModel)]="foodToUpdate!!.categorySet" multiple required>
-                  <option *ngFor="let category of categories" [value]="category" [selected]="true">{{ category.name }}</option>
-                </select>
-            
-                <label for="ingredients">Ingredients:</label>
-                <select name="ingredients" class="form-control" [(ngModel)]="foodToUpdate!!.ingredientsSet" multiple required>
-                  <option *ngFor="let ingredient of ingredients" [value]="ingredient" [selected]="isSelectedIngredient(ingredient)">{{ingredient.name}} </option>
-                </select>
-            
-                <button type="submit" class="btn btn-warning w-100 mt-3">Save Changes</button>
-              </form>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
