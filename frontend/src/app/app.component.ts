@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AuthService } from './service/auth.service';
 
 @Component({
@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
     this.restaurantId=null;
   }
 
-  isAuthorized():boolean{
+  isAuthorized():boolean{    
     return this.sessionId!=null;
   }
 

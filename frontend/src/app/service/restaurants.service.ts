@@ -40,6 +40,15 @@ export class RestaurantsService {
     return this.http.get<Restaurant[]>(`${this.url}/search/?q=${term}`);
   }
 
+  rateRestaurant(id: number, rating: number){
+    const userId=localStorage.getItem('token')
+    return this.http.post<Restaurant>(`api/restaurant/${id}/rate/${userId}/`, {
+      rating: rating })
+  }
+
+  getTopRestaurants(){
+    return this.http.get<Restaurant[]>(`api/topRestaurants`)
+  }
 
 }
 

@@ -31,10 +31,6 @@ export class AuthService {
       switchMap(
       (res) => {
       if (res) {
-        this.sessionID.next(res.sessionId);
-        this.ROLE.next(res.role);
-        this.currentUsername.next(model.username);
-        this.currentRestaurantId.next(res.restaurantId);
         localStorage.setItem('token',res.sessionId);
         localStorage.setItem("role",res.role);
         localStorage.setItem("username",model.username);
@@ -60,11 +56,7 @@ export class AuthService {
         localStorage.removeItem('role');
         localStorage.removeItem('username');
         localStorage.removeItem('restaurantId');
-        this.sessionID.next(null);
-        this.ROLE.next(null);
-        this.currentUsername.next(null);
-        this.currentRestaurantId.next(null);
-        this.router.navigate(['login']);
+        window.location.href='/login'
       } else {
         alert("Cannot logout")
       }

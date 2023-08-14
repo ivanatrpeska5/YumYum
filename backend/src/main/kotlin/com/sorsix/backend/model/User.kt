@@ -39,7 +39,7 @@ abstract class User(
         return password;
     }
 
-    @JsonIgnore
+
     override fun getUsername(): String {
         return username
     }
