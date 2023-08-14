@@ -192,7 +192,8 @@ export class RestaurantComponent implements OnInit {
           this.foodService.updateFood(this.foodToUpdate!!).subscribe(
             (response) => {
               // Handle the success response if needed.
-              this.router.navigate(['/restaurant', this.restaurant!!.id]);
+              this.getFoodsbyCategory();
+
               console.log('Food posted successfully:', response);
             },
             (error) => {

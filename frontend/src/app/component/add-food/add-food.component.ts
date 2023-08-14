@@ -67,7 +67,6 @@ export class AddFoodComponent implements OnInit {
           this.foodService.postFood(this.newFood!!).subscribe(
             (response) => {
               // Handle the success response if needed.
-              this.router.navigate([`/restaurant/${this.newFood!!.restaurant!!.id}`], {relativeTo: this.activatedRoute})
               console.log('Food posted successfully:', response);
               this.router.navigate([`restaurant/${this.restaurant?.id}`]);
             },
@@ -87,7 +86,6 @@ export class AddFoodComponent implements OnInit {
       this.foodService.postFood(this.newFood!!).subscribe(
         (response) => {
           // Handle the success response if needed.
-          this.router.navigate([`/restaurant/${this.newFood!!.restaurant!!.id}`], {relativeTo: this.activatedRoute})
           console.log('Food posted successfully:', response);
           this.router.navigate([`restaurant/${this.restaurant?.id}`]);
         },
