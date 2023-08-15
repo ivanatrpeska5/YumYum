@@ -49,7 +49,7 @@ class FoodController(
     @PostMapping("food/photo")
     fun uploadPhoto(@RequestParam("image") image: MultipartFile): ResponseEntity<Map<String, String>> {
         if (!Files.isDirectory(uploadDir)) {
-            uploadDir = Paths.get("D:\\Faks\\Sorsix\\YumYum\\frontend\\src\\assets\\images")
+            uploadDir = Paths.get("E:\\IdeaProjects\\Sorsix\\YumYum\\YumYum\\frontend\\src\\assets\\images")
         }
         val fileName = "${System.currentTimeMillis()}_${image.originalFilename}"
         val file = uploadDir.resolve(fileName).toFile()
