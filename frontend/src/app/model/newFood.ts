@@ -7,7 +7,7 @@ export interface NewFood {
   photo: string;
   name: string;
   price: number;
-  restaurant: Restaurant | undefined;
+  restaurantId: number| null | undefined;
   categorySet: Category[];
   ingredientsSet: Ingredient[];
 }

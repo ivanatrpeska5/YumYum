@@ -16,7 +16,7 @@ export class AddFoodComponent implements OnInit {
   newFood: NewFood = {
     id: null,
     photo: '',
-    restaurant: undefined,
+    restaurantId: null,
     name: '',
     price: 0,
     categorySet: [],
@@ -57,7 +57,7 @@ export class AddFoodComponent implements OnInit {
   onSubmit() {
     this.newFood.categorySet = this.selectedCategories;
     this.newFood.ingredientsSet = this.selectedIngredients;
-    this.newFood.restaurant = this.restaurant;
+    this.newFood.restaurantId = this.restaurant?.id;
     console.log(this.newFood.id);
 
     if (this.selectedImage) {
