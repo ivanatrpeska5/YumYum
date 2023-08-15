@@ -10,7 +10,8 @@
         <div class="row">
             <div class="col-6 card-body p-5">
                 <p>
-                    <span class="fw-bold">Address: </span> St: {{ order.location.street }} No.{{ order.location.number }}
+                    <span class="fw-bold">Address: </span> St: {{ order.location.street }} No.{{ order.location.number
+                    }}
                 </p>
                 <p>
                     <span class="fw-bold">Payment: </span> {{ order.paymentMethod }}
@@ -21,12 +22,12 @@
                 <p class="card-text"><small class="text-muted">Date created: {{order.dateCreated}}</small></p>
             </div>
             <div class="col-6  p-5">
-                
+
                 <p><span class="fw-bold">Products: </span> </p>
                 <div *ngFor="let food of order.cart.cartConsistsOfFoodList">
                     <p>{{food.food.name}} X {{food.quantity}}</p>
                 </div>
             </div>
-            </div>
+        </div>
     </div>
-</div>    
+</div>

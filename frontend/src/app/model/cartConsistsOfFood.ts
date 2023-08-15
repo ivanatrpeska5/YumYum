@@ -1,6 +1,6 @@
-import { Food } from "./food";
+import { Food } from './food';
 
-export interface CartConsistsOfFood{
-    quantity:number,
-    food:Food
+export interface CartConsistsOfFood {
+  quantity: number;
+  food: Food;
 }

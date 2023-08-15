@@ -6,21 +6,19 @@ import { AuthService } from 'src/app/service/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
   model: any = {};
-  sessionId: any = "";
+  sessionId: any = '';
 
   constructor(
     private router: Router,
     private http: HttpClient,
     private authService: AuthService
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   login() {
     this.authService.login(this.model);
@@ -28,5 +26,4 @@ export class LoginComponent implements OnInit {
   logout() {
     this.authService.logout();
   }
-
 }

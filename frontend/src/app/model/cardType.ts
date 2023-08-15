@@ -1,3 +1,4 @@
 export enum CardType {
-    VISA, MasterCard
-  }
+  VISA,
+  MasterCard,
+}

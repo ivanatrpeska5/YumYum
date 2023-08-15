@@ -1,4 +1,4 @@
-export interface UserSession{
-    sessionId:string,
-    role:string,
+export interface UserSession {
+  sessionId: string;
+  role: string;
 }

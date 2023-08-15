@@ -1,7 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
 .cdk-overlay-container {
-    top: 0;
-    transform: translateY(50%);
-    transform: translateX(50%);
-    position: absolute;
-  }
+  top: 0;
+  transform: translateY(50%);
+  transform: translateX(50%);
+  position: absolute;
+}

@@ -1,8 +1,8 @@
-import { PaymentMethod } from "./paymentMethod"
+import { PaymentMethod } from './paymentMethod';
 
 export interface OrderForm {
-    sessionId: string
-    street: string
-    number: string
-    paymentMethod: PaymentMethod
-  }
+  sessionId: string;
+  street: string;
+  number: string;
+  paymentMethod: PaymentMethod;
+}

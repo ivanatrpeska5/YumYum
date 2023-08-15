@@ -1,30 +1,30 @@
 <div class="row mt-3">
-<div class="col-md-2"></div>
+  <div class="col-md-2"></div>
   <div class="col-md-8 card p-4">
-  <h3 class="text-warning">Add new Food:</h3>
-  <form (submit)="onSubmit()">
-    <label for="photo">Photo:</label>
-    <!-- Use the 'onFileChange' function to handle the file input change -->
-    <input type="file" name="photo" class="form-control" (change)="onFileChange($event)" required>
+    <h3 class="text-warning">Add new Food:</h3>
+    <form (submit)="onSubmit()">
+      <label for="photo">Photo:</label>
 
-    <label for="name">Name:</label>
-    <input type="text" name="name" class="form-control" [(ngModel)]="newFood!!.name" required>
+      <input type="file" name="photo" class="form-control" (change)="onFileChange($event)" required>
 
-    <label for="price">Price:</label>
-    <input type="number" name="price" class="form-control" [(ngModel)]="newFood!!.price" required>
+      <label for="name">Name:</label>
+      <input type="text" name="name" class="form-control" [(ngModel)]="newFood!!.name" required>
 
-    <label for="categories">Categories:</label>
-    <select name="categories" class="form-control" [(ngModel)]="selectedCategories" multiple required>
-      <option *ngFor="let category of categories" [value]="category">{{ category.name }}</option>
-    </select>
+      <label for="price">Price:</label>
+      <input type="number" name="price" class="form-control" [(ngModel)]="newFood!!.price" required>
 
-    <label for="ingredients">Ingredients:</label>
-    <select name="ingredients" class="form-control" [(ngModel)]="selectedIngredients" multiple required>
-      <option *ngFor="let ingredient of ingredients" [value]="ingredient">{{ ingredient.name }}</option>
-    </select>
+      <label for="categories">Categories:</label>
+      <select name="categories" class="form-control" [(ngModel)]="selectedCategories" multiple required>
+        <option *ngFor="let category of categories" [value]="category">{{ category.name }}</option>
+      </select>
 
-    <button type="submit" class="btn btn-warning w-100 mt-3">Add Product</button>
-  </form>
+      <label for="ingredients">Ingredients:</label>
+      <select name="ingredients" class="form-control" [(ngModel)]="selectedIngredients" multiple required>
+        <option *ngFor="let ingredient of ingredients" [value]="ingredient">{{ ingredient.name }}</option>
+      </select>
+
+      <button type="submit" class="btn btn-warning w-100 mt-3">Add Product</button>
+    </form>
   </div>
   <div class="col-md-2"></div>
-  </div>
+</div>

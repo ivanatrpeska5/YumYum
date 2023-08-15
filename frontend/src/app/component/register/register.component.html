@@ -1,40 +1,43 @@
 <div>
-<div class="img-fluid row form-bg">
-  <div class="col-md-4"></div>
-  <div class="col-md-4">
-    <h1 class="text-center mt-2">Register</h1>
+  <div class="img-fluid row form-bg">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+      <h1 class="text-center mt-2">Register</h1>
       <form (ngSubmit)="onSubmit()">
-          <label for="name">Name:</label>
-          <input type="text" id="name" name="name" class="form-control" [(ngModel)]="formData.name" required />
-          <label for="surname">Surname:</label>
-          <input type="text" id="surname" name="surname" class="form-control" [(ngModel)]="formData.surname" required />
-        
-          <label for="email">Email:</label>
-          <input type="email" id="email" name="email" class="form-control" [(ngModel)]="formData.email" required />
-        
-          <label for="phone">Phone:</label>
-          <input type="text" id="phone" name="phone" class="form-control" [(ngModel)]="formData.phone" required />
-        
-          <label for="password">Password:</label>
-          <input type="password" id="password" name="password" class="form-control" [(ngModel)]="formData.password" required />
-        
-          <label for="username">Username:</label>
-          <input type="text" id="username" name="username" class="form-control" [(ngModel)]="formData.username" required />
-        
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" class="form-control" [(ngModel)]="formData.name" required />
+        <label for="surname">Surname:</label>
+        <input type="text" id="surname" name="surname" class="form-control" [(ngModel)]="formData.surname" required />
 
-          <select name="role" id="role" class="form-control mt-2" [(ngModel)]="formData.role">
-            <option value="customer" selected>Customer</option>
-            <option value="delivery">Delivery Man</option>
-            <option value="employee">Restaurant Employee</option>
-          </select>
-        
-          <select *ngIf="formData.role=='employee'" class="form-control mt-2 " [(ngModel)]="formData.restaurantId" [ngModelOptions]="{standalone: true}">
-            <option *ngFor="let r of restaurants" [value]="r.id">{{r.name}}</option>
-          </select>
-          
-          <button type="submit" class="btn btn-warning w-100 mt-3">Register</button>
-        </form>
-      </div>
-      <div class="col-md-4"></div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" class="form-control" [(ngModel)]="formData.email" required />
+
+        <label for="phone">Phone:</label>
+        <input type="text" id="phone" name="phone" class="form-control" [(ngModel)]="formData.phone" required />
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" class="form-control" [(ngModel)]="formData.password"
+          required />
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" class="form-control" [(ngModel)]="formData.username"
+          required />
+
+
+        <select name="role" id="role" class="form-control mt-2" [(ngModel)]="formData.role">
+          <option value="customer" selected>Customer</option>
+          <option value="delivery">Delivery Man</option>
+          <option value="employee">Restaurant Employee</option>
+        </select>
+
+        <select *ngIf="formData.role=='employee'" class="form-control mt-2 " [(ngModel)]="formData.restaurantId"
+          [ngModelOptions]="{standalone: true}">
+          <option *ngFor="let r of restaurants" [value]="r.id">{{r.name}}</option>
+        </select>
+
+        <button type="submit" class="btn btn-warning w-100 mt-3">Register</button>
+      </form>
     </div>
+    <div class="col-md-4"></div>
   </div>
+</div>

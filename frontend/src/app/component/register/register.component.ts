@@ -9,7 +9,7 @@ import { RestaurantsService } from 'src/app/service/restaurants.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit {
   formData: RegisterForm = {
@@ -19,26 +19,27 @@ export class RegisterComponent implements OnInit {
     phone: '',
     password: '',
     username: '',
-    role: "customer",
-    restaurantId:undefined
+    role: 'customer',
+    restaurantId: undefined,
   };
 
-  restaurants:Restaurant[]=[]
+  restaurants: Restaurant[] = [];
 
-  constructor(private http: HttpClient, private authService:AuthService,
-     private restaurantsService:RestaurantsService, private router:Router,
-     private activatedRoute:ActivatedRoute) {}
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private restaurantsService: RestaurantsService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
   ngOnInit(): void {
-    this.restaurantsService.getRestaurants().subscribe(restaurants=>{
-      this.restaurants=restaurants;
-    })
+    this.restaurantsService.getRestaurants().subscribe((restaurants) => {
+      this.restaurants = restaurants;
+    });
   }
 
   onSubmit() {
     this.authService.register(this.formData);
-    this.router.navigate(['/login'], {relativeTo: this.activatedRoute})
+    this.router.navigate(['/login'], { relativeTo: this.activatedRoute });
   }
-
 }
-
-
