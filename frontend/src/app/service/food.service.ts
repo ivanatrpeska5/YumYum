@@ -28,7 +28,7 @@ export class FoodService {
   // Method to post food to the server
   postFood(food: NewFood): Observable<any> {
     const url = `${this.baseUrl}/add`;
-    console.log(food.restaurant)
+    console.log(food.restaurantId)
     return this.http.post<NewFood>(url, food);
   }
 
