@@ -1,4 +1,4 @@
-package com.sorsix.backend.repository;
+package com.sorsix.backend.repository
 
 import com.sorsix.backend.model.Customer
 import com.sorsix.backend.model.DeliveryMan
@@ -12,6 +12,7 @@ interface OrderRepository : JpaRepository<Order, Long> {
     fun findOrdersByCustomerOrderByIdDesc(customer: Customer): MutableList<Order>
 
     fun findAllByStatus(status: OrderStatus): List<Order>
+
 
     fun getOrdersByDeliveryManAndStatus(deliveryMan: DeliveryMan, status: OrderStatus): List<Order>
 
