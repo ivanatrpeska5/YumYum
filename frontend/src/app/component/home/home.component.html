@@ -13,9 +13,8 @@
             <h3>New Fresh Bites Discovery Hub:</h3>
             <div class="row justify-content-between mt-5">
                 <div *ngFor="let food of newFood" class="col-md-2 card">
-                    <img src="{{food.photo}}" alt="" class="card-img-top img-fluid"
-                        style="object-fit: cover; height: 150px;"
-                        routerLink="/restaurant/{{food.restaurant.id}}">
+                    <img src="{{food.photo}}" alt="" class="card-img-top img-fluid img-style"
+                         routerLink="/restaurant/{{food.restaurant.id}}">
                     <div class="card-body">
                         <h6 class="text-center">{{ food.name }}</h6>
                     </div>
@@ -28,8 +27,7 @@
             <h3 class="mb-5">Our Most Popular Picks:</h3>
             <div class="row justify-content-between">
                 <div *ngFor="let food of mostOrdered" class="col-md-2 card p-3">
-                    <img src="{{food.photo}}" alt="" class="card-img-top img-fluid"
-                        style="object-fit: cover; height: 150px;"
+                    <img src="{{food.photo}}" alt="" class="card-img-top img-fluid img-style"
                         routerLink="/restaurant/{{food.restaurant.id}}">
                     <div class="card-body">
                         <h6 class="text-center">{{ food.name }}</h6>
@@ -43,9 +41,8 @@
             <h3 class="mb-5">Top 5 Rated Restaurants:</h3>
             <div class="row justify-content-between">
                 <div *ngFor="let restaurant of topRestaurants" class="col-md-2 card p-3">
-                    <img src="{{restaurant.logo}}" alt="" class="card-img-top img-fluid"
-                        style="object-fit: cover; height: 150px;"
-                        routerLink="/restaurant/{{restaurant.id}}">
+                    <img src="{{restaurant.logo}}" alt="" class="card-img-top img-fluid img-style"
+                         routerLink="/restaurant/{{restaurant.id}}">
                     <div class="card-body">
                         <h6 class="text-center">{{ restaurant.name }}</h6>
                     </div>
