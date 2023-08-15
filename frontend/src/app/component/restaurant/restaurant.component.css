@@ -1,9 +1,7 @@
-.restaurant-info{
-    /* background: #ffffd3; */
-    font-size:20px;
+.restaurant-info {
+  font-size: 20px;
 }
 
-
-option:checked{
-    background-color: aqua;
+option:checked {
+  background-color: aqua;
 }

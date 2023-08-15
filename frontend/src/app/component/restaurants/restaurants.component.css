@@ -1,6 +1,5 @@
-.card:hover{
-    cursor: pointer;
-    /* border: 1px solid; */
-    box-shadow: 0 4px 8px RGB(255, 193, 7); /* Adjust the shadow properties as needed */
-     transition: box-shadow 0.3s ease; /* Adding transition for a smooth effect */
+.card:hover {
+  cursor: pointer;
+  box-shadow: 0 4px 8px RGB(255, 193, 7);
+  transition: box-shadow 0.3s ease;
 }

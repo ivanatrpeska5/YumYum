@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,7 +23,6 @@ import { AcceptOrderDeliveryComponent } from './component/accept-order-delivery/
 import { CurrentOrderDeliveryComponent } from './component/current-order-delivery/current-order-delivery.component';
 import { FinishedOrderDeliveryComponent } from './component/finished-order-delivery/finished-order-delivery.component';
 import { AboutUsComponent } from './component/about-us/about-us.component';
-import { EditFoodComponent } from './component/edit-food/edit-food.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
@@ -45,7 +44,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CurrentOrderDeliveryComponent,
     FinishedOrderDeliveryComponent,
     AboutUsComponent,
-    EditFoodComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +53,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ReactiveFormsModule,
     BrowserAnimationsModule,
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

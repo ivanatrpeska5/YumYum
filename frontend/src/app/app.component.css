@@ -1,11 +1,11 @@
-.component-content{
-    background-color: #f7f8f3;
-    min-height: 580px;
+.component-content {
+  background-color: #f7f8f3;
+  min-height: 580px;
 }
-body{
-    background-color: #f7f8f3;
+body {
+  background-color: #f7f8f3;
 }
 .mat-snack-bar-container {
-    top: 0;
-    transform: translateY(0%);
-  }
+  top: 0;
+  transform: translateY(0%);
+}

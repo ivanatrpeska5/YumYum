@@ -21,7 +21,7 @@ export class RestaurantOrdersComponent implements OnInit {
   cancelOrder(orderId: number) {
     this.orderService.cancelOrder(orderId).subscribe(() => {
       this.restaurantOrders$ = this.restaurantOrders$!.pipe(
-        map(orders => orders.filter(order => order.id !== orderId))
+        map((orders) => orders.filter((order) => order.id !== orderId))
       );
     });
   }
@@ -29,7 +29,7 @@ export class RestaurantOrdersComponent implements OnInit {
   preparedOrder(orderId: number) {
     this.orderService.preparedOrder(orderId).subscribe(() => {
       this.restaurantOrders$ = this.restaurantOrders$!.pipe(
-        map(orders => orders.filter(order => order.id !== orderId))
+        map((orders) => orders.filter((order) => order.id !== orderId))
       );
     });
   }

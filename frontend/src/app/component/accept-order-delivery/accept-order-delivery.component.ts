@@ -6,7 +6,7 @@ import { OrderService } from 'src/app/service/order.service';
 @Component({
   selector: 'app-accept-order-delivery',
   templateUrl: './accept-order-delivery.component.html',
-  styleUrls: ['./accept-order-delivery.component.css']
+  styleUrls: ['./accept-order-delivery.component.css'],
 })
 export class AcceptOrderDeliveryComponent {
   preparedOrders$?: Observable<Order[]>;
@@ -17,12 +17,11 @@ export class AcceptOrderDeliveryComponent {
     this.preparedOrders$ = this.orderService.getPreparedOrders();
   }
 
-  acceptOrder(orderId:number){
+  acceptOrder(orderId: number) {
     this.orderService.acceptOrder(orderId).subscribe(() => {
       this.preparedOrders$ = this.preparedOrders$!.pipe(
-        map(orders => orders.filter(order => order.id !== orderId))
+        map((orders) => orders.filter((order) => order.id !== orderId))
       );
     });
   }
-  
 }

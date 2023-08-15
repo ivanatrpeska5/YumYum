@@ -1,4 +1,4 @@
 export interface FoodQuantityDTO {
-  foodName: string
-  quantity: number
+  foodName: string;
+  quantity: number;
 }

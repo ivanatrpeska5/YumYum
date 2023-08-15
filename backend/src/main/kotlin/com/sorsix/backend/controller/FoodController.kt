@@ -68,6 +68,11 @@ class FoodController(
         return ResponseEntity.ok().body(foodService.newestFood())
     }
 
+    @GetMapping("mostOrdered")
+    fun getMostOrderedFood():ResponseEntity<List<Food>>{
+        return ResponseEntity.ok().body(foodService.getMostOrderedFood())
+    }
+
     @PutMapping("food/update")
     fun updateFood(@RequestBody food: Food): ResponseEntity<Any> {
         foodRepository.save(food)

@@ -6,7 +6,7 @@ import { OrderService } from 'src/app/service/order.service';
 @Component({
   selector: 'app-current-order-delivery',
   templateUrl: './current-order-delivery.component.html',
-  styleUrls: ['./current-order-delivery.component.css']
+  styleUrls: ['./current-order-delivery.component.css'],
 })
 export class CurrentOrderDeliveryComponent {
   acceptedOrders$?: Observable<Order[]>;
@@ -17,10 +17,10 @@ export class CurrentOrderDeliveryComponent {
     this.acceptedOrders$ = this.orderService.getAcceptedOrders();
   }
 
-  deliverOrder(orderId:number){
+  deliverOrder(orderId: number) {
     this.orderService.deliverOrder(orderId).subscribe(() => {
       this.acceptedOrders$ = this.acceptedOrders$!.pipe(
-        map(orders => orders.filter(order => order.id !== orderId))
+        map((orders) => orders.filter((order) => order.id !== orderId))
       );
     });
   }

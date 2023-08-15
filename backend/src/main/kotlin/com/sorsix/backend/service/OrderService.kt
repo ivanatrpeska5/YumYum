@@ -37,6 +37,8 @@ class OrderService(
             )
         )
         for (cart in carts) {
+            if (cart.cartConsistsOfFoodList.size==0)
+                continue;
             cart.status = ShoppingCartStatus.ORDERED
             cartRepository.save(cart)
             println(orderDTO.paymentMethod)

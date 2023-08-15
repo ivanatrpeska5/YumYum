@@ -5,20 +5,18 @@ import { OrderService } from 'src/app/service/order.service';
 @Component({
   selector: 'app-customer-orders',
   templateUrl: './customer-orders.component.html',
-  styleUrls: ['./customer-orders.component.css']
+  styleUrls: ['./customer-orders.component.css'],
 })
 export class CustomerOrdersComponent implements OnInit {
+  customerOrders: Order[] = [];
 
-  customerOrders:Order[]=[]
-
-  constructor(private orderService:OrderService){
-
-  }
+  constructor(private orderService: OrderService) {}
   ngOnInit(): void {
-    const role=localStorage.getItem("role")
-    if (role=="customer"){
-      this.orderService.getCustomerOrders().subscribe(orders=>this.customerOrders=orders)
+    const role = localStorage.getItem('role');
+    if (role == 'customer') {
+      this.orderService
+        .getCustomerOrders()
+        .subscribe((orders) => (this.customerOrders = orders));
     }
   }
-
 }

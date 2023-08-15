@@ -67,4 +67,8 @@ export class FoodService {
     return this.http.get<Food[]>(`api/newestFood`)
   }
 
+  getMostOrdered(){
+    return this.http.get<Food[]>(`api/mostOrdered`)
+  }
+
 }

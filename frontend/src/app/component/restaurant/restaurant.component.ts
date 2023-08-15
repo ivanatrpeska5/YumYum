@@ -36,7 +36,6 @@ export class RestaurantComponent implements OnInit {
   ngOnInit(): void {
     this.getRestaurant();
     this.getFoodsbyCategory();
-    console.log(this.foodsByCategory);
     this.quantity = {};
     this.sessionId = localStorage.getItem('token');
     this.role = localStorage.getItem('role');
@@ -70,15 +69,17 @@ export class RestaurantComponent implements OnInit {
 
   getRestaurant() {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.restaurantsService.getRestaurant(id).pipe(
-      switchMap((restaurant) => {
-      this.restaurant = restaurant;
-      return of(null);
-    })).subscribe(
-      () => {
+    this.restaurantsService
+      .getRestaurant(id)
+      .pipe(
+        switchMap((restaurant) => {
+          this.restaurant = restaurant;
+          return of(null);
+        })
+      )
+      .subscribe(() => {
         this.hasUserRatedTheRestaurant();
-      }
-    );
+      });
   }
 
   getFoodsbyCategory() {
@@ -112,7 +113,6 @@ export class RestaurantComponent implements OnInit {
 
   addToCart(food: Food) {
     var food_quantity = this.quantity[food.id];
-    console.log(food_quantity);
     if (food_quantity == undefined) {
       food_quantity = 1;
     }
@@ -190,47 +190,28 @@ export class RestaurantComponent implements OnInit {
   }
 
   updateFood() {
-    console.log(this.foodToUpdate);
-    console.log(this.newCategories);
-    console.log(this.newIngredients);
     this.foodToUpdate!!.categorySet = this.newCategories;
     this.foodToUpdate!!.ingredientsSet = this.newIngredients;
     if (this.selectedImage) {
       this.foodService.uploadImage(this.selectedImage).subscribe(
         (response) => {
-          // The backend should return the path of the uploaded image
           this.foodToUpdate!!.photo = response.imageUrl;
-          // Now, post the foodToUpdate object with the image path to the server
+
           this.foodService.updateFood(this.foodToUpdate!!).subscribe(
             (response) => {
-              // Handle the success response if needed.
               this.getFoodsbyCategory();
-
-              console.log('Food posted successfully:', response);
             },
-            (error) => {
-              // Handle the error if needed.
-              console.error('Error while posting food:', error);
-            }
+            (error) => {}
           );
         },
-        (error) => {
-          // Handle the error if image upload fails
-          console.error('Error while uploading image:', error);
-        }
+        (error) => {}
       );
     } else {
-      // If no image is selected, directly post the foodToUpdate object to the server
       this.foodService.updateFood(this.foodToUpdate!!).subscribe(
         (response) => {
-          // Handle the success response if needed.
           this.getFoodsbyCategory();
-          console.log('Food posted successfully:', response);
         },
-        (error) => {
-          // Handle the error if needed.
-          console.error('Error while posting food:', error);
-        }
+        (error) => {}
       );
     }
   }
@@ -259,9 +240,11 @@ export class RestaurantComponent implements OnInit {
         lastNumberTrue = i;
       }
     }
-    this.restaurantsService.rateRestaurant(this.restaurant!!.id, lastNumberTrue + 1).subscribe((response) => {
-      this.getRestaurant();
-    });
+    this.restaurantsService
+      .rateRestaurant(this.restaurant!!.id, lastNumberTrue + 1)
+      .subscribe((response) => {
+        this.getRestaurant();
+      });
   }
 
   hasUserRatedTheRestaurant() {
