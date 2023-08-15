@@ -15,18 +15,11 @@ export class AppComponent implements OnInit {
 
   constructor(private authService: AuthService) {}
   ngOnInit(): void {
-<<<<<<< HEAD
     this.role=localStorage.getItem('role');
     this.sessionId=localStorage.getItem("token")
     this.username=localStorage.getItem('username')
     this.restaurantId=Number(localStorage.getItem('restaurantId'))
     
-=======
-    this.role = localStorage.getItem('role');
-    this.sessionId = localStorage.getItem('token');
-    this.username = localStorage.getItem('username');
-    this.restaurantId = Number(localStorage.getItem('restaurantId'));
->>>>>>> 07e6e06884a0e497482665836bbf6596e66b5c8a
   }
   logout() {
     this.authService.logout();
