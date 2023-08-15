@@ -3,6 +3,7 @@
     <div class="card restaurant-info">
         <div class="container pt-2 pb-2">
             <h1>{{ restaurant?.name }}</h1>
+            <h5>Average Rating: {{restaurant?.averageRating}}</h5>
             <div class="mb-3 text-warning">
                 <span *ngIf="addRating[0]" (click)="onChangeRating(1)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
