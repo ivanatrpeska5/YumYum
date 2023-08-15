@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RegisterForm } from '../model/registerForm';
-import { BehaviorSubject, of, switchMap } from 'rxjs';
+import { of, switchMap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,41 +10,32 @@ import { BehaviorSubject, of, switchMap } from 'rxjs';
 export class AuthService {
 
   model: any = {};
- // sessionId: string | null=null;
-  //role: string | null=null;
-  private sessionID= new BehaviorSubject(null);
-  private ROLE=new BehaviorSubject(null);
-  currentSessionId=this.sessionID.asObservable();
-  currentRole=this.ROLE.asObservable();
-  currentUsername=new BehaviorSubject(null);
-  currentRestaurantId=new BehaviorSubject(null);
   constructor(private router: Router, private activatedRoute: ActivatedRoute,
     private http: HttpClient) { }
 
-  login(model:any) {
+  login(model: any) {
     let url = '/api/login';
-    //this.model=model
     this.http.post<any>(url, {
       username: model.username,
       password: model.password
     }).pipe(
       switchMap(
-      (res) => {
-      if (res) {
-        localStorage.setItem('token',res.sessionId);
-        localStorage.setItem("role",res.role);
-        localStorage.setItem("username",model.username);
-        localStorage.setItem("restaurantId",res.restaurantId);
-      } else {
-        alert("Authentication failed.")
-      }
-      return of(res);
-    })).subscribe(res => {
-      this.router.navigate(['']).then(()=>{
-        window.location.reload();
-      });
+        (res) => {
+          if (res) {
+            localStorage.setItem('token', res.sessionId);
+            localStorage.setItem("role", res.role);
+            localStorage.setItem("username", model.username);
+            localStorage.setItem("restaurantId", res.restaurantId);
+          } else {
+            alert("Authentication failed.")
+          }
+          return of(res);
+        })).subscribe(res => {
+          this.router.navigate(['']).then(() => {
+            window.location.reload();
+          });
 
-    });
+        });
   }
   logout() {
     let url = '/api/logout';
@@ -56,16 +47,16 @@ export class AuthService {
         localStorage.removeItem('role');
         localStorage.removeItem('username');
         localStorage.removeItem('restaurantId');
-        window.location.href='/login'
+        window.location.href = '/login'
       } else {
         alert("Cannot logout")
       }
     });
   }
 
-  register(formData:RegisterForm){
+  register(formData: RegisterForm) {
     let url = '/api/register';
-    console.log("restaurant id:",formData.restaurantId)
+    console.log("restaurant id:", formData.restaurantId)
     this.http
       .post<any>(url, formData)
       .subscribe(

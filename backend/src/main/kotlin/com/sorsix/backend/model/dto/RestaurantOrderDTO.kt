@@ -10,7 +10,7 @@ import javax.persistence.Enumerated
 import javax.persistence.ManyToOne
 import javax.persistence.OneToOne
 
-data class RestaurantOrderDTO (
+data class RestaurantOrderDTO(
     val id: Long? = null,
     val dateCreated: LocalDate,
     var status: OrderStatus,
@@ -20,7 +20,7 @@ data class RestaurantOrderDTO (
     var customerSurname: String,
     var customerUsername: String,
     var paymentMethod: PaymentMethod,
-    var cartId: Long?=null,
+    var cartId: Long? = null,
     var foodQuantity: List<FoodNameQuantityDTO>
 
 )

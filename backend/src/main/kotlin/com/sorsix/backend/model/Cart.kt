@@ -12,18 +12,18 @@ import javax.persistence.*
 class Cart(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long?=null,
-    @ManyToOne var customer:Customer,
+    var id: Long? = null,
+    @ManyToOne var customer: Customer,
     @ManyToOne var restaurant: Restaurant,
     @Enumerated(EnumType.STRING)
     var status: ShoppingCartStatus,
 
     @OneToMany
-    @JoinColumn(name="cart_id")
+    @JoinColumn(name = "cart_id")
     @JsonManagedReference
     val cartConsistsOfFoodList: MutableList<CartConsistsOfFood> = mutableListOf<CartConsistsOfFood>()
-){
+) {
     fun getAmmountPrice(): Double {
-        return cartConsistsOfFoodList.map { it.food.price*it.quantity }.sum();
+        return cartConsistsOfFoodList.map { it.food.price * it.quantity }.sum();
     }
 }

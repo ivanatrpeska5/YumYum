@@ -9,18 +9,11 @@ import javax.persistence.*
 @Entity
 @Table(name = "cart_consists_of_food")
 class CartConsistsOfFood(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long?=null,
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long? = null,
 
-    @ManyToOne
-    @JoinColumn(name="cart_id")
-    @JsonBackReference
-    var cart: Cart,
+    @ManyToOne @JoinColumn(name = "cart_id") @JsonBackReference var cart: Cart,
 
-    @ManyToOne
-    @JoinColumn(name="food_id")
-    var food: Food,
+    @ManyToOne @JoinColumn(name = "food_id") var food: Food,
 
     var quantity: Long
 ) {

@@ -20,21 +20,29 @@ class CartService(
     private val sessionRegistry: InMemorySessionRegistry,
     private val customerRepository: CustomerRepository,
     private val cartConsistsOfFoodRepository: CartConsistsOfFoodRepository,
-    private val restaurantRepository: RestaurantRepository,
-    private val orderRepository: OrderRepository
 ) {
 
     fun addFoodToCart(dto: AddFoodToCartDto) {
         val food: Food = foodRepository.findFoodById(dto.foodId)
         val username = sessionRegistry.getUsernameForSession(dto.sessionId);
         val customer = customerRepository.findCustomerByUsername(username!!);
-        var cart = cartRepository.findCartByRestaurantIdAndCustomerUserIdAndStatus(food.restaurant.id, customer.userId!!, ShoppingCartStatus.ACTIVE);
+        var cart = cartRepository.findCartByRestaurantIdAndCustomerUserIdAndStatus(
+            food.restaurant.id,
+            customer.userId!!,
+            ShoppingCartStatus.ACTIVE
+        );
         if (cart == null) {
-            cart = cartRepository.save(Cart( customer=customer, restaurant = food.restaurant, status = ShoppingCartStatus.ACTIVE))
+            cart = cartRepository.save(
+                Cart(
+                    customer = customer,
+                    restaurant = food.restaurant,
+                    status = ShoppingCartStatus.ACTIVE
+                )
+            )
         }
         cartConsistsOfFoodRepository.save(
             CartConsistsOfFood(
-                cart= cart, food = food, quantity = dto.quantity
+                cart = cart, food = food, quantity = dto.quantity
             )
         )
     }

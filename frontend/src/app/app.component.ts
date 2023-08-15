@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
     this.sessionId=localStorage.getItem("token")
     this.username=localStorage.getItem('username')
     this.restaurantId=Number(localStorage.getItem('restaurantId'))
+    
   }
   logout(){
     this.authService.logout()

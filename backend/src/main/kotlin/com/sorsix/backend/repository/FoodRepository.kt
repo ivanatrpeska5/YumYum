@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 
 interface FoodRepository : JpaRepository<Food, Long> {
-    fun findFoodsByRestaurantId(restaurantId: Long):List<Food>
-    fun findFoodById(foodId: Long):Food
-    fun findTop5ByOrderByIdDesc():List<Food>
+    fun findFoodsByRestaurantId(restaurantId: Long): List<Food>
+    fun findFoodById(foodId: Long): Food
+    fun findTop5ByOrderByIdDesc(): List<Food>
 }

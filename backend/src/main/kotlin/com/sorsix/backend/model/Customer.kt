@@ -9,7 +9,13 @@ import javax.persistence.PrimaryKeyJoinColumn
 @Entity
 @PrimaryKeyJoinColumn(name = "userId")
 class Customer(
-    userId: Long?=null, name: String, surname: String, email: String, phone: String, password: String, username: String,
+    userId: Long? = null,
+    name: String,
+    surname: String,
+    email: String,
+    phone: String,
+    password: String,
+    username: String,
     role: String,
 ) : User(userId, name, surname, email, phone, password, username, role) {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {

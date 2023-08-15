@@ -23,11 +23,8 @@ import javax.servlet.http.HttpServletResponse
 @EnableWebSecurity
 class SecurityConfig(
     private val sessionFilter: SessionFilter,
-
-
     private val passwordEncoder: PasswordEncoder
 ) : WebSecurityConfigurerAdapter() {
-
 
 
     @Throws(Exception::class)
@@ -55,9 +52,6 @@ class SecurityConfig(
         )
         http.logout().clearAuthentication(true).invalidateHttpSession(true).deleteCookies("JSESSIONID")
     }
-
-
-
 
 
     @Bean

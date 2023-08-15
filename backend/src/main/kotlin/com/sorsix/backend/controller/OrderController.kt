@@ -25,7 +25,6 @@ class OrderController(private val orderService: OrderService) {
 
     @PostMapping
     fun createOrder(@RequestBody request: OrderRequestDTO) {
-        println(request.paymentFormData?.cardHolderName)
         orderService.createOrder(request.orderFormData, request.paymentFormData)
     }
 
@@ -39,16 +38,14 @@ class OrderController(private val orderService: OrderService) {
     }
 
     @PutMapping("/cancel/{orderId}")
-    fun cancelOrder(@PathVariable orderId:Long): ResponseEntity<Any> {
-        val order=orderService.changeOrderStatus(orderId,OrderStatus.Cancelled)
-        println(order.status)
+    fun cancelOrder(@PathVariable orderId: Long): ResponseEntity<Any> {
+        val order = orderService.changeOrderStatus(orderId, OrderStatus.Cancelled)
         return ResponseEntity.ok().body(mapOf("id" to orderId));
     }
 
     @PutMapping("/prepared/{orderId}")
-    fun preparedOrder(@PathVariable orderId:Long): ResponseEntity<Any> {
-        val order=orderService.changeOrderStatus(orderId,OrderStatus.Prepared)
-        println(order.status)
+    fun preparedOrder(@PathVariable orderId: Long): ResponseEntity<Any> {
+        val order = orderService.changeOrderStatus(orderId, OrderStatus.Prepared)
         return ResponseEntity.ok().body(mapOf("id" to orderId));
     }
 
@@ -58,8 +55,8 @@ class OrderController(private val orderService: OrderService) {
     }
 
     @PutMapping("/accept/{sessionId}/{orderId}")
-    fun acceptOrder(@PathVariable sessionId: String,@PathVariable orderId: Long): ResponseEntity<Map<String, Long>> {
-        orderService.acceptOrder(sessionId,orderId);
+    fun acceptOrder(@PathVariable sessionId: String, @PathVariable orderId: Long): ResponseEntity<Map<String, Long>> {
+        orderService.acceptOrder(sessionId, orderId);
         return ResponseEntity.ok().body(mapOf("id" to orderId));
     }
 
@@ -69,9 +66,8 @@ class OrderController(private val orderService: OrderService) {
     }
 
     @PutMapping("/deliver/{orderId}")
-    fun deliverOrder(@PathVariable orderId:Long): ResponseEntity<Any> {
-        val order=orderService.changeOrderStatus(orderId,OrderStatus.Delivered)
-        println(order.status)
+    fun deliverOrder(@PathVariable orderId: Long): ResponseEntity<Any> {
+        val order = orderService.changeOrderStatus(orderId, OrderStatus.Delivered)
         return ResponseEntity.ok().body(mapOf("id" to orderId));
     }
 

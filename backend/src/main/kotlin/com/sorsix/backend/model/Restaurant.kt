@@ -8,13 +8,13 @@ class Restaurant(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long,
-    var name:String,
+    var name: String,
 
     @ManyToOne
     var location: Location,
 
-    var logo:String,
-    var photo:String,
+    var logo: String,
+    var photo: String,
 
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "restaurant")
     val workingHours: List<WorkingHours> = mutableListOf(),
@@ -25,8 +25,8 @@ class Restaurant(
     @Column(nullable = false)
     var averageRating: Double = 0.0,
 
-    var deliveryTime:String,
+    var deliveryTime: String,
 
-) {
+    ) {
 
 }

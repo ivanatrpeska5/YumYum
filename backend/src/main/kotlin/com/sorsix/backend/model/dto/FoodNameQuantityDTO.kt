@@ -1,6 +1,6 @@
 package com.sorsix.backend.model.dto
 
-class FoodNameQuantityDTO (
+class FoodNameQuantityDTO(
     var foodName: String,
     var quantity: Long
 )

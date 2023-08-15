@@ -6,9 +6,7 @@ import javax.persistence.*
 
 @Entity
 class Ingredient(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long,
-    var name:String,
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) var id: Long,
+    var name: String,
 
-)
+    )

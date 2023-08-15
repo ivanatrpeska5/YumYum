@@ -12,23 +12,21 @@ class FoodService(
 ) {
 
 
-    fun foodsByRestaurant(restaurantId:Long): MutableCollection<CategoryFoodsDTO> {
-        val foodMap:MutableMap<String,CategoryFoodsDTO> = mutableMapOf();
-        val foods=foodRepository.findFoodsByRestaurantId(restaurantId)
-        println(foods)
-        for (food in foods){
+    fun foodsByRestaurant(restaurantId: Long): MutableCollection<CategoryFoodsDTO> {
+        val foodMap: MutableMap<String, CategoryFoodsDTO> = mutableMapOf();
+        val foods = foodRepository.findFoodsByRestaurantId(restaurantId)
+        for (food in foods) {
             println(food.ingredientsSet)
-            for (c in food.categorySet){
+            for (c in food.categorySet) {
                 println(c)
                 foodMap.putIfAbsent(c.name, CategoryFoodsDTO(c.name, mutableListOf()))
                 foodMap[c.name]?.food?.add(food);
             }
         }
-        println(foodMap)
         return foodMap.values;
     }
 
-    fun newestFood():List<Food>{
+    fun newestFood(): List<Food> {
         return foodRepository.findTop5ByOrderByIdDesc()
     }
 }

@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 
 interface CartConsistsOfFoodRepository : JpaRepository<CartConsistsOfFood, Long> {
-    fun findAllByCart(cart: Cart) : List<CartConsistsOfFood>
+    fun findAllByCart(cart: Cart): List<CartConsistsOfFood>
 
     @Query("select max(c.id) from CartConsistsOfFood c")
-    fun maxId():Long
+    fun maxId(): Long
 }

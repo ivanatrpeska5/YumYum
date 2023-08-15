@@ -13,21 +13,21 @@ import javax.persistence.*
 @Data
 @Table(name = "users")
 abstract class User(
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) open var userId: Long?=null,
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) open var userId: Long? = null,
     @JsonIgnore
-    open var name:String,
+    open var name: String,
     @JsonIgnore
-    open var surname:String,
+    open var surname: String,
     @JsonIgnore
-    open var email:String,
+    open var email: String,
     @JsonIgnore
-    open var phone:String,
+    open var phone: String,
     @JsonIgnore
-    private var password:String,
+    private var password: String,
     @Column(unique = true)
-    private var username:String,
-    open var role:String
-): UserDetails{
+    private var username: String,
+    open var role: String
+) : UserDetails {
 
     @JsonIgnore
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {

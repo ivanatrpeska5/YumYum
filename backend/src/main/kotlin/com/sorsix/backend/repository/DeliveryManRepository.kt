@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository
 
 interface DeliveryManRepository : JpaRepository<DeliveryMan, Long> {
 
-    fun findByUsername(username:String):DeliveryMan;
+    fun findByUsername(username: String): DeliveryMan;
 }

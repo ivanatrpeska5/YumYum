@@ -8,10 +8,10 @@ import javax.persistence.*
 class Food(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    var id: Long?=null,
-    var photo:String,
-    var name:String,
-    var price:Double,
+    var id: Long? = null,
+    var photo: String,
+    var name: String,
+    var price: Double,
 
     @ManyToOne
     var restaurant: Restaurant,
