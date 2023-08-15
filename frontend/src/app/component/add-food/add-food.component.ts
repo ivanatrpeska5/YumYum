@@ -42,9 +42,7 @@ export class AddFoodComponent implements OnInit {
   ) {}
   ngOnInit(): void {
     this.foodService.getRestaurantByEmployee().subscribe((restaurant) => {
-      console.log('Restaurant: ', restaurant.name);
       this.restaurant = restaurant;
-      console.log('Restaurant: ', this.restaurant.name);
     });
     this.foodService
       .getCategories()
@@ -58,7 +56,6 @@ export class AddFoodComponent implements OnInit {
     this.newFood.categorySet = this.selectedCategories;
     this.newFood.ingredientsSet = this.selectedIngredients;
     this.newFood.restaurantId = this.restaurant?.id;
-    console.log(this.newFood.id);
 
     if (this.selectedImage) {
       this.foodService.uploadImage(this.selectedImage).subscribe(
@@ -67,27 +64,19 @@ export class AddFoodComponent implements OnInit {
 
           this.foodService.postFood(this.newFood!!).subscribe(
             (response) => {
-              console.log('Food posted successfully:', response);
               this.router.navigate([`restaurant/${this.restaurant?.id}`]);
             },
-            (error) => {
-              console.error('Error while posting food:', error);
-            }
+            (error) => {}
           );
         },
-        (error) => {
-          console.error('Error while uploading image:', error);
-        }
+        (error) => {}
       );
     } else {
       this.foodService.postFood(this.newFood!!).subscribe(
         (response) => {
-          console.log('Food posted successfully:', response);
           this.router.navigate([`restaurant/${this.restaurant?.id}`]);
         },
-        (error) => {
-          console.error('Error while posting food:', error);
-        }
+        (error) => {}
       );
     }
   }
