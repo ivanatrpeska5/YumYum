@@ -52,7 +52,7 @@ export class FoodService {
     return this.http.delete<Food>(`api/food/delete/${foodId}`);
   }
 
-  updateFood(food: Food) {
+  updateFood(food: NewFood) {
     return this.http.put<Food>(`api/food/update`, food);
   }
 

@@ -76,8 +76,8 @@ class FoodController(
     }
 
     @PutMapping("food/update")
-    fun updateFood(@RequestBody food: Food): ResponseEntity<Any> {
-        foodRepository.save(food)
+    fun updateFood(@RequestBody food: NewFoodDto): ResponseEntity<Any> {
+        foodService.updateFood(food)
         return ResponseEntity.ok().build()
     }
 }
