@@ -1,6 +1,7 @@
 package com.sorsix.backend.model
 
 import com.fasterxml.jackson.annotation.JsonIgnore
+import com.fasterxml.jackson.annotation.JsonManagedReference
 import javax.persistence.*
 
 @Entity
@@ -20,6 +21,7 @@ class Restaurant(
     val workingHours: List<WorkingHours> = mutableListOf(),
 
     @OneToMany(cascade = [CascadeType.ALL], fetch = FetchType.LAZY, mappedBy = "restaurant")
+    @JsonManagedReference
     var ratings: List<Rating> = mutableListOf(),
 
     @Column(nullable = false)

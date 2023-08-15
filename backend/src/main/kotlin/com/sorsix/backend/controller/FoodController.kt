@@ -1,11 +1,13 @@
 package com.sorsix.backend.controller
 
+import NewFoodDto
 import com.sorsix.backend.model.Category
 import com.sorsix.backend.model.Food
 import com.sorsix.backend.model.Ingredient
 import com.sorsix.backend.repository.CategoryRepository
 import com.sorsix.backend.repository.FoodRepository
 import com.sorsix.backend.repository.IngredientRepository
+import com.sorsix.backend.repository.RestaurantRepository
 import com.sorsix.backend.service.FoodService
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -20,7 +22,7 @@ class FoodController(
     private val categoryRepository: CategoryRepository,
     private val ingredientRepository: IngredientRepository,
     private val foodRepository: FoodRepository,
-    private val foodService: FoodService
+    private val foodService: FoodService, private val restaurantRepository: RestaurantRepository
 ) {
     private var uploadDir: Path = Paths.get("E:\\IdeaProjects\\Sorsix\\YumYum\\YumYum\\frontend\\src\\assets\\images")
 
@@ -36,11 +38,11 @@ class FoodController(
     }
 
     @PostMapping("food/add")
-    fun postFood(@RequestBody food: Food): ResponseEntity<Any> {
+    fun postFood(@RequestBody food: NewFoodDto): ResponseEntity<Any> {
         foodRepository.save(
             Food(
                 photo = food.photo, name = food.name, price = food.price,
-                restaurant = food.restaurant, ingredientsSet = food.ingredientsSet, categorySet = food.categorySet
+                restaurant = restaurantRepository.findById(food.restaurantId!!).get(), ingredientsSet = food.ingredientsSet, categorySet = food.categorySet
             )
         )
         return ResponseEntity.ok().build()
@@ -49,7 +51,7 @@ class FoodController(
     @PostMapping("food/photo")
     fun uploadPhoto(@RequestParam("image") image: MultipartFile): ResponseEntity<Map<String, String>> {
         if (!Files.isDirectory(uploadDir)) {
-            uploadDir = Paths.get("E:\\IdeaProjects\\Sorsix\\YumYum\\YumYum\\frontend\\src\\assets\\images")
+            uploadDir = Paths.get("D:\\Faks\\Sorsix\\YumYum\\frontend\\src\\assets\\images")
         }
         val fileName = "${System.currentTimeMillis()}_${image.originalFilename}"
         val file = uploadDir.resolve(fileName).toFile()
