@@ -33,9 +33,7 @@ export class RestaurantsComponent implements OnInit {
     this.restaurants$ = this.searchTerms.pipe(
       startWith(''),
       debounceTime(300),
-
       distinctUntilChanged(),
-
       switchMap((term: string) =>
         this.restaurantsService.searchRestaurants(term)
       )
