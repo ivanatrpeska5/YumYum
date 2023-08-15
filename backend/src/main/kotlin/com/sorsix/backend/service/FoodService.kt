@@ -17,12 +17,9 @@ class FoodService(
 
 
     fun foodsByRestaurant(restaurantId: Long): MutableCollection<CategoryFoodsDTO> {
-        val foodMap: MutableMap<String, CategoryFoodsDTO> = mutableMapOf();
+        val foodMap: MutableMap<String, CategoryFoodsDTO> = mutableMapOf()
         val foods = foodRepository.findFoodsByRestaurantId(restaurantId)
-<<<<<<< HEAD
-=======
-        println(foods)
->>>>>>> 07e6e06884a0e497482665836bbf6596e66b5c8a
+
         for (food in foods) {
             println(food.ingredientsSet)
             for (c in food.categorySet) {

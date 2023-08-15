@@ -13,12 +13,9 @@ interface OrderRepository : JpaRepository<Order, Long> {
 
     fun findAllByStatus(status: OrderStatus): List<Order>
 
-<<<<<<< HEAD
     fun getOrdersByDeliveryManAndStatus(deliveryMan: DeliveryMan, status: OrderStatus): List<Order>
-=======
+
     fun findAllByStatusIn(status: MutableCollection<OrderStatus>):List<Order>
 
-    fun getOrdersByDeliveryManAndStatus(deliveryMan: DeliveryMan,status: OrderStatus):List<Order>
->>>>>>> 07e6e06884a0e497482665836bbf6596e66b5c8a
 
 }
