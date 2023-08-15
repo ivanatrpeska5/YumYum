@@ -47,7 +47,7 @@ export class RestaurantsService {
   }
 
   getTopRestaurants(){
-    return this.http.get<Restaurant[]>(`/topRestaurants`)
+    return this.http.get<Restaurant[]>(`api/topRestaurants`)
   }
 
 }
