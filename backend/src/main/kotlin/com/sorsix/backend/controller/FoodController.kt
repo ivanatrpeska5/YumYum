@@ -28,21 +28,25 @@ class FoodController(
 
     @GetMapping("/categories")
     fun getCategories(): ResponseEntity<MutableList<Category>> {
-        return ResponseEntity.ok().body(categoryRepository.findAll());
+        return ResponseEntity.ok().body(categoryRepository.findAll())
     }
 
 
     @GetMapping("/ingredients")
     fun getIngredients(): ResponseEntity<MutableList<Ingredient>> {
-        return ResponseEntity.ok().body(ingredientRepository.findAll());
+        return ResponseEntity.ok().body(ingredientRepository.findAll())
     }
 
     @PostMapping("food/add")
     fun postFood(@RequestBody food: NewFoodDto): ResponseEntity<Any> {
         foodRepository.save(
             Food(
-                photo = food.photo, name = food.name, price = food.price,
-                restaurant = restaurantRepository.findById(food.restaurantId!!).get(), ingredientsSet = food.ingredientsSet, categorySet = food.categorySet
+                photo = food.photo,
+                name = food.name,
+                price = food.price,
+                restaurant = restaurantRepository.findById(food.restaurantId!!).get(),
+                ingredientsSet = food.ingredientsSet,
+                categorySet = food.categorySet
             )
         )
         return ResponseEntity.ok().build()
@@ -51,12 +55,12 @@ class FoodController(
     @PostMapping("food/photo")
     fun uploadPhoto(@RequestParam("image") image: MultipartFile): ResponseEntity<Map<String, String>> {
         if (!Files.isDirectory(uploadDir)) {
-            uploadDir = Paths.get("D:\\Faks\\Sorsix\\YumYum\\frontend\\src\\assets\\images")
+            uploadDir = Paths.get("E:\\IdeaProjects\\Sorsix\\YumYum\\YumYum\\frontend\\src\\assets\\images")
         }
         val fileName = "${System.currentTimeMillis()}_${image.originalFilename}"
         val file = uploadDir.resolve(fileName).toFile()
         image.transferTo(file)
-        return ResponseEntity.ok().body(mapOf("imageUrl" to "assets/images/$fileName"));
+        return ResponseEntity.ok().body(mapOf("imageUrl" to "assets/images/$fileName"))
     }
 
     @DeleteMapping("food/delete/{id}")
@@ -71,7 +75,7 @@ class FoodController(
     }
 
     @GetMapping("mostOrdered")
-    fun getMostOrderedFood():ResponseEntity<List<Food>>{
+    fun getMostOrderedFood(): ResponseEntity<List<Food>> {
         return ResponseEntity.ok().body(foodService.getMostOrderedFood())
     }
 

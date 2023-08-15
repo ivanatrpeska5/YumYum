@@ -16,7 +16,6 @@ class FoodService(
     private val restaurantRepository: RestaurantRepository,
 ) {
 
-
     fun foodsByRestaurant(restaurantId: Long): MutableCollection<CategoryFoodsDTO> {
         val foodMap: MutableMap<String, CategoryFoodsDTO> = mutableMapOf()
         val foods = foodRepository.findFoodsByRestaurantId(restaurantId)

@@ -2,13 +2,9 @@ package com.sorsix.backend.controller
 
 
 import com.sorsix.backend.model.Order
-import com.sorsix.backend.model.Payment
-import com.sorsix.backend.model.dto.OrderDTO
-
 import com.sorsix.backend.model.dto.OrderRequestDTO
 import com.sorsix.backend.model.enumeration.OrderStatus
 import com.sorsix.backend.service.OrderService
-import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -39,14 +35,14 @@ class OrderController(private val orderService: OrderService) {
 
     @PutMapping("/cancel/{orderId}")
     fun cancelOrder(@PathVariable orderId: Long): ResponseEntity<Any> {
-        val order = orderService.changeOrderStatus(orderId, OrderStatus.Cancelled)
-        return ResponseEntity.ok().body(mapOf("id" to orderId));
+        orderService.changeOrderStatus(orderId, OrderStatus.Cancelled)
+        return ResponseEntity.ok().body(mapOf("id" to orderId))
     }
 
     @PutMapping("/prepared/{orderId}")
     fun preparedOrder(@PathVariable orderId: Long): ResponseEntity<Any> {
-        val order = orderService.changeOrderStatus(orderId, OrderStatus.Prepared)
-        return ResponseEntity.ok().body(mapOf("id" to orderId));
+        orderService.changeOrderStatus(orderId, OrderStatus.Prepared)
+        return ResponseEntity.ok().body(mapOf("id" to orderId))
     }
 
     @GetMapping("/prepared")
@@ -56,8 +52,8 @@ class OrderController(private val orderService: OrderService) {
 
     @PutMapping("/accept/{sessionId}/{orderId}")
     fun acceptOrder(@PathVariable sessionId: String, @PathVariable orderId: Long): ResponseEntity<Map<String, Long>> {
-        orderService.acceptOrder(sessionId, orderId);
-        return ResponseEntity.ok().body(mapOf("id" to orderId));
+        orderService.acceptOrder(sessionId, orderId)
+        return ResponseEntity.ok().body(mapOf("id" to orderId))
     }
 
     @GetMapping("/accepted/{sessionId}")
@@ -67,8 +63,8 @@ class OrderController(private val orderService: OrderService) {
 
     @PutMapping("/deliver/{orderId}")
     fun deliverOrder(@PathVariable orderId: Long): ResponseEntity<Any> {
-        val order = orderService.changeOrderStatus(orderId, OrderStatus.Delivered)
-        return ResponseEntity.ok().body(mapOf("id" to orderId));
+        orderService.changeOrderStatus(orderId, OrderStatus.Delivered)
+        return ResponseEntity.ok().body(mapOf("id" to orderId))
     }
 
 

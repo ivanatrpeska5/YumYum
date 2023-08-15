@@ -31,12 +31,12 @@ abstract class User(
 
     @JsonIgnore
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        return mutableListOf(SimpleGrantedAuthority("user"));
+        return mutableListOf(SimpleGrantedAuthority("user"))
     }
 
     @JsonIgnore
     override fun getPassword(): String {
-        return password;
+        return password
     }
 
 

@@ -1,6 +1,5 @@
 package com.sorsix.backend.model
 
-import com.fasterxml.jackson.annotation.JsonIgnore
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import javax.persistence.*
 
@@ -28,7 +27,6 @@ class Restaurant(
     var averageRating: Double = 0.0,
 
     var deliveryTime: String,
-
     ) {
 
 }

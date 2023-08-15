@@ -17,6 +17,4 @@ class Payment(
 
     @Enumerated
     val cardType: CardType
-) {
-
-}
+)

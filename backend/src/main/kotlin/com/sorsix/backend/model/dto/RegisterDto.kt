@@ -9,5 +9,4 @@ data class RegisterDto(
     val username: String,
     val role: String,
     val restaurantId: Long?
-) {
-}
+)

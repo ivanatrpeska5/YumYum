@@ -29,7 +29,7 @@ class OrderService(
     fun createOrder(orderDTO: OrderDTO, payment: Payment?) {
         val username: String = sessionRegistry.getUsernameForSession(orderDTO.sessionId)!!
         val customer = customerRepository.findCustomerByUsername(username)
-        val carts = cartRepository.findAllByCustomerUserIdAndStatus(customer.userId!!, ShoppingCartStatus.ACTIVE);
+        val carts = cartRepository.findAllByCustomerUserIdAndStatus(customer.userId!!, ShoppingCartStatus.ACTIVE)
         val location = locationRepository.save(
             Location(
                 street = orderDTO.street,
@@ -38,7 +38,7 @@ class OrderService(
         )
         for (cart in carts) {
             if (cart.cartConsistsOfFoodList.size==0)
-                continue;
+                continue
             cart.status = ShoppingCartStatus.ORDERED
             cartRepository.save(cart)
             println(orderDTO.paymentMethod)
@@ -117,39 +117,36 @@ class OrderService(
 
 
     fun changeOrderStatus(orderId: Long, status: OrderStatus): Order {
-        val order = orderRepository.findById(orderId).get();
-        order.status = status;
-        orderRepository.save(order);
-        return order;
+        val order = orderRepository.findById(orderId).get()
+        order.status = status
+        orderRepository.save(order)
+        return order
     }
 
     fun getPreparedOrders(): List<Order> {
-        val orders = orderRepository.findAllByStatus(OrderStatus.Prepared)
-        return orders;
+        return orderRepository.findAllByStatus(OrderStatus.Prepared)
     }
 
     fun acceptOrder(sessionId: String, orderId: Long): Order {
-        val username = sessionRegistry.getUsernameForSession(sessionId);
-        val deliveryMan = deliveryManRepository.findByUsername(username!!);
-        val order = orderRepository.findById(orderId).get();
-        order.deliveryMan = deliveryMan;
-        order.status = OrderStatus.InDelivery;
-        orderRepository.save(order);
-        return order;
+        val username = sessionRegistry.getUsernameForSession(sessionId)
+        val deliveryMan = deliveryManRepository.findByUsername(username!!)
+        val order = orderRepository.findById(orderId).get()
+        order.deliveryMan = deliveryMan
+        order.status = OrderStatus.InDelivery
+        orderRepository.save(order)
+        return order
     }
 
     fun getInDeliveryOrders(sessionId: String): List<Order> {
-        val username = sessionRegistry.getUsernameForSession(sessionId);
-        val deliveryMan = deliveryManRepository.findByUsername(username!!);
-        val orders = orderRepository.getOrdersByDeliveryManAndStatus(deliveryMan, OrderStatus.InDelivery);
-        return orders;
+        val username = sessionRegistry.getUsernameForSession(sessionId)
+        val deliveryMan = deliveryManRepository.findByUsername(username!!)
+        return orderRepository.getOrdersByDeliveryManAndStatus(deliveryMan, OrderStatus.InDelivery)
     }
 
     fun getDeliveredOrders(sessionId: String): List<Order> {
-        val username = sessionRegistry.getUsernameForSession(sessionId);
-        val deliveryMan = deliveryManRepository.findByUsername(username!!);
-        val orders = orderRepository.getOrdersByDeliveryManAndStatus(deliveryMan, OrderStatus.Delivered);
-        return orders;
+        val username = sessionRegistry.getUsernameForSession(sessionId)
+        val deliveryMan = deliveryManRepository.findByUsername(username!!)
+        return orderRepository.getOrdersByDeliveryManAndStatus(deliveryMan, OrderStatus.Delivered)
     }
 
 
