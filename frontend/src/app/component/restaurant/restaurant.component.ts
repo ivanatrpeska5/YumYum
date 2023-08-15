@@ -233,6 +233,7 @@ export class RestaurantComponent implements OnInit {
       }
     }
   }
+  
   onRatingSubmit() {
     let lastNumberTrue = 0;
     for (let i = 0; i < 5; i++) {
