@@ -44,8 +44,6 @@ export class PaymentComponent implements OnInit {
         .subscribe((response) => {
           this.router.navigate(['/successfulOrder']);
         });
-    } else {
-      console.error('Order Form Data is undefined');
-    }
+    } 
   }
 }

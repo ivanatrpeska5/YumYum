@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
 import org.springframework.web.bind.annotation.*
-import java.util.*
 import javax.servlet.http.HttpServletRequest
 
 @RestController
@@ -36,8 +35,8 @@ class AuthenticationController(
             UsernamePasswordAuthenticationToken(user.username, user.password)
         )
         val sessionId: String? = sessionRegistry?.registerSession(user.username)
-        val role = userRepository.findUserByUsername(user.username).role;
-        var restaurantId: Long? = null;
+        val role = userRepository.findUserByUsername(user.username).role
+        var restaurantId: Long? = null
         when (role) {
             "employee" -> {
                 restaurantId = restorantEmployeeRepository.findByUsername(user.username)!!.restaurant.id
@@ -52,8 +51,8 @@ class AuthenticationController(
     @PostMapping("/logout")
     fun logout(@RequestBody sessionId: String, req: HttpServletRequest): ResponseEntity<String> {
         req.session.invalidate()
-        sessionRegistry?.sessions?.remove(sessionId);
-        return ResponseEntity.ok().body(sessionId);
+        sessionRegistry?.sessions?.remove(sessionId)
+        return ResponseEntity.ok().body(sessionId)
     }
 
     @GetMapping("/user/{id}")

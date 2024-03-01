@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query
 
 interface UserRepository : JpaRepository<User, Long> {
 
-    public fun findUserByUsername(username: String?): User
+    fun findUserByUsername(username: String?): User
 
     @Query("select max(u.userId) from User u")
     fun maxId(): Long

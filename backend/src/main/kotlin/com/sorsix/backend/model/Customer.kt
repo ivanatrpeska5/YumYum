@@ -19,6 +19,6 @@ class Customer(
     role: String,
 ) : User(userId, name, surname, email, phone, password, username, role) {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        return mutableListOf(SimpleGrantedAuthority("customer"));
+        return mutableListOf(SimpleGrantedAuthority("customer"))
     }
 }

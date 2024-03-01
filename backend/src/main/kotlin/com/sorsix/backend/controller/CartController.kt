@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*
 @RequestMapping("/api/cart")
 class CartController(private val cartService: CartService) {
 
-    @PostMapping()
+    @PostMapping
     fun addToCart(@RequestBody dto: AddFoodToCartDto): ResponseEntity<UserSessionDto> {
         cartService.addFoodToCart(dto)
         return ResponseEntity.ok().body(UserSessionDto(dto.sessionId, "customer"))

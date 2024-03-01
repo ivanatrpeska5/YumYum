@@ -23,7 +23,7 @@ class Food(
         joinColumns = [JoinColumn(name = "foodId")],
         inverseJoinColumns = [JoinColumn(name = "ingredientId")],
     )
-    val ingredientsSet: Set<Ingredient>,
+    var ingredientsSet: Set<Ingredient>,
 
     @ManyToMany
     @JsonManagedReference
@@ -32,6 +32,6 @@ class Food(
         joinColumns = [JoinColumn(name = "foodId")],
         inverseJoinColumns = [JoinColumn(name = "categoryId")],
     )
-    val categorySet: Set<Category>,
+    var categorySet: Set<Category>,
 
     )

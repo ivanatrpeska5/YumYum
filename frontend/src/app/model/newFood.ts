@@ -3,11 +3,11 @@ import { Ingredient } from './ingredient';
 import { Restaurant } from './restaurant';
 
 export interface NewFood {
-  id: null;
+  id: number | null | undefined;
   photo: string;
   name: string;
   price: number;
-  restaurantId: number| null | undefined;
+  restaurantId: number | null | undefined;
   categorySet: Category[];
   ingredientsSet: Ingredient[];
 }

@@ -21,9 +21,9 @@ class Cart(
     @OneToMany
     @JoinColumn(name = "cart_id")
     @JsonManagedReference
-    val cartConsistsOfFoodList: MutableList<CartConsistsOfFood> = mutableListOf<CartConsistsOfFood>()
+    val cartConsistsOfFoodList: MutableList<CartConsistsOfFood> = mutableListOf()
 ) {
     fun getAmmountPrice(): Double {
-        return cartConsistsOfFoodList.map { it.food.price * it.quantity }.sum();
+        return cartConsistsOfFoodList.map { it.food.price * it.quantity }.sum()
     }
 }

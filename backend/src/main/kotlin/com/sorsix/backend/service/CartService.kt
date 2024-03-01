@@ -2,10 +2,8 @@ package com.sorsix.backend.service
 
 import com.sorsix.backend.model.Cart
 import com.sorsix.backend.model.Food
-import com.sorsix.backend.model.Order
 import com.sorsix.backend.model.dto.AddFoodToCartDto
 import com.sorsix.backend.model.dto.CartInfoDTO
-import com.sorsix.backend.model.enumeration.OrderStatus
 import com.sorsix.backend.model.enumeration.ShoppingCartStatus
 import com.sorsix.backend.model.manytomany.CartConsistsOfFood
 import com.sorsix.backend.repository.*
@@ -24,13 +22,13 @@ class CartService(
 
     fun addFoodToCart(dto: AddFoodToCartDto) {
         val food: Food = foodRepository.findFoodById(dto.foodId)
-        val username = sessionRegistry.getUsernameForSession(dto.sessionId);
-        val customer = customerRepository.findCustomerByUsername(username!!);
+        val username = sessionRegistry.getUsernameForSession(dto.sessionId)
+        val customer = customerRepository.findCustomerByUsername(username!!)
         var cart = cartRepository.findCartByRestaurantIdAndCustomerUserIdAndStatus(
             food.restaurant.id,
             customer.userId!!,
             ShoppingCartStatus.ACTIVE
-        );
+        )
         if (cart == null) {
             cart = cartRepository.save(
                 Cart(
@@ -48,16 +46,15 @@ class CartService(
     }
 
     fun getCarts(sessionId: String): Set<Cart> {
-        val username = sessionRegistry.getUsernameForSession(sessionId);
-        val customer = customerRepository.findCustomerByUsername(username!!);
-        val carts = cartRepository.findAllByCustomer(customer);
-        return carts;
+        val username = sessionRegistry.getUsernameForSession(sessionId)
+        val customer = customerRepository.findCustomerByUsername(username!!)
+        return cartRepository.findAllByCustomer(customer)
     }
 
     fun getCartsInfoForUser(sessionId: String): List<CartInfoDTO>? {
-        val username = sessionRegistry.getUsernameForSession(sessionId);
-        val customer = customerRepository.findCustomerByUsername(username!!);
-        val carts = cartRepository.findAllByCustomerUserIdAndStatus(customer.userId!!, ShoppingCartStatus.ACTIVE);
+        val username = sessionRegistry.getUsernameForSession(sessionId)
+        val customer = customerRepository.findCustomerByUsername(username!!)
+        val carts = cartRepository.findAllByCustomerUserIdAndStatus(customer.userId!!, ShoppingCartStatus.ACTIVE)
         val foodsInCart: MutableList<CartConsistsOfFood> = mutableListOf()
         for (cart in carts) {
             foodsInCart.addAll(cartConsistsOfFoodRepository.findAllByCart(cart))

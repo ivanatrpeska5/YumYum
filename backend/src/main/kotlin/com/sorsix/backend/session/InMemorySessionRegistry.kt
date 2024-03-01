@@ -7,7 +7,7 @@ import java.util.*
 
 @Component
 class InMemorySessionRegistry() {
-    val sessions= HashMap<String, String>();
+    val sessions= HashMap<String, String>()
 
     fun getUsernameForSession(sessionId: String?): String? {
         return sessions[sessionId]

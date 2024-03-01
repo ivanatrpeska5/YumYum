@@ -6,6 +6,7 @@ import { Category } from 'src/app/model/category';
 import { Food } from 'src/app/model/food';
 import { FoodsByCategory } from 'src/app/model/foodsByCategory';
 import { Ingredient } from 'src/app/model/ingredient';
+import { NewFood } from 'src/app/model/newFood';
 import { Restaurant } from 'src/app/model/restaurant';
 import { CartService } from 'src/app/service/cart.service';
 import { FoodService } from 'src/app/service/food.service';
@@ -23,7 +24,7 @@ export class RestaurantComponent implements OnInit {
   isAddedToCart: { [id: number]: boolean } = {};
   sessionId: string | null = null;
   role: string | null = null;
-  foodToUpdate: Food | undefined;
+  foodToUpdate: NewFood | undefined;
   selectedImage: File | undefined;
   categories: Category[] = [];
   newCategories: Category[] = [];
@@ -46,7 +47,7 @@ export class RestaurantComponent implements OnInit {
       photo: '',
       name: '',
       price: 0,
-      restaurant: this.restaurant!!,
+      restaurantId: 0,
       categorySet: [],
       ingredientsSet: [],
     };
@@ -134,7 +135,14 @@ export class RestaurantComponent implements OnInit {
   }
 
   edit(food: Food) {
-    this.foodToUpdate = { ...food };
+    //this.foodToUpdate = { ...food };
+    this.foodToUpdate!!.id = food.id;
+    this.foodToUpdate!!.name = food.name;
+    this.foodToUpdate!!.price = food.price;
+    this.foodToUpdate!!.photo = food.photo;
+    this.foodToUpdate!!.restaurantId = food.restaurant.id;
+    this.foodToUpdate!!.categorySet = food.categorySet;
+    this.foodToUpdate!!.ingredientsSet = food.ingredientsSet;
     this.newCategories = [];
     this.newIngredients = [];
     for (let category of food.categorySet) {
@@ -233,6 +241,7 @@ export class RestaurantComponent implements OnInit {
       }
     }
   }
+
   onRatingSubmit() {
     let lastNumberTrue = 0;
     for (let i = 0; i < 5; i++) {

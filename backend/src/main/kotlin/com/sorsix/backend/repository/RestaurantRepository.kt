@@ -1,4 +1,4 @@
-package com.sorsix.backend.repository;
+package com.sorsix.backend.repository
 
 import com.sorsix.backend.model.Restaurant
 import org.springframework.data.jpa.repository.JpaRepository
