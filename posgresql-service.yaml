@@ -1,0 +1,15 @@
+# PostgreSQL StatefulSet Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-db-lb
+spec:
+  selector:
+    app: postgresql-db
+  type: NodePort
+  ports:
+  - port: 5432
+    targetPort: 5432
+    nodePort: 30080
+    protocol: TCP
+    name: 80-80
