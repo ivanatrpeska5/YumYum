@@ -3,12 +3,7 @@ package com.sorsix.backend.model.dto
 import com.sorsix.backend.model.*
 import com.sorsix.backend.model.enumeration.OrderStatus
 import com.sorsix.backend.model.enumeration.PaymentMethod
-import com.sorsix.backend.model.manytomany.CartConsistsOfFood
 import java.time.LocalDate
-import javax.persistence.EnumType
-import javax.persistence.Enumerated
-import javax.persistence.ManyToOne
-import javax.persistence.OneToOne
 
 data class RestaurantOrderDTO(
     val id: Long? = null,

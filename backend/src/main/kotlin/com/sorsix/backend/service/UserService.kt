@@ -6,7 +6,6 @@ import com.sorsix.backend.model.RestaurantEmployee
 import com.sorsix.backend.model.User
 import com.sorsix.backend.model.dto.RegisterDto
 import com.sorsix.backend.repository.*
-import org.springframework.security.core.userdetails.UserDetails
 import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.stereotype.Service
@@ -61,6 +60,6 @@ class UserService(
                 )
             )
         }
-        return null;
+        return null
     }
 }

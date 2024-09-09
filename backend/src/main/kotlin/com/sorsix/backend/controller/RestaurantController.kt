@@ -24,13 +24,13 @@ class RestaurantController(
 
     @GetMapping("/restaurants")
     fun restaurants(): ResponseEntity<MutableList<Restaurant>> {
-        return ResponseEntity.ok().body(restaurantService.findAll());
+        return ResponseEntity.ok().body(restaurantService.findAll())
     }
 
     @GetMapping("restaurants/{id}")
     fun restaurant(@PathVariable id: Long): ResponseEntity<Restaurant> {
         println(id)
-        return ResponseEntity.ok().body(restaurantService.findById(id));
+        return ResponseEntity.ok().body(restaurantService.findById(id))
     }
 
     @GetMapping("/restaurants/foods/{id}")
@@ -41,12 +41,12 @@ class RestaurantController(
     @GetMapping("/restaurant/{sessionId}")
     fun getRestaurantByEmployee(@PathVariable sessionId: String): ResponseEntity<Restaurant> {
         val username = sessionRegistry.getUsernameForSession(sessionId)
-        val employee = restaurantEmployeeRepository.findByUsername(username!!);
+        val employee = restaurantEmployeeRepository.findByUsername(username!!)
         if (employee != null) {
             println(employee.name)
             return ResponseEntity.ok().body(employee.restaurant)
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.notFound().build()
     }
 
     @GetMapping("/restaurants/search")

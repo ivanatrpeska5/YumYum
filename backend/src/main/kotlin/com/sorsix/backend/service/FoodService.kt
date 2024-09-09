@@ -1,18 +1,20 @@
 package com.sorsix.backend.service
 
+import NewFoodDto
 import com.sorsix.backend.model.Food
 import com.sorsix.backend.model.dto.CategoryFoodsDTO
 import com.sorsix.backend.model.enumeration.OrderStatus
 import com.sorsix.backend.repository.FoodRepository
 import com.sorsix.backend.repository.OrderRepository
+import com.sorsix.backend.repository.RestaurantRepository
 import org.springframework.stereotype.Service
 
 @Service
 class FoodService(
     private val foodRepository: FoodRepository,
-    private val orderRepository: OrderRepository
+    private val orderRepository: OrderRepository,
+    private val restaurantRepository: RestaurantRepository,
 ) {
-
 
     fun foodsByRestaurant(restaurantId: Long): MutableCollection<CategoryFoodsDTO> {
         val foodMap: MutableMap<String, CategoryFoodsDTO> = mutableMapOf()
@@ -50,5 +52,16 @@ class FoodService(
             }
         }
         return foodAndNumberOfOrders.toList().sortedByDescending { (_, value) -> value }.take(5).map { it.first }
+    }
+
+    fun updateFood(newFood: NewFoodDto) {
+        val food = foodRepository.findFoodById(newFood.id!!)
+        food.name = newFood.name
+        food.photo = newFood.photo
+        food.price = newFood.price
+        food.restaurant = restaurantRepository.findById(newFood.restaurantId!!).get()
+        food.categorySet = newFood.categorySet
+        food.ingredientsSet = newFood.ingredientsSet
+        foodRepository.save(food)
     }
 }

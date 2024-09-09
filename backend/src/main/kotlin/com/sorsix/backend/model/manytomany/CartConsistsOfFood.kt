@@ -16,6 +16,4 @@ class CartConsistsOfFood(
     @ManyToOne @JoinColumn(name = "food_id") var food: Food,
 
     var quantity: Long
-) {
-
-}
+)

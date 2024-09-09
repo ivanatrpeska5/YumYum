@@ -1,4 +1,4 @@
-package com.sorsix.backend.repository;
+package com.sorsix.backend.repository
 
 import com.sorsix.backend.model.Cart
 import com.sorsix.backend.model.manytomany.CartConsistsOfFood

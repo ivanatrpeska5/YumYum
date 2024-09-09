@@ -23,7 +23,7 @@ class RestaurantService(
     }
 
     fun findById(id: Long): Restaurant {
-        return restaurantRepository.findById(id).get();
+        return restaurantRepository.findById(id).get()
     }
 
     fun rateRestaurant(restaurantId: Long, ratingDTO: RatingDTO, sessionId: String): Restaurant? {
