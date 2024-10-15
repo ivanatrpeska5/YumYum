@@ -86,24 +86,26 @@
       </div>
     </div>
   </div>
-  <div class="bg-dark text-warning mb-3">
-    <div class="container pt-5 pb-5">
-      <h3 class="mb-5">Recommended for you:</h3>
-      <div class="row justify-content-between">
-        <div *ngFor="let food of recommendedFoods" class="col-md-2 card p-3">
-          <ng-container *ngIf="food.photo != 'None'; else noPhoto">
-            <img src="{{ food.photo }}" alt="" class="card-img-top img-fluid img-style"
-                 routerLink="/restaurant/{{food.restaurant.id}}"/>
-          </ng-container>
-          <ng-template #noPhoto>
-            <img src="https://www.svgrepo.com/show/508699/landscape-placeholder.svg" alt="placeholder"
-                 class="card-img-top img-fluid img-style">
-          </ng-template>
-          <div class="card-body">
-            <h6 class="text-center">{{ food.name }}</h6>
+  <ng-container *ngIf="role=='customer'">
+    <div class="bg-dark text-warning mb-3">
+      <div class="container pt-5 pb-5">
+        <h3 class="mb-5">Recommended for you:</h3>
+        <div class="row justify-content-between">
+          <div *ngFor="let food of recommendedFoods" class="col-md-2 card p-3">
+            <ng-container *ngIf="food.photo != 'None'; else noPhoto">
+              <img src="{{ food.photo }}" alt="" class="card-img-top img-fluid img-style"
+                   routerLink="/restaurant/{{food.restaurant.id}}"/>
+            </ng-container>
+            <ng-template #noPhoto>
+              <img src="https://www.svgrepo.com/show/508699/landscape-placeholder.svg" alt="placeholder"
+                   class="card-img-top img-fluid img-style">
+            </ng-template>
+            <div class="card-body">
+              <h6 class="text-center">{{ food.name }}</h6>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 </div>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Food } from 'src/app/model/food';
 import { Restaurant } from 'src/app/model/restaurant';
 import { FoodService } from 'src/app/service/food.service';
@@ -15,6 +15,8 @@ export class HomeComponent implements OnInit {
   mostOrdered: Food[] = [];
   onSale: Food[] = []
   recommendedFoods: Food[] = []
+  role: string | null = null;
+
   constructor(
     private foodService: FoodService,
     private restaurantsService: RestaurantsService
@@ -26,6 +28,7 @@ export class HomeComponent implements OnInit {
     this.getMostOrdered();
     this.getOnSale();
     this.getRecommendation();
+    this.role = localStorage.getItem('role');
   }
 
   getNewFood() {
