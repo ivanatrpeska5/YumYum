@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { AuthService } from './service/auth.service';
+import { DatePipe } from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -13,14 +14,16 @@ export class AppComponent implements OnInit {
   username: string | null = null;
   restaurantId: number | null = null;
 
-  constructor(private authService: AuthService) {}
-  ngOnInit(): void {
-    this.role=localStorage.getItem('role');
-    this.sessionId=localStorage.getItem("token")
-    this.username=localStorage.getItem('username')
-    this.restaurantId=Number(localStorage.getItem('restaurantId'))
-    
+  constructor(private authService: AuthService) {
   }
+
+  ngOnInit(): void {
+    this.role = localStorage.getItem('role');
+    this.sessionId = localStorage.getItem("token")
+    this.username = localStorage.getItem('username')
+    this.restaurantId = Number(localStorage.getItem('restaurantId'))
+  }
+
   logout() {
     this.authService.logout();
     this.role = null;
@@ -32,4 +35,5 @@ export class AppComponent implements OnInit {
   isAuthorized(): boolean {
     return this.sessionId != null;
   }
+
 }

@@ -1,53 +1,109 @@
 <div id="home" class="img-fluid pt-5"
-    style="background: url('assets/images/home.jpg') no-repeat center center; background-size:cover; height:700px; margin-top: -30px;">
-    <div class="pt-5 container">
-        <h1 style="font-size: 7rem" class="mt-5 pt-5"><span class="text-warning">Y</span>um<span
-                class="text-warning">Y</span>um</h1>
-        <h2 style="font-size: 3rem">Where Flavorful Moments</h2>
-        <h3 style="font-size: 2rem">Are Delivered To Your Doorstep.</h3>
-    </div>
+     style="background: url('assets/images/home.jpg') no-repeat center center; background-size:cover; height:700px; margin-top: -30px;">
+  <div class="pt-5 container">
+    <h1 style="font-size: 7rem" class="mt-5 pt-5"><span class="text-warning">Y</span>um<span
+      class="text-warning">Y</span>um</h1>
+    <h2 style="font-size: 3rem">Where Flavorful Moments</h2>
+    <h3 style="font-size: 2rem">Are Delivered To Your Doorstep.</h3>
+  </div>
 </div>
 <div class="mt-5">
-    <div class="bg-dark text-warning mb-3">
-        <div class="container pt-5 pb-5">
-            <h3>New Fresh Bites Discovery Hub:</h3>
-            <div class="row justify-content-between mt-5">
-                <div *ngFor="let food of newFood" class="col-md-2 card">
-                    <img src="{{food.photo}}" alt="" class="card-img-top img-fluid img-style"
-                         routerLink="/restaurant/{{food.restaurant.id}}">
-                    <div class="card-body">
-                        <h6 class="text-center">{{ food.name }}</h6>
-                    </div>
-                </div>
-            </div>
+  <div class="bg-dark text-warning mb-3">
+    <div class="container pt-5 pb-5">
+      <h3>New Fresh Bites Discovery Hub:</h3>
+      <div class="row justify-content-between mt-5">
+        <div *ngFor="let food of newFood" class="col-md-2 card">
+          <ng-container *ngIf="food.photo != 'None'; else noPhoto">
+            <img src="{{ food.photo }}" alt="" class="card-img-top img-fluid img-style"
+                 routerLink="/restaurant/{{food.restaurant.id}}"/>
+          </ng-container>
+          <ng-template #noPhoto>
+            <img src="https://www.svgrepo.com/show/508699/landscape-placeholder.svg" alt="placeholder"
+                 class="card-img-top img-fluid img-style">
+          </ng-template>
+          <div class="card-body">
+            <h6 class="text-center">{{ food.name }}</h6>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="mb-3">
-        <div class="container pt-5 pb-5">
-            <h3 class="mb-5">Our Most Popular Picks:</h3>
-            <div class="row justify-content-between">
-                <div *ngFor="let food of mostOrdered" class="col-md-2 card p-3">
-                    <img src="{{food.photo}}" alt="" class="card-img-top img-fluid img-style"
-                        routerLink="/restaurant/{{food.restaurant.id}}">
-                    <div class="card-body">
-                        <h6 class="text-center">{{ food.name }}</h6>
-                    </div>
-                </div>
-            </div>
+  </div>
+  <div class="mb-3">
+    <div class="container pt-5 pb-5">
+      <h3 class="mb-5">Our Most Popular Picks:</h3>
+      <div class="row justify-content-between">
+        <div *ngFor="let food of mostOrdered" class="col-md-2 card p-3">
+          <ng-container *ngIf="food.photo != 'None'; else noPhoto">
+            <img src="{{ food.photo }}" alt="" class="card-img-top img-fluid img-style"
+                 routerLink="/restaurant/{{food.restaurant.id}}"/>
+          </ng-container>
+          <ng-template #noPhoto>
+            <img src="https://www.svgrepo.com/show/508699/landscape-placeholder.svg" alt="placeholder"
+                 class="card-img-top img-fluid img-style">
+          </ng-template>
+          <div class="card-body">
+            <h6 class="text-center">{{ food.name }}</h6>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="bg-dark text-warning mb-3">
-        <div class="container pt-5 pb-5">
-            <h3 class="mb-5">Top 5 Rated Restaurants:</h3>
-            <div class="row justify-content-between">
-                <div *ngFor="let restaurant of topRestaurants" class="col-md-2 card p-3">
-                    <img src="{{restaurant.logo}}" alt="" class="card-img-top img-fluid img-style"
-                         routerLink="/restaurant/{{restaurant.id}}">
-                    <div class="card-body">
-                        <h6 class="text-center">{{ restaurant.name }}</h6>
-                    </div>
-                </div>
-            </div>
+  </div>
+  <div class="bg-dark text-warning mb-3">
+    <div class="container pt-5 pb-5">
+      <h3 class="mb-5">Items on sale right now:</h3>
+      <div class="row justify-content-between">
+        <div *ngFor="let food of onSale" class="col-md-2 card p-3">
+          <ng-container *ngIf="food.photo != 'None'; else noPhoto">
+            <img src="{{ food.photo }}" alt="" class="card-img-top img-fluid img-style"
+                 routerLink="/restaurant/{{food.restaurant.id}}"/>
+          </ng-container>
+          <ng-template #noPhoto>
+            <img src="https://www.svgrepo.com/show/508699/landscape-placeholder.svg" alt="placeholder"
+                 class="card-img-top img-fluid img-style">
+          </ng-template>
+          <div class="card-body">
+            <h6 class="text-center">{{ food.name }}</h6>
+            <ng-container *ngIf="food.priceWithDiscount != null">
+              <span class="fw-bold old-price me-1">{{ food.price }} MKD</span>
+              <span class="fw-bold color-red me-1">{{ food.priceWithDiscount }} MKD</span>
+            </ng-container>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+  <div class="mb-3">
+    <div class="container pt-5 pb-5">
+      <h3 class="mb-5">Top 5 Rated Restaurants:</h3>
+      <div class="row justify-content-between">
+        <div *ngFor="let restaurant of topRestaurants" class="col-md-2 card p-3">
+          <img src="{{restaurant.logo}}" alt="" class="card-img-top img-fluid img-style"
+               routerLink="/restaurant/{{restaurant.id}}">
+          <div class="card-body">
+            <h6 class="text-center">{{ restaurant.name }}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="bg-dark text-warning mb-3">
+    <div class="container pt-5 pb-5">
+      <h3 class="mb-5">Recommended for you:</h3>
+      <div class="row justify-content-between">
+        <div *ngFor="let food of recommendedFoods" class="col-md-2 card p-3">
+          <ng-container *ngIf="food.photo != 'None'; else noPhoto">
+            <img src="{{ food.photo }}" alt="" class="card-img-top img-fluid img-style"
+                 routerLink="/restaurant/{{food.restaurant.id}}"/>
+          </ng-container>
+          <ng-template #noPhoto>
+            <img src="https://www.svgrepo.com/show/508699/landscape-placeholder.svg" alt="placeholder"
+                 class="card-img-top img-fluid img-style">
+          </ng-template>
+          <div class="card-body">
+            <h6 class="text-center">{{ food.name }}</h6>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

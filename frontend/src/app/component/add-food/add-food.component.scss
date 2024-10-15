@@ -1,0 +1,29 @@
+::ng-deep .ng-select {
+  .ng-select-container {
+    border: none;
+  }
+}
+//
+//  .ng-select-multiple .ng-select-container .ng-value-container .ng-value {
+//    background-color: #ffc107 !important; /* Background color of selected options */
+//    color: #fff !important; /* Text color for contrast */
+//  }
+//
+//
+//
+//  .ng-select-container:hover {
+//    border-color: #e0a800; /* Darker warning color on hover */
+//  }
+//
+//  .ng-dropdown-panel .ng-option {
+//    &.ng-option-marked {
+//      background-color: rgba(255, 193, 7, 0.7); /* #ffc107 with 50% opacity */
+//      /* Background color of highlighted options */
+//      color: #fff; /* Text color for contrast */
+//    }
+//  }
+//
+//  .ng-select .ng-clear-wrapper:hover {
+//    background-color: #ffc107; /* Clear button hover */
+//  }
+//}

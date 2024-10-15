@@ -27,7 +27,7 @@
         <div *ngFor="let restaurant of restaurants$ | async" class="col-md-3">
             <div class="card mb-3" routerLink="/restaurant/{{restaurant.id}}" style="min-height: 320px">
                 <img src="{{restaurant.logo}}" alt="" class="card-img-top img-fluid"
-                    style="object-fit: cover; min-height: 214.4px;">
+                    style="object-fit: cover; min-height: 214.4px; min-width: 214.4px;">
                 <div class="card-body">
                     <h4 class="text-center">{{ restaurant.name }}</h4>
                 </div>

@@ -17,6 +17,9 @@ import { AcceptOrderDeliveryComponent } from './component/accept-order-delivery/
 import { CurrentOrderDeliveryComponent } from './component/current-order-delivery/current-order-delivery.component';
 import { FinishedOrderDeliveryComponent } from './component/finished-order-delivery/finished-order-delivery.component';
 import { AboutUsComponent } from './component/about-us/about-us.component';
+import { AddSaleComponent } from "./component/add-sale/add-sale.component";
+import { AdminPanelComponent } from "./component/admin-panel/admin-panel.component";
+import {AddRestaurantComponent} from "./component/add-restaurant/add-restaurant.component";
 
 const routes: Routes = [
   {
@@ -31,6 +34,8 @@ const routes: Routes = [
       { path: 'cart', component: CartComponent },
       { path: 'order', component: OrderComponent },
       { path: 'add-product', component: AddFoodComponent },
+      { path: 'add-sale', component: AddSaleComponent },
+      { path: 'admin-panel', component: AdminPanelComponent },
       { path: 'payment', component: PaymentComponent },
       { path: 'successfulOrder', component: SuccessfulOrderComponent },
       { path: 'myOrders', component: CustomerOrdersComponent },
@@ -39,6 +44,7 @@ const routes: Routes = [
       { path: 'currentOrders', component: CurrentOrderDeliveryComponent },
       { path: 'deliveredOrders', component: FinishedOrderDeliveryComponent },
       { path: 'aboutUs', component: AboutUsComponent },
+      { path: 'add-restaurant', component: AddRestaurantComponent },
       { path: '**', redirectTo: '' },
     ],
   },

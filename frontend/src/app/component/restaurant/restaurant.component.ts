@@ -135,66 +135,28 @@ export class RestaurantComponent implements OnInit {
   }
 
   edit(food: Food) {
-    //this.foodToUpdate = { ...food };
-    this.foodToUpdate!!.id = food.id;
-    this.foodToUpdate!!.name = food.name;
-    this.foodToUpdate!!.price = food.price;
-    this.foodToUpdate!!.photo = food.photo;
-    this.foodToUpdate!!.restaurantId = food.restaurant.id;
-    this.foodToUpdate!!.categorySet = food.categorySet;
-    this.foodToUpdate!!.ingredientsSet = food.ingredientsSet;
-    this.newCategories = [];
-    this.newIngredients = [];
-    for (let category of food.categorySet) {
-      this.toggleCategorySelection(category);
-    }
-    for (let ingredient of food.ingredientsSet) {
-      this.toggleIngredientSelection(ingredient);
-    }
+    // Ensure foodToUpdate is correctly initialized with all required fields
+    this.foodToUpdate = {
+      id: food.id,
+      photo: food.photo,
+      name: food.name,
+      price: food.price,
+      restaurantId: food.restaurant.id, // Assign restaurant ID here
+      categorySet: food.categorySet,
+      ingredientsSet: food.ingredientsSet,
+    };
+
+    // Pre-select categories and ingredients
+    this.newCategories = [...food.categorySet];
+    this.newIngredients = [...food.ingredientsSet];
   }
+
 
   onFileChange(event: Event) {
     const inputElement = event.target as HTMLInputElement;
     if (inputElement.files && inputElement.files.length > 0) {
       this.selectedImage = inputElement.files[0];
     }
-  }
-
-  toggleCategorySelection(category: Category): void {
-    const index = this.newCategories.map((it) => it.id).indexOf(category.id);
-
-    if (index === -1) {
-      this.newCategories.push(category);
-    } else {
-      this.newCategories.splice(index, 1);
-    }
-  }
-  checkCategorySelection(cat: Category): boolean {
-    for (let category of this.newCategories) {
-      if (category.name == cat.name) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  toggleIngredientSelection(ingredient: Ingredient): void {
-    const index = this.newIngredients.map((it) => it.id).indexOf(ingredient.id);
-
-    if (index === -1) {
-      this.newIngredients.push(ingredient);
-    } else {
-      this.newIngredients.splice(index, 1);
-    }
-  }
-
-  checkIngredientSelection(ing: Ingredient): boolean {
-    for (let ingredient of this.newIngredients) {
-      if (ingredient.name == ing.name) {
-        return true;
-      }
-    }
-    return false;
   }
 
   updateFood() {

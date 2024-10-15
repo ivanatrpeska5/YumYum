@@ -1,0 +1,24 @@
+<div class="row mt-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-8 card p-4">
+    <h3 class="text-warning">Add new Sale:</h3>
+    <form (submit)="onSubmit()">
+      <label>Date from:</label>
+      <input type="date" name="date_from" class="form-control" [(ngModel)]="newSale.dateFrom" required>
+
+      <label>Date to:</label>
+      <input type="date" name="date_to" class="form-control" [(ngModel)]="newSale.dateTo" required>
+
+      <label>Percentage:</label>
+      <input type="number" name="percentage" class="form-control" [(ngModel)]="newSale.percentage" required>
+
+      <label>Food:</label>
+      <select name="food" class="form-control" [(ngModel)]="newSale.foodId" required>
+        <option *ngFor="let food of foods" [value]="food.id">{{ food.name }}</option>
+      </select>
+
+      <button type="submit" class="btn btn-warning w-100 mt-3">Add Sale</button>
+    </form>
+  </div>
+  <div class="col-md-2"></div>
+</div>

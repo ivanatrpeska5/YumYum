@@ -7,6 +7,7 @@ import { Ingredient } from '../model/ingredient';
 import { Category } from '../model/category';
 import { NewFood } from '../model/newFood';
 import { RestaurantsService } from './restaurants.service';
+import { NewSale } from "../model/newSale";
 
 @Injectable({
   providedIn: 'root',
@@ -56,11 +57,29 @@ export class FoodService {
     return this.http.put<Food>(`api/food/update`, food);
   }
 
+  addSale(newSale: NewSale) {
+    return this.http.post<void>(`api/food/add-sale`, newSale);
+  }
+
   getNewFood() {
     return this.http.get<Food[]>(`api/newestFood`);
   }
 
+  getFoodsFromMyRestaurant() {
+    const sessionId = localStorage.getItem('token');
+    return this.http.get<Food[]>(`api/foods-from-my-restaurant/${sessionId}`);
+  }
+
   getMostOrdered() {
     return this.http.get<Food[]>(`api/mostOrdered`);
+  }
+
+  getRecommendation() {
+    const sessionId = localStorage.getItem('token');
+    return this.http.get<Food[]>(`api/recommendation/${sessionId}`)
+  }
+
+  getOnSale() {
+    return this.http.get<Food[]>(`api/onSale`);
   }
 }

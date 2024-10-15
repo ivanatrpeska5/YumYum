@@ -18,7 +18,7 @@
           <li class="nav-item">
             <a class="nav-link text-white" routerLink="/aboutUs">About Us</a>
           </li>
-          <li class="nav-item" *ngIf="role=='customer' || !isAuthorized()">
+          <li class="nav-item" *ngIf="role=='customer' || role=='admin' || !isAuthorized()">
             <a class="nav-link text-white" routerLink="/restaurants">Restaurants</a>
           </li>
           <li class="nav-item" *ngIf="role=='employee' && restaurantId!=0">
@@ -33,6 +33,9 @@
           <li class="nav-item" *ngIf="role=='employee'">
             <a class="nav-link text-white" routerLink="add-product">Add Product</a>
           </li>
+          <li class="nav-item" *ngIf="role=='employee'">
+            <a class="nav-link text-white" routerLink="add-sale">Add Sale</a>
+          </li>
           <li class="nav-item" *ngIf="role=='delivery'">
             <a class="nav-link text-white" routerLink="preparedOrders">Accept Order</a>
           </li>
@@ -41,6 +44,15 @@
           </li>
           <li class="nav-item" *ngIf="role=='delivery'">
             <a class="nav-link text-white" routerLink="deliveredOrders">Delivered Orders</a>
+          </li>
+          <li class="nav-item" *ngIf="role=='admin'">
+            <a class="nav-link text-white" routerLink="admin-panel">Statistics</a>
+          </li>
+          <li class="nav-item" *ngIf="role=='admin'">
+            <a class="nav-link text-white" routerLink="add-restaurant">Add Restaurant</a>
+          </li>
+          <li class="nav-item" *ngIf="role=='admin'">
+            <a class="nav-link text-white" routerLink="register">Register User</a>
           </li>
         </ul>
         <ul class="navbar-nav ms-auto">

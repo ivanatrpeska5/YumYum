@@ -7,6 +7,7 @@ export interface Food {
   photo: string;
   name: string;
   price: number;
+  priceWithDiscount: number | null,
   restaurant: Restaurant;
   categorySet: Category[];
   ingredientsSet: Ingredient[];

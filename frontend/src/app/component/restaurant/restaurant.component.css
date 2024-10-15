@@ -5,3 +5,82 @@
 option:checked {
   background-color: aqua;
 }
+
+.food-img {
+  background-color: gray;
+  object-fit: cover;
+  height: 200px;
+}
+
+.food-description {
+  height: 75px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.food-name {
+  height: 50px;
+}
+
+.color-red {
+  color: red;
+}
+
+.old-price {
+  text-decoration: line-through;
+}
+
+.sale-container {
+  padding: 5px;
+  border-radius: 20px;
+  height: 50%;
+}
+
+.sale-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.food-img {
+  background-color: gray;
+  object-fit: cover;
+  height: 200px;
+}
+
+.food-description {
+  height: 75px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.food-name {
+  height: 50px;
+}
+
+.color-red {
+  color: red;
+}
+
+.old-price {
+  text-decoration: line-through;
+}
+
+.sale-container {
+  padding: 5px;
+  border-radius: 20px;
+  height: 50%;
+}
+
+.sale-icon {
+  width: 16px;
+  height: 16px;
+}
+ ng-container{
+   border: var(--bs-border-width) solid var(--bs-border-color) !important;
+ }

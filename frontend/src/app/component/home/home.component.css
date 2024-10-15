@@ -2,3 +2,19 @@
   object-fit: cover;
   height: 150px;
 }
+
+.color-red {
+  color: red;
+}
+
+.old-price {
+  text-decoration: line-through;
+}
+
+.color-red {
+  color: red;
+}
+
+.old-price {
+  text-decoration: line-through;
+}

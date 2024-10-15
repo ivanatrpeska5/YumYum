@@ -1,0 +1,13 @@
+<div class="container">
+  <form>
+    <ng-select
+      [items]="cars"
+      [(ngModel)]="selectedCar"
+      [ngModelOptions]="{standalone: true}"
+      bindLabel="name"
+      bindValue="id"
+      [multiple]="true"
+    >
+    </ng-select>
+  </form>
+</div>

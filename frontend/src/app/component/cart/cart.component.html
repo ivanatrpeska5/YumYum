@@ -1,47 +1,52 @@
 <div class="container">
-    <div class="text-center p-2 mb-3 mt-3">
-        <h2 class="mt-2">Shopping Cart</h2>
-    </div>
-    <div class="row mt-3">
-        <div class="col-md-3" *ngFor="let cartInfo of cartsInfo">
-            <div class="card mb-3">
-                <img src="{{ cartInfo.photo }}" alt="" class="card-img-top img-fluid"
-                    style="height: 300px; object-fit: cover" />
-                <div class="card-body">
-                    <h5 class="fw-bold">{{ cartInfo.name }}</h5>
-                    <p>
-                        <span class="fw-bold">Quantity:</span> {{ cartInfo.quantity }} <br />
-                        <span class="fw-bold">Price for one:</span>
-                        {{ cartInfo.price }} MKD
-                    </p>
-                    <p class="fw-bold">Subtotal: {{ cartInfo.quantity * cartInfo.price }} MKD</p>
-                </div>
-                <a class="btn btn-danger" (click)="removeFromCart(cartInfo.cartConsistsOfFoodId)"
-                    style="position: absolute; right: 3%; top: 3%">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                        class="bi bi-trash3-fill" viewBox="0 0 16 16">
-                        <path
-                            d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
-                    </svg>
-                </a>
-            </div>
+  <div class="text-center p-2 mb-3 mt-3">
+    <h2 class="mt-2">Shopping Cart</h2>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-3" *ngFor="let cartInfo of cartsInfo">
+      <div class="card mb-3">
+        <img src="{{ cartInfo.photo }}" alt="" class="card-img-top img-fluid"
+             style="height: 300px; object-fit: cover"/>
+        <div class="card-body">
+          <h5 class="fw-bold">{{ cartInfo.name }}</h5>
+          <p>
+            <span class="fw-bold">Quantity:</span> {{ cartInfo.quantity }} <br/>
+            <span class="fw-bold">Price for one:</span>
+            {{ cartInfo.price }} MKD
+          </p>
+          <p class="fw-bold">Subtotal: {{ cartInfo.quantity * cartInfo.price }} MKD</p>
         </div>
+        <a class="btn btn-danger" (click)="removeFromCart(cartInfo.cartConsistsOfFoodId)"
+           style="position: absolute; right: 3%; top: 3%">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+               class="bi bi-trash3-fill" viewBox="0 0 16 16">
+            <path
+              d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+          </svg>
+        </a>
+      </div>
     </div>
-    <div *ngIf="cartsInfo && cartsInfo.length>0">
-        <div class="text-center">
-            <h4>Total Amount : {{ totalAmount }} MKD</h4>
-            <a routerLink="/order" class="btn btn-warning rounded-pill"
-                style="padding: 1rem 10rem 1rem 10rem; font-size: 1.6rem">Order All Products</a>
-        </div>
+  </div>
+  <div *ngIf="cartsInfo && cartsInfo.length>0">
+    <div class="text-center">
+      <h4>Total Amount : {{ totalAmount }} MKD</h4>
+      <div class="text-center mb-2">Note: This action will result in 2 separate orders, as your shopping cart contains
+        items from 2 different restaurants.
+      </div>
+      <a routerLink="/order" class="btn btn-warning rounded-pill"
+         style="padding: 1rem 10rem 1rem 10rem; font-size: 1.6rem">
+        Order All Products
+      </a>
     </div>
-    <div *ngIf="!cartsInfo || cartsInfo.length==0" class="d-flex justify-content-center text-center mt-5"
-        style="height: 500px;">
-        <div>
-            <h1 class="display-1 fw-bold"><span class="text-warning">Y</span>um<span class="text-warning">Y</span>um
-            </h1>
-            <h3>Empty cart, full appetite? Order now and feast!</h3>
-            <a routerLink="/restaurants" class="btn btn-warning rounded-pill mt-2"
-                style="padding: 1rem 10rem 1rem 10rem; font-size: 1.6rem">Explore Restaurants</a>
-        </div>
+  </div>
+  <div *ngIf="!cartsInfo || cartsInfo.length==0" class="d-flex justify-content-center text-center mt-5"
+       style="height: 500px;">
+    <div>
+      <h1 class="display-1 fw-bold"><span class="text-warning">Y</span>um<span class="text-warning">Y</span>um
+      </h1>
+      <h3>Empty cart, full appetite? Order now and feast!</h3>
+      <a routerLink="/restaurants" class="btn btn-warning rounded-pill mt-2"
+         style="padding: 1rem 10rem 1rem 10rem; font-size: 1.6rem">Explore Restaurants</a>
     </div>
+  </div>
 </div>

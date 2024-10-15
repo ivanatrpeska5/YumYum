@@ -4,24 +4,37 @@
     <h3 class="text-warning">Add new Food:</h3>
     <form (submit)="onSubmit()">
       <label for="photo">Photo:</label>
-
       <input type="file" name="photo" class="form-control" (change)="onFileChange($event)" required>
 
       <label for="name">Name:</label>
-      <input type="text" name="name" class="form-control" [(ngModel)]="newFood!!.name" required>
+      <input type="text" name="name" class="form-control" [(ngModel)]="newFood.name" required>
 
       <label for="price">Price:</label>
-      <input type="number" name="price" class="form-control" [(ngModel)]="newFood!!.price" required>
+      <input type="number" name="price" class="form-control" [(ngModel)]="newFood.price" required>
 
       <label for="categories">Categories:</label>
-      <select name="categories" class="form-control" [(ngModel)]="selectedCategories" multiple required>
-        <option *ngFor="let category of categories" [value]="category">{{ category.name }}</option>
-      </select>
+      <ng-select
+        name="categories"
+        class="form-control"
+        [items]="categories"
+        [(ngModel)]="selectedCategories"
+        bindLabel="name"
+        [multiple]="true"
+        required
+      >
+      </ng-select>
 
       <label for="ingredients">Ingredients:</label>
-      <select name="ingredients" class="form-control" [(ngModel)]="selectedIngredients" multiple required>
-        <option *ngFor="let ingredient of ingredients" [value]="ingredient">{{ ingredient.name }}</option>
-      </select>
+      <ng-select
+        name="ingredients"
+        class="form-control"
+        [items]="ingredients"
+        [(ngModel)]="selectedIngredients"
+        bindLabel="name"
+        [multiple]="true"
+        required
+      >
+      </ng-select>
 
       <button type="submit" class="btn btn-warning w-100 mt-3">Add Product</button>
     </form>

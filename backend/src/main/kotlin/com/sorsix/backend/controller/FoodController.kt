@@ -4,6 +4,8 @@ import NewFoodDto
 import com.sorsix.backend.model.Category
 import com.sorsix.backend.model.Food
 import com.sorsix.backend.model.Ingredient
+import com.sorsix.backend.model.dto.FoodDTO
+import com.sorsix.backend.model.dto.NewSaleDto
 import com.sorsix.backend.repository.CategoryRepository
 import com.sorsix.backend.repository.FoodRepository
 import com.sorsix.backend.repository.IngredientRepository
@@ -79,9 +81,30 @@ class FoodController(
         return ResponseEntity.ok().body(foodService.getMostOrderedFood())
     }
 
+    @GetMapping("recommendation/{sessionId}")
+    fun recommendFoodForUser(@PathVariable sessionId: String): ResponseEntity<List<Food>> {
+        return ResponseEntity.ok().body(foodService.recommendFoodForUser(sessionId))
+    }
+
+    @GetMapping("onSale")
+    fun getOnSaleFood(): ResponseEntity<List<FoodDTO>> {
+        return ResponseEntity.ok().body(foodService.getOnSaleFood())
+    }
+
     @PutMapping("food/update")
     fun updateFood(@RequestBody food: NewFoodDto): ResponseEntity<Any> {
         foodService.updateFood(food)
         return ResponseEntity.ok().build()
+    }
+
+    @PostMapping("food/add-sale")
+    fun addSaleForFood(@RequestBody newSale: NewSaleDto): ResponseEntity<Any> {
+        foodService.addSaleForFood(newSale.dateFrom, newSale.dateTo, newSale.percentage, newSale.foodId)
+        return ResponseEntity.ok().build()
+    }
+
+    @GetMapping("foods-from-my-restaurant/{sessionId}")
+    fun getFoodsFromMyRestaurant(@PathVariable sessionId: String): ResponseEntity<List<Food>> {
+        return ResponseEntity.ok().body(foodService.getFoodsFromMyRestaurant(sessionId))
     }
 }

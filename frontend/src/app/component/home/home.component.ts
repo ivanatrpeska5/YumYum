@@ -13,6 +13,8 @@ export class HomeComponent implements OnInit {
   newFood: Food[] = [];
   topRestaurants: Restaurant[] = [];
   mostOrdered: Food[] = [];
+  onSale: Food[] = []
+  recommendedFoods: Food[] = []
   constructor(
     private foodService: FoodService,
     private restaurantsService: RestaurantsService
@@ -22,6 +24,8 @@ export class HomeComponent implements OnInit {
     this.getNewFood();
     this.getTopRestaurants();
     this.getMostOrdered();
+    this.getOnSale();
+    this.getRecommendation();
   }
 
   getNewFood() {
@@ -41,5 +45,17 @@ export class HomeComponent implements OnInit {
     this.foodService
       .getMostOrdered()
       .subscribe((foods) => (this.mostOrdered = foods));
+  }
+
+  getOnSale() {
+    this.foodService
+      .getOnSale()
+      .subscribe((foods) => (this.onSale = foods))
+  }
+
+  getRecommendation() {
+    this.foodService
+      .getRecommendation()
+      .subscribe((foods) => (this.recommendedFoods = foods))
   }
 }

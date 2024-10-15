@@ -1,0 +1,9 @@
+.center-charts {
+  display: flex;
+  justify-content: center;
+}
+
+.nav-tabs .nav-link.active {
+  background-color: #ffc107;
+  color: #343a40 !important;
+}

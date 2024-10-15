@@ -4,5 +4,5 @@ import com.sorsix.backend.model.Food
 
 class CategoryFoodsDTO(
     val categoryName: String,
-    val food: MutableList<Food>
+    val food: MutableList<FoodDTO>
 )

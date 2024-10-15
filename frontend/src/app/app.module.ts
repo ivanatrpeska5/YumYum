@@ -24,6 +24,13 @@ import { CurrentOrderDeliveryComponent } from './component/current-order-deliver
 import { FinishedOrderDeliveryComponent } from './component/finished-order-delivery/finished-order-delivery.component';
 import { AboutUsComponent } from './component/about-us/about-us.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AddSaleComponent } from "./component/add-sale/add-sale.component";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
+import { AdminPanelComponent } from "./component/admin-panel/admin-panel.component";
+import {AddRestaurantComponent} from "./component/add-restaurant/add-restaurant.component";
+import {NgSelectModule} from "@ng-select/ng-select";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -44,6 +51,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CurrentOrderDeliveryComponent,
     FinishedOrderDeliveryComponent,
     AboutUsComponent,
+    AddSaleComponent,
+    AdminPanelComponent,
+    AddRestaurantComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +62,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NgxChartsModule,
+    NgSelectModule,
+    MatFormFieldModule,
+    MatSelectModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },

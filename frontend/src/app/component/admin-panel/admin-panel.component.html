@@ -1,0 +1,64 @@
+<div class="container mt-5">
+  <ul class="nav nav-tabs" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active text-warning" id="chart1-tab" data-bs-toggle="tab" href="#chart1" role="tab">Orders per restaurant</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-warning" id="chart2-tab" data-bs-toggle="tab" href="#chart2" role="tab">Orders over time by restaurant</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-warning" id="chart3-tab" data-bs-toggle="tab" href="#chart3" role="tab">Orders by categories</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link text-warning" id="chart4-tab" data-bs-toggle="tab" href="#chart4" role="tab">Revenue by restaurant</a>
+    </li>
+  </ul>
+  <div class="tab-content mt-3 center-charts">
+    <div class="tab-pane fade show active" id="chart1" role="tabpanel">
+      <ngx-charts-bar-vertical
+        [results]="ordersByRestaurant"
+        [view]="[1200, 500]"
+        [animations]="true"
+        [legend]="true"
+        [xAxis]="true"
+        [yAxis]="'Orders per restaurant'"
+        [showYAxisLabel]="true"
+        [yAxisLabel]="'Orders per restaurant'"
+        [dataLabelFormatting]="numberOfOrdersTooltip"
+      ></ngx-charts-bar-vertical>
+    </div>
+    <div class="tab-pane fade" id="chart2" role="tabpanel">
+      <ngx-charts-line-chart
+        [results]="ordersOverTimeByRestaurant"
+        [view]="[1500, 500]"
+        [animations]="true"
+        [showGridLines]="true"
+        [legend]="true"
+        [legendTitle]="'Orders over time by restaurant'"
+        [roundDomains]="true"
+        [xAxis]="true"
+        [yAxis]="true"
+      ></ngx-charts-line-chart>
+    </div>
+    <div class="tab-pane fade" id="chart3" role="tabpanel">
+      <ngx-charts-pie-chart
+        [results]="ordersByCategory"
+        [view]="[800, 800]"
+        [animations]="true"
+        [scheme]="'vivid'"
+        [labels]="true"
+        [doughnut]="true"
+        [tooltipText]="numberOfOrdersTooltip"
+      ></ngx-charts-pie-chart>
+    </div>
+    <div class="tab-pane fade bg-dark text-warning" id="chart4" role="tabpanel">
+      <ngx-charts-number-card
+        [view]="viewNC"
+        [animations]="animationsNC"
+        [results]="dataNC"
+        [cardColor]="cardColor"
+        [valueFormatting]="currencyFormatterNC"
+      ></ngx-charts-number-card>
+    </div>
+  </div>
+</div>

@@ -4,7 +4,7 @@
         <div class="container pt-2 pb-2">
             <h1>{{ restaurant?.name }}</h1>
             <h5>Average Rating: {{restaurant?.averageRating}}</h5>
-            <div class="mb-3 text-warning">
+            <div class="mb-3 text-warning" *ngIf="role=='customer'">
                 <span *ngIf="addRating[0]" (click)="onChangeRating(1)">
                     <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
                         class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -118,12 +118,17 @@
         </div>
         <div *ngFor="let food of category.food" class="col-md-3">
             <div class="card mb-3">
-                <img src="{{ food.photo }}" alt="" class="card-img-top img-fluid" style="object-fit: cover" />
+                <ng-container *ngIf="food.photo != 'None'; else noPhoto">
+                <img src="{{ food.photo }}" alt="" class="card-img-top img-fluid food-img" />
+                </ng-container>
+                <ng-template #noPhoto>
+                  <img src="https://www.svgrepo.com/show/508699/landscape-placeholder.svg" alt="placeholder" class="card-img-top img-fluid food-img">
+                </ng-template>
                 <div class="card-body">
                     <hr />
-                    <h4 class="text-center">{{ food.name }}</h4>
+                    <h4 class="text-center food-name">{{ food.name }}</h4>
                     <hr />
-                    <div style="height: 35px">
+                    <div class="food-description">
                         <span class="fw-bold">Ingredients:</span>
                         <ng-container *ngFor="let ingredient of food.ingredientsSet; let last = last">
                             {{ ingredient.name }}
@@ -131,7 +136,16 @@
                         </ng-container>
                     </div>
                     <hr />
-                    <p><span class="fw-bold">Price:</span>{{ food.price }} MKD</p>
+                    <p class="d-flex">
+                      <ng-container *ngIf="food.priceWithDiscount != null; else priceWithoutDiscount">
+                        <span class="fw-bold old-price me-1">{{ food.price }} MKD</span>
+                        <span class="fw-bold color-red me-1">{{ food.priceWithDiscount }} MKD</span>
+                        <span class="sale-container fw-bold bg-warning"><img src="assets/images/discount.png" class="sale-icon me-2 color-white"/>SALE</span>
+                      </ng-container>
+                      <ng-template #priceWithoutDiscount>
+                        <span class="fw-bold">Price:</span>{{ food.price }} MKD
+                      </ng-template>
+                    </p>
                     <hr />
                     <div class="row" *ngIf="role == 'customer'">
                         <div class="col-md-4">
@@ -183,52 +197,57 @@
 </div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Update Food</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form (submit)="updateFood()">
-                    <label for="photo">Photo:</label>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Food</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (submit)="updateFood()">
+          <label for="photo">Photo:</label>
+          <input type="file" name="photo" class="form-control" required (change)="onFileChange($event)" />
 
-                    <input type="file" name="photo" class="form-control" required (change)="onFileChange($event)" />
+          <label for="name">Name:</label>
+          <input type="text" name="name" class="form-control" [(ngModel)]="foodToUpdate!!.name" required />
 
-                    <label for="name">Name:</label>
-                    <input type="text" name="name" class="form-control" [(ngModel)]="foodToUpdate!!.name" required />
+          <label for="price">Price:</label>
+          <input type="number" name="price" class="form-control" [(ngModel)]="foodToUpdate!!.price" required />
 
-                    <label for="price">Price:</label>
-                    <input type="number" name="price" class="form-control" [(ngModel)]="foodToUpdate!!.price"
-                        required />
+          <div>
+            <label for="categories">Select Categories</label>
+            <ng-select
+              [items]="categories"
+              bindLabel="name"
+              bindValue="id"
+              [(ngModel)]="newCategories"
+              [multiple]="true"
+              placeholder="Choose categories"
+              [ngClass]="{'is-invalid': newCategories.length === 0}"
+            >
+            </ng-select>
+          </div>
 
-                    <label for="categories">Categories:</label>
-                    <div *ngIf="newCategories.length > 0">
-                        <div *ngFor="let category of categories">
-                            <label>
-                                <input type="checkbox" name="categories" class="form-check-input"
-                                    [checked]="checkCategorySelection(category)"
-                                    (change)="toggleCategorySelection(category)" />
-                                {{ category.name }}
-                            </label>
-                        </div>
-                    </div>
-                    <label for="ingredients">Ingredients:</label>
-                    <div *ngIf="newIngredients.length > 0">
-                        <div *ngFor="let ingredient of ingredients">
-                            <label>
-                                <input type="checkbox" name="ingredients" class="form-check-input"
-                                    [checked]="checkIngredientSelection(ingredient)"
-                                    (change)="toggleIngredientSelection(ingredient)" />
-                                {{ ingredient.name }}
-                            </label>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-warning w-100 mt-3" data-bs-dismiss="modal" aria-label="Close">
-                        Save Changes
-                    </button>
-                </form>
-            </div>
-        </div>
+          <div>
+            <label for="ingredients">Select Ingredients</label>
+            <ng-select
+              [items]="ingredients"
+              bindLabel="name"
+              bindValue="id"
+              [(ngModel)]="newIngredients"
+              [multiple]="true"
+              placeholder="Choose ingredients"
+              [ngClass]="{'is-invalid': newIngredients.length === 0}"
+            >
+            </ng-select>
+          </div>
+
+
+          <button type="submit" class="btn btn-warning w-100 mt-3" data-bs-dismiss="modal" aria-label="Close">
+            Save Changes
+          </button>
+        </form>
+      </div>
     </div>
+  </div>
 </div>
