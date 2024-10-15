@@ -220,10 +220,11 @@
               [items]="categories"
               bindLabel="name"
               bindValue="id"
-              [(ngModel)]="newCategories"
+              [(ngModel)]="newCategoriesIds"
               [multiple]="true"
+              name="categories"
               placeholder="Choose categories"
-              [ngClass]="{'is-invalid': newCategories.length === 0}"
+              [ngClass]="{'is-invalid': newCategoriesIds.length === 0}"
             >
             </ng-select>
           </div>
@@ -234,10 +235,11 @@
               [items]="ingredients"
               bindLabel="name"
               bindValue="id"
-              [(ngModel)]="newIngredients"
+              [(ngModel)]="newIngredientsIds"
               [multiple]="true"
+              name = "ingredients"
               placeholder="Choose ingredients"
-              [ngClass]="{'is-invalid': newIngredients.length === 0}"
+              [ngClass]="{'is-invalid': newIngredientsIds.length === 0}"
             >
             </ng-select>
           </div>

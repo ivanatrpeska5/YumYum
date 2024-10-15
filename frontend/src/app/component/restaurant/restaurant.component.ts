@@ -27,11 +27,11 @@ export class RestaurantComponent implements OnInit {
   foodToUpdate: NewFood | undefined;
   selectedImage: File | undefined;
   categories: Category[] = [];
-  newCategories: Category[] = [];
   ingredients: Ingredient[] = [];
-  newIngredients: Ingredient[] = [];
   addRating: boolean[] = [];
   hasUserRated: boolean = false;
+  newIngredientsIds: number[] = [];
+  newCategoriesIds: number[] = [];
   @ViewChild('addCart') button!: ElementRef;
 
   ngOnInit(): void {
@@ -53,10 +53,18 @@ export class RestaurantComponent implements OnInit {
     };
     this.foodService
       .getCategories()
-      .subscribe((categories) => (this.categories = categories));
+      .subscribe({
+        next: categories => {
+          this.categories = categories;
+        }
+      });
     this.foodService
       .getIngredients()
-      .subscribe((ingredients) => (this.ingredients = ingredients));
+      .subscribe({
+        next: ingredients => {
+          this.ingredients = ingredients;
+        }
+      });
   }
 
   constructor(
@@ -135,20 +143,17 @@ export class RestaurantComponent implements OnInit {
   }
 
   edit(food: Food) {
-    // Ensure foodToUpdate is correctly initialized with all required fields
     this.foodToUpdate = {
       id: food.id,
       photo: food.photo,
       name: food.name,
       price: food.price,
-      restaurantId: food.restaurant.id, // Assign restaurant ID here
+      restaurantId: food.restaurant.id,
       categorySet: food.categorySet,
       ingredientsSet: food.ingredientsSet,
     };
-
-    // Pre-select categories and ingredients
-    this.newCategories = [...food.categorySet];
-    this.newIngredients = [...food.ingredientsSet];
+    this.newIngredientsIds = food.ingredientsSet.map(ingredient => ingredient.id);
+    this.newCategoriesIds = food.categorySet.map(category => category.id);
   }
 
 
@@ -160,8 +165,8 @@ export class RestaurantComponent implements OnInit {
   }
 
   updateFood() {
-    this.foodToUpdate!!.categorySet = this.newCategories;
-    this.foodToUpdate!!.ingredientsSet = this.newIngredients;
+    this.foodToUpdate!!.categorySet = this.categories.filter(category => this.newCategoriesIds.includes(category.id));
+    this.foodToUpdate!!.ingredientsSet = this.ingredients.filter(ingredient => this.newIngredientsIds.includes(ingredient.id));
     if (this.selectedImage) {
       this.foodService.uploadImage(this.selectedImage).subscribe(
         (response) => {
