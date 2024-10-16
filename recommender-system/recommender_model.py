@@ -28,7 +28,7 @@ def get_newest_data():
     global users_df, foods_df, food_id_to_idx, user_id_to_idx
     conn = psycopg2.connect(
         user="postgres",
-        password="at",
+        password="ivana123",
         host="localhost",
         port="5432",
         database="YumYum"

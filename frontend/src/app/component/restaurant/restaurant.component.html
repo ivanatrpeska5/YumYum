@@ -143,7 +143,7 @@
                         <span class="sale-container fw-bold bg-warning"><img src="assets/images/discount.png" class="sale-icon me-2 color-white"/>SALE</span>
                       </ng-container>
                       <ng-template #priceWithoutDiscount>
-                        <span class="fw-bold">Price:</span>{{ food.price }} MKD
+                        <span class="fw-bold">Price: </span>{{ food.price }} MKD
                       </ng-template>
                     </p>
                     <hr />
@@ -211,7 +211,7 @@
           <label for="name">Name:</label>
           <input type="text" name="name" class="form-control" [(ngModel)]="foodToUpdate!!.name" required />
 
-          <label for="price">Price:</label>
+          <label for="price">Price: </label>
           <input type="number" name="price" class="form-control" [(ngModel)]="foodToUpdate!!.price" required />
 
           <div>

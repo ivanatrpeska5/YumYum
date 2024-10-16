@@ -12,7 +12,7 @@
     <div class="container pt-5 pb-5">
       <h3>New Fresh Bites Discovery Hub:</h3>
       <div class="row justify-content-between mt-5">
-        <div *ngFor="let food of newFood" class="col-md-2 card">
+        <div *ngFor="let food of newFood" class="col-md-2 p-3 card">
           <ng-container *ngIf="food.photo != 'None'; else noPhoto">
             <img src="{{ food.photo }}" alt="" class="card-img-top img-fluid img-style"
                  routerLink="/restaurant/{{food.restaurant.id}}"/>
