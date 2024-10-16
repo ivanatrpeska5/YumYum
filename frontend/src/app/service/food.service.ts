@@ -6,8 +6,8 @@ import { Restaurant } from '../model/restaurant';
 import { Ingredient } from '../model/ingredient';
 import { Category } from '../model/category';
 import { NewFood } from '../model/newFood';
-import { RestaurantsService } from './restaurants.service';
 import { NewSale } from "../model/newSale";
+import {PhotoResponse} from "../model/PhotoResponse";
 
 @Injectable({
   providedIn: 'root',
@@ -21,9 +21,8 @@ export class FoodService {
   }
 
   constructor(
-    private http: HttpClient,
-    private restaurantService: RestaurantsService
-  ) {}
+    private http: HttpClient) {
+  }
 
   postFood(food: NewFood): Observable<any> {
     const url = `${this.baseUrl}/add`;
@@ -38,7 +37,7 @@ export class FoodService {
     return this.http.get<Category[]>(`api/categories`);
   }
 
-  uploadImage(image: File): Observable<any> {
+  uploadImage(image: File): Observable<PhotoResponse> {
     const formData = new FormData();
     formData.append('image', image, image.name);
 
@@ -46,7 +45,7 @@ export class FoodService {
     headers.append('Content-Type', 'application/json');
 
     const url = `${this.baseUrl}/photo`;
-    return this.http.post(url, formData, { headers });
+    return this.http.post<PhotoResponse>(url, formData, {headers});
   }
 
   deleteFoodFromRestaurant(foodId: number) {

@@ -128,7 +128,7 @@ class FoodService(
         val username = sessionRegistry.getUsernameForSession(sessionId)
         val employee = employeeRepository.findRestaurantEmployeeByUsername(username!!)
         val restaurant = employee.restaurant
-        return foodRepository.findFoodsByRestaurantId(restaurant.id)
+        return foodRepository.findFoodsByRestaurantId(restaurant.id!!)
     }
 
     @Scheduled(cron = "0 0 0 * * *")

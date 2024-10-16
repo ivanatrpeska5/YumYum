@@ -1,9 +1,12 @@
 package com.sorsix.backend.service
 
+import com.sorsix.backend.model.Location
 import com.sorsix.backend.model.Rating
 import com.sorsix.backend.model.Restaurant
+import com.sorsix.backend.model.dto.AddRestaurantRequest
 import com.sorsix.backend.model.dto.RatingDTO
 import com.sorsix.backend.repository.CustomerRepository
+import com.sorsix.backend.repository.LocationRepository
 import com.sorsix.backend.repository.RatingRepository
 import com.sorsix.backend.repository.RestaurantRepository
 import com.sorsix.backend.session.InMemorySessionRegistry
@@ -15,7 +18,8 @@ class RestaurantService(
     private val restaurantRepository: RestaurantRepository,
     private val ratingRepository: RatingRepository,
     private val sessionRegistry: InMemorySessionRegistry,
-    private val customerRepository: CustomerRepository
+    private val customerRepository: CustomerRepository,
+    private val locationRepository: LocationRepository
 ) {
 
     fun findAll(): MutableList<Restaurant> {
@@ -36,5 +40,22 @@ class RestaurantService(
         return restaurantRepository.save(restaurant)
     }
 
+    fun addRestaurant(restaurant: AddRestaurantRequest): Restaurant {
+        val location = this.locationRepository.save(
+            Location(
+                number = restaurant.location.number,
+                street = restaurant.location.street
+            )
+        )
+        return restaurantRepository.save(
+            Restaurant(
+                name = restaurant.name,
+                location = location,
+                logo = restaurant.logo,
+                photo = restaurant.photo,
+                deliveryTime = "20-30 min",
+            )
+        )
+    }
 
 }

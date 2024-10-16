@@ -1,6 +1,7 @@
 package com.sorsix.backend.controller
 
 import com.sorsix.backend.model.Restaurant
+import com.sorsix.backend.model.dto.AddRestaurantRequest
 import com.sorsix.backend.model.dto.CategoryFoodsDTO
 import com.sorsix.backend.model.dto.RatingDTO
 import com.sorsix.backend.repository.RestaurantEmployeeRepository
@@ -29,7 +30,6 @@ class RestaurantController(
 
     @GetMapping("restaurants/{id}")
     fun restaurant(@PathVariable id: Long): ResponseEntity<Restaurant> {
-        println(id)
         return ResponseEntity.ok().body(restaurantService.findById(id))
     }
 
@@ -43,7 +43,6 @@ class RestaurantController(
         val username = sessionRegistry.getUsernameForSession(sessionId)
         val employee = restaurantEmployeeRepository.findByUsername(username!!)
         if (employee != null) {
-            println(employee.name)
             return ResponseEntity.ok().body(employee.restaurant)
         }
         return ResponseEntity.notFound().build()
@@ -67,5 +66,8 @@ class RestaurantController(
     fun getTopRestaurants(): List<Restaurant> {
         return restaurantRepository.findTop5ByOrderByAverageRatingDesc()
     }
+
+    @PostMapping("/restaurants/add")
+    fun postFood(@RequestBody restaurant: AddRestaurantRequest) = restaurantService.addRestaurant(restaurant)
 
 }

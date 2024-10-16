@@ -25,7 +25,7 @@ class CartService(
         val username = sessionRegistry.getUsernameForSession(dto.sessionId)
         val customer = customerRepository.findCustomerByUsername(username!!)
         var cart = cartRepository.findCartByRestaurantIdAndCustomerUserIdAndStatus(
-            food.restaurant.id,
+            food.restaurant.id!!,
             customer.userId!!,
             ShoppingCartStatus.ACTIVE
         )
@@ -68,7 +68,7 @@ class CartService(
                 it.food.name,
                 it.food.price,
                 it.quantity,
-                it.cart.restaurant.id,
+                it.cart.restaurant.id!!,
                 it.cart.restaurant.name
             )
         }

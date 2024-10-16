@@ -4,14 +4,13 @@ import { Restaurant } from '../model/restaurant';
 import { Observable, catchError, tap } from 'rxjs';
 import { FoodsByCategory } from '../model/foodsByCategory';
 import { FoodInCart } from '../model/foodInCart';
+import {AddRestaurantRequest} from "../model/AddRestaurantRequest";
 
 @Injectable({
   providedIn: 'root'
 })
 export class RestaurantsService {
 
-
- 
   private url=`api/restaurants`
 
   constructor(private http:HttpClient) { }
@@ -48,6 +47,10 @@ export class RestaurantsService {
 
   getTopRestaurants(){
     return this.http.get<Restaurant[]>(`api/topRestaurants`)
+  }
+
+  postRestaurant(restaurant: AddRestaurantRequest): Observable<any> {
+    return this.http.post<any>(`${this.url}/add`, restaurant);
   }
 
 }

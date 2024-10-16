@@ -1,13 +1,27 @@
-<div class="container">
-  <form>
-    <ng-select
-      [items]="cars"
-      [(ngModel)]="selectedCar"
-      [ngModelOptions]="{standalone: true}"
-      bindLabel="name"
-      bindValue="id"
-      [multiple]="true"
-    >
-    </ng-select>
-  </form>
+<div class="row mt-3">
+  <div class="col-md-2"></div>
+  <div class="col-md-8 card p-4">
+    <h3 class="text-warning">Add New Restaurant:</h3>
+    <form (submit)="onSubmit()">
+      <label for="name">Restaurant Name:</label>
+      <input type="text" name="name" class="form-control" [(ngModel)]="newRestaurant.name" required>
+
+      <label for="logo">Logo:</label>
+      <input type="file" name="logo" class="form-control" (change)="onLogoChange($event)" required>
+
+      <label for="photo">Photo:</label>
+      <input type="file" name="photo" class="form-control" (change)="onPhotoChange($event)" required>
+
+      <div class="card mt-3 p-4">
+        <h5 class="text-warning">Location</h5>
+        <label for="street">Street:</label>
+        <input type="text" name="street" class="form-control" [(ngModel)]="newRestaurant.location.street" required>
+
+        <label for="number">Number:</label>
+        <input type="text" name="number" class="form-control" [(ngModel)]="newRestaurant.location.number" required>
+      </div>
+      <button type="submit" class="btn btn-warning w-100 mt-3">Add Restaurant</button>
+    </form>
+  </div>
+  <div class="col-md-2"></div>
 </div>
