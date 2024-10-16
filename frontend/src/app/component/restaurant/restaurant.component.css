@@ -77,10 +77,6 @@ option:checked {
   height: 50%;
 }
 
-.sale-icon {
-  width: 16px;
-  height: 16px;
-}
  ng-container{
    border: var(--bs-border-width) solid var(--bs-border-color) !important;
  }

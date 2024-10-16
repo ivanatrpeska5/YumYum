@@ -22,5 +22,9 @@ export class StatisticsService {
   getOrdersOverTimeByRestaurant() {
     return this.http.get<any>(`${ this.url }/orders-over-time-by-restaurant`);
   }
+
+  getRevenueByRestaurant() {
+    return this.http.get<any>(`${ this.url }/revenue-by-restaurant`)
+  }
 }
 

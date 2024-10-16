@@ -312,50 +312,56 @@ def find_key_by_value(d, target_value):
 
 def recommend_top_foods(user_id, top_n=5):
     global model, heteroData, device
-    execute_model()
     all_food_ids = list(foods_df['food_id'])
 
     model.eval()  # Set the model to evaluation mode
+    try:
+        # Get the user node index using user_id_to_idx
+        user_idx = user_id_to_idx[user_id]
 
-    # Get the user node index using user_id_to_idx
-    user_idx = user_id_to_idx[user_id]
+        # Map all food_ids to indices using food_id_to_idx
+        all_food_indices = [food_id_to_idx[food_id] for food_id in all_food_ids]
 
-    # Map all food_ids to indices using food_id_to_idx
-    all_food_indices = [food_id_to_idx[food_id] for food_id in all_food_ids]
+        # Get the list of food IDs the user has already ordered
+        ordered_food_ids = heteroData["user", "ordered", "food"].edge_index[1][
+            heteroData["user", "ordered", "food"].edge_index[0] == user_idx
+            ].tolist()
 
-    # Get the list of food IDs the user has already ordered
-    ordered_food_ids = heteroData["user", "ordered", "food"].edge_index[1][
-        heteroData["user", "ordered", "food"].edge_index[0] == user_idx
-        ].tolist()
+        # Convert ordered_food_ids to indices using food_id_to_idx
+        ordered_food_indices = [food_id_to_idx[food_id] for food_id in ordered_food_ids]
 
-    # Convert ordered_food_ids to indices using food_id_to_idx
-    ordered_food_indices = [food_id_to_idx[food_id] for food_id in ordered_food_ids]
+        # Get the list of food indices the user hasn't ordered yet
+        unordered_food_indices = [food_idx for food_idx in all_food_indices if food_idx not in ordered_food_indices]
 
-    # Get the list of food indices the user hasn't ordered yet
-    unordered_food_indices = [food_idx for food_idx in all_food_indices if food_idx not in ordered_food_indices]
+        # Generate the candidate edges (user, candidate food pairs)
+        candidate_edges = torch.tensor([
+            [user_idx] * len(unordered_food_indices),  # Repeat user_idx for all candidate foods
+            unordered_food_indices  # The candidate food items (indices)
+        ], dtype=torch.long)
 
-    # Generate the candidate edges (user, candidate food pairs)
-    candidate_edges = torch.tensor([
-        [user_idx] * len(unordered_food_indices),  # Repeat user_idx for all candidate foods
-        unordered_food_indices  # The candidate food items (indices)
-    ], dtype=torch.long)
+        # Move to device
+        candidate_edges = candidate_edges.to(device)
 
-    # Move to device
-    candidate_edges = candidate_edges.to(device)
+        # Ensure user embeddings and food embeddings are selected properly
+        # user_embeddings = model.user_emb.weight[user_idx].unsqueeze(0)  # User embedding
+        user_embeddings = model.user_emb.weight
 
-    # Ensure user embeddings and food embeddings are selected properly
-    # user_embeddings = model.user_emb.weight[user_idx].unsqueeze(0)  # User embedding
-    user_embeddings = model.user_emb.weight
+        food_embeddings = model.food_emb.weight  # All food embeddings
 
-    food_embeddings = model.food_emb.weight  # All food embeddings
+        # Generate predictions for the user and each candidate food
+        with torch.no_grad():
+            pred = model.classifier(user_embeddings, food_embeddings, candidate_edges)
+            pred = torch.sigmoid(pred)  # Convert logits to probabilities
 
-    # Generate predictions for the user and each candidate food
-    with torch.no_grad():
-        pred = model.classifier(user_embeddings, food_embeddings, candidate_edges)
-        pred = torch.sigmoid(pred)  # Convert logits to probabilities
+        # Get the top-N food indices with the highest probabilities
+        top_n_indices = pred.topk(top_n).indices.tolist()
+        # # Map the top-N indices back to food IDs
 
-    # Get the top-N food indices with the highest probabilities
-    top_n_indices = pred.topk(top_n).indices.tolist()
-    # # Map the top-N indices back to food IDs
+        return [find_key_by_value(food_id_to_idx, idx) for idx in top_n_indices]
+    except KeyError:
+        # If user_id is not found, return the top 5 most ordered foods overall
+        top_ordered_foods = (heteroData["user", "ordered", "food"].edge_index[1]
+                             .bincount().topk(top_n).indices.tolist())
 
-    return [find_key_by_value(food_id_to_idx, idx) for idx in top_n_indices]
+        # Map the top ordered indices back to food IDs
+        return [find_key_by_value(food_id_to_idx, food_idx) for food_idx in top_ordered_foods]

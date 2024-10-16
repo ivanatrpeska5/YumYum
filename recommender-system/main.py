@@ -1,27 +1,25 @@
+from contextlib import asynccontextmanager
+
+from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.cron import CronTrigger
 from fastapi import FastAPI
 
 from recommendation_service import RecommendationService
+from recommender_model import execute_model
 
 app = FastAPI()
 service = RecommendationService()
+execute_model()
+scheduler = BackgroundScheduler()
+trigger = CronTrigger(hour=0, minute=1)
+scheduler.add_job(execute_model, trigger)
+scheduler.start()
 
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
+@asynccontextmanager
+async def lifespan():
+    yield
+    scheduler.shutdown()
 
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
-
-@app.get("/users-also-ordered/{user_id}")
-async def users(user_id: int):
-    return service.findUsersAlsoOrderedRecommendations(user_id)
-
-@app.get("/add-more-items-to-your-order/{user_id}")
-async def add_more_items_to_your_order(user_id: int):
-    return service.findAddMoreItemsRecommendations(user_id)
-
-@app.get("/no-idea-what-to-eat/{user_id}")
-async def no_idea_what_to_eat(user_id: int):
-    return service.findNoIdeaWhatToEatRecommendations(user_id)
+@app.get("/recommend-food-for-user/{user_id}")
+async def recommend_food_for_user(user_id: int):
+    return service.recommendFoodForUser(user_id)

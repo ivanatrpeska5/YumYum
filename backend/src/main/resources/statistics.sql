@@ -64,3 +64,13 @@ ORDER BY d.order_date DESC, r.name;
 select * from public.v_orders_over_time_by_restaurant;
 -- end
 
+-- v_revenue_by_restaurant
+CREATE OR REPLACE VIEW public.v_revenue_by_restaurant AS
+select r.id as restaurant_id, r.name as restaurant_name, sum(f.price * ccof.quantity) as total_revenue
+from public.customer c
+         join public.orders o on o.customer_user_id = c.user_id
+         join public.cart c2 on c2.id = o.cart_id
+         join public.cart_consists_of_food ccof on c2.id = ccof.cart_id
+         join public.food f on f.id = ccof.food_id
+         join public.restaurant r on r.id = c2.restaurant_id
+group by r.id order by total_revenue desc;

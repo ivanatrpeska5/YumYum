@@ -143,7 +143,7 @@ class FoodService(
     fun recommendFoodForUser(sessionId: String): List<Food> {
         val username = sessionRegistry.getUsernameForSession(sessionId)!!
         val customer = customerRepository.findCustomerByUsername(username)
-        val url = "http://127.0.0.1:8000/no-idea-what-to-eat/${customer.userId}"
+        val url = "http://127.0.0.1:8000/recommend-food-for-user/${customer.userId}"
         val response = restTemplate.getForObject(url, Array<Long>::class.java)
         return response?.map {
             foodRepository.findFoodById(it)

@@ -7,8 +7,8 @@ INSERT INTO public.delivery_man (user_id)
 VALUES ((select max(user_id) from public.users));
 -- CUSTOMERS
 INSERT INTO public.users (email, name, password, phone, surname, username, role)
-VALUES ('hungry13_customer13@mail.com', 'customer13', '$2a$10$Yjfls9w.o7BsgnsFwjp9wuQjIlwJ5oggpc7BzrhTtOACI37PppaS6',
-        '070123456', 'hungry13', 'hungry13_customer13', 'customer');
+VALUES ('hungry15_customer15@mail.com', 'customer15', '$2a$10$Yjfls9w.o7BsgnsFwjp9wuQjIlwJ5oggpc7BzrhTtOACI37PppaS6',
+        '070123456', 'hungry15', 'hungry15_customer15', 'customer');
 
 INSERT INTO public.customer (user_id)
 VALUES ((select max(user_id) from public.users));

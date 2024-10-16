@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './component/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
 import { HomeComponent } from './component/home/home.component';
 import { RequestInterceptor } from './request.interceptor';
 import { RestaurantsComponent } from './component/restaurants/restaurants.component';
@@ -27,10 +26,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddSaleComponent } from "./component/add-sale/add-sale.component";
 import { NgxChartsModule } from "@swimlane/ngx-charts";
 import { AdminPanelComponent } from "./component/admin-panel/admin-panel.component";
-import {AddRestaurantComponent} from "./component/add-restaurant/add-restaurant.component";
-import {NgSelectModule} from "@ng-select/ng-select";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatSelectModule} from "@angular/material/select";
+import { AddRestaurantComponent } from "./component/add-restaurant/add-restaurant.component";
+import { NgSelectModule } from "@ng-select/ng-select";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatSelectModule } from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -65,7 +64,7 @@ import {MatSelectModule} from "@angular/material/select";
     NgxChartsModule,
     NgSelectModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true },

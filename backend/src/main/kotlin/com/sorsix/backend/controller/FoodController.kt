@@ -24,7 +24,8 @@ class FoodController(
     private val categoryRepository: CategoryRepository,
     private val ingredientRepository: IngredientRepository,
     private val foodRepository: FoodRepository,
-    private val foodService: FoodService, private val restaurantRepository: RestaurantRepository
+    private val foodService: FoodService,
+    private val restaurantRepository: RestaurantRepository
 ) {
     private var uploadDir: Path = Paths.get("E:\\IdeaProjects\\Sorsix\\YumYum\\YumYum\\frontend\\src\\assets\\images")
 

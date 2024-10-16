@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { StatisticsService } from "../../service/statistics.service";
+import { Color } from "@swimlane/ngx-charts";
 
 @Component({
   selector: 'app-admin-panel',
@@ -10,6 +11,7 @@ export class AdminPanelComponent implements OnInit {
   ordersByRestaurant: any;
   ordersByCategory: any;
   ordersOverTimeByRestaurant: any;
+  revenueByRestaurant: any;
 
   constructor(private readonly statisticsService: StatisticsService) {
   }
@@ -30,17 +32,22 @@ export class AdminPanelComponent implements OnInit {
         this.ordersOverTimeByRestaurant = value
       }
     )
+    this.statisticsService.getRevenueByRestaurant().subscribe(
+      value => {
+        this.revenueByRestaurant = value
+      }
+    )
   }
 
-  dataNC = salesPerRestaurant;
-  viewNC: [number, number] = [800, 150];
-  animationsNC = true;
-  cardColor = '#232837';
+  colorScheme = {
+    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+  } as Color;
+  cardColor: string = '#232837';
 
-  currencyFormatterNC(moneyAmount: any): string {
-    const currencyFormat = new Intl.NumberFormat("en-US", {
+  currencyFormatter(moneyAmount: any): string {
+    const currencyFormat = new Intl.NumberFormat("mk-MK", {
       style: "currency",
-      currency: "USD",
+      currency: "MKD",
     });
     return currencyFormat.format(moneyAmount.value);
   }
@@ -55,27 +62,3 @@ export class AdminPanelComponent implements OnInit {
   }
 
 }
-
-
-export const salesPerRestaurant = [
-  {
-    name: "Royal",
-    value: 128169,
-  },
-  {
-    name: "Bistro",
-    value: 94794,
-  },
-  {
-    name: "BurgerKing",
-    value: 87688,
-  },
-  {
-    name: "Trend",
-    value: 85358,
-  },
-  {
-    name: "KFC",
-    value: 68309,
-  },
-];
